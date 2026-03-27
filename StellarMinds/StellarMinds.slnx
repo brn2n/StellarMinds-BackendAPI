@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="StellarMinds.Infraestructura/StellarMinds.Infraestructura.csproj" />
+  <Project Path="StellarMinds.LogicaAplicacion/StellarMinds.LogicaAplicacion.csproj" />
+  <Project Path="StellarMinds.LogicaNegocio/StellarMinds.LogicaNegocio.csproj" />
+  <Project Path="StellarMinds.WebApp/StellarMinds.WebApp.csproj" />
+</Solution>
