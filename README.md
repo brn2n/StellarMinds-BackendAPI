@@ -1,1 +1,48 @@
-# OBLIGATORIO-N3D-317501-331209
+StellarMinds - Sistema de Gestión Astronómica
+Sistema integral para la gestión de socios, préstamos de equipos astronómicos y planificación de sesiones de observación con asistencia de IA (Google Gemini). Este proyecto fue desarrollado para la materia Diseño Web asistido por IA de la Universidad ORT Uruguay.
+
+🌌 Descripción del Problema
+El observatorio "StellarMinds" requiere un sistema para gestionar sus socios, el inventario de equipos (telescopios, monturas, cámaras y oculares) y los préstamos asociados. El sistema destaca por validar técnicamente si una configuración de equipo es apta para observar un objeto celeste específico mediante el análisis de parámetros ópticos a través de la API de Gemini.
+
+🏗️ Arquitectura y Diseño
+La solución sigue las recomendaciones de Arquitectura Limpia (Clean Architecture) y DDD (Domain Driven Design), aplicando los principios SOLID.
+
+Estructura de la Solución
+StellarMinds.LogicaNegocio: Núcleo del sistema con entidades de dominio, Value Objects y reglas de negocio. Es la capa más interna y no posee dependencias de las demás.
+
+StellarMinds.Infraestructura: Encargada del acceso a datos mediante Entity Framework 10 y la persistencia en SQL Server. Conoce a la Lógica de Negocio.
+
+StellarMinds.LogicaAplicacion: Coordina los servicios de aplicación y casos de uso. Conoce tanto a la Lógica de Negocio como a Infraestructura.
+
+StellarMinds.WebApp: Aplicación ASP.NET Core MVC que consume la Web API mediante HttpClient. Utiliza ViewModels para la interfaz.
+
+🛠️ Tecnologías Utilizadas
+.NET 10 y C# como lenguaje principal.
+
+Entity Framework 10 con LINQ (sintaxis de método) para consultas.
+
+Web API REST-ful documentada con Swagger.
+
+Google Gemini API para la evaluación de adecuación de equipos (RF07).
+
+SQL Server para el almacenamiento de datos.
+
+🚀 Requerimientos Funcionales Destacados
+Gestión de Préstamos: Validación de carga útil (peso) y compatibilidad de monturas (ecuatorial/híbrida para astrofotografía).
+
+Evaluación con IA: Clasificación de observaciones como IDEAL, ADECUADO o NO RECOMENDABLE según la óptica del equipo y el objeto celeste.
+
+Auditoría: Registro automático de altas y devoluciones de préstamos indicando fecha y usuario.
+
+Ranking de Objetos: Listado ordenado de los objetos celestes más observados por los socios.
+
+📋 Instrucciones de Ejecución
+Clonar el repositorio dentro de la organización Prog-DW-2026-1.
+
+Configurar la cadena de conexión en el appsettings.json de la Web API.
+
+Ejecutar el script SQL con la precarga de datos (mínimo 10 registros por tabla).
+
+Configurar la API Key de Gemini para la funcionalidad de evaluación.
+
+Iniciar la solución ejecutando la Web API y la WebApp de forma independiente.
