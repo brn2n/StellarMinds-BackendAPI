@@ -1,215 +1,48 @@
-# OBLIGATORIO-N3D-317501-331209
+StellarMinds - Sistema de Gestión Astronómica
+Sistema integral para la gestión de socios, préstamos de equipos astronómicos y planificación de sesiones de observación con asistencia de IA (Google Gemini). Este proyecto fue desarrollado para la materia Diseño Web asistido por IA de la Universidad ORT Uruguay.
 
-# 🚀 StellarMinds - Sistema de Gestión Astronómica
+🌌 Descripción del Problema
+El observatorio "StellarMinds" requiere un sistema para gestionar sus socios, el inventario de equipos (telescopios, monturas, cámaras y oculares) y los préstamos asociados. El sistema destaca por validar técnicamente si una configuración de equipo es apta para observar un objeto celeste específico mediante el análisis de parámetros ópticos a través de la API de Gemini.
 
-## 📌 Descripción del Proyecto
+🏗️ Arquitectura y Diseño
+La solución sigue las recomendaciones de Arquitectura Limpia (Clean Architecture) y DDD (Domain Driven Design), aplicando los principios SOLID.
 
-Este proyecto consiste en el desarrollo de un sistema para el observatorio astronómico **StellarMinds**, orientado a la gestión de socios, préstamos de equipos y planificación de observaciones astronómicas.
+Estructura de la Solución
+StellarMinds.LogicaNegocio: Núcleo del sistema con entidades de dominio, Value Objects y reglas de negocio. Es la capa más interna y no posee dependencias de las demás.
 
-El sistema permitirá centralizar la operativa del club, facilitando tanto la administración interna como la experiencia de los socios, integrando además evaluaciones inteligentes mediante servicios de inteligencia artificial.
+StellarMinds.Infraestructura: Encargada del acceso a datos mediante Entity Framework 10 y la persistencia en SQL Server. Conoce a la Lógica de Negocio.
 
-Este desarrollo se realiza en el marco del obligatorio de la materia **Diseño Web Asistido por IA** de ORT.
+StellarMinds.LogicaAplicacion: Coordina los servicios de aplicación y casos de uso. Conoce tanto a la Lógica de Negocio como a Infraestructura.
 
----
+StellarMinds.WebApp: Aplicación ASP.NET Core MVC que consume la Web API mediante HttpClient. Utiliza ViewModels para la interfaz.
 
-## 🧠 Objetivo
+🛠️ Tecnologías Utilizadas
+.NET 10 y C# como lenguaje principal.
 
-Diseñar una solución completa basada en **arquitectura en capas y principios de Clean Architecture**, que permita:
+Entity Framework 10 con LINQ (sintaxis de método) para consultas.
 
-- Gestionar usuarios con distintos roles
-- Administrar equipos astronómicos
-- Controlar préstamos de equipos
-- Planificar observaciones
-- Evaluar la calidad de las observaciones mediante IA
+Web API REST-ful documentada con Swagger.
 
----
+Google Gemini API para la evaluación de adecuación de equipos (RF07).
 
-## 🏗️ Arquitectura del Proyecto
+SQL Server para el almacenamiento de datos.
 
-El sistema se organiza en múltiples capas siguiendo buenas prácticas de diseño:
+🚀 Requerimientos Funcionales Destacados
+Gestión de Préstamos: Validación de carga útil (peso) y compatibilidad de monturas (ecuatorial/híbrida para astrofotografía).
 
-### 📦 Lógica de Negocio (`LogicaNegocio`)
-- Contiene las entidades del dominio
-- Define reglas de negocio
-- Modela el comportamiento del sistema
-- No depende de otras capas
+Evaluación con IA: Clasificación de observaciones como IDEAL, ADECUADO o NO RECOMENDABLE según la óptica del equipo y el objeto celeste.
 
----
+Auditoría: Registro automático de altas y devoluciones de préstamos indicando fecha y usuario.
 
-### ⚙️ Lógica de Aplicación (`LogicaAplicacion`)
-- Orquesta los casos de uso
-- Coordina la interacción entre dominio e infraestructura
-- Aplica validaciones y flujos del sistema
+Ranking de Objetos: Listado ordenado de los objetos celestes más observados por los socios.
 
-Depende de:
-- `LogicaNegocio`
-- `Infraestructura`
+📋 Instrucciones de Ejecución
+Clonar el repositorio dentro de la organización Prog-DW-2026-1.
 
----
+Configurar la cadena de conexión en el appsettings.json de la Web API.
 
-### 🏗️ Infraestructura (`Infraestructura`)
-- Implementa la persistencia en base de datos
-- Maneja acceso a datos y repositorios
-- Integra servicios externos (ej: API de IA)
-- Contiene implementaciones técnicas
+Ejecutar el script SQL con la precarga de datos (mínimo 10 registros por tabla).
 
-Depende de:
-- `LogicaNegocio`
+Configurar la API Key de Gemini para la funcionalidad de evaluación.
 
----
-
-### 🌐 Web (`Web`)
-- Interfaz de usuario (MVC)
-- Consumo de Web API
-- Interacción con el usuario final
-
-Depende de:
-- `LogicaAplicacion`
-- `LogicaNegocio`
-
----
-
-## ⚙️ Tecnologías Utilizadas
-
-- .NET (Web API + MVC)
-- C#
-- Entity Framework
-- SQL Server
-- LINQ
-- Swagger (documentación de API)
-- Consumo de APIs externas (IA - Gemini)
-
----
-
-## 🔐 Roles del Sistema
-
-El sistema contempla distintos tipos de usuarios:
-
-- **Administrador**
-- **Coordinador**
-- **Socio**
-
-Cada uno con permisos y funcionalidades específicas.
-
----
-
-## 📋 Funcionalidades Previstas
-
-### 🔑 Autenticación
-- Login y Logout de usuarios
-- Control de acceso por roles
-
----
-
-### 👥 Gestión de Socios
-- Alta de usuarios
-- Asignación de roles
-
----
-
-### 🔭 Gestión de Equipos
-- CRUD de:
-  - Telescopios
-  - Monturas
-  - Cámaras
-  - Oculares
-
----
-
-### 📦 Préstamos de Equipos
-- Registro de préstamos
-- Validación de disponibilidad
-- Validación de compatibilidad entre equipos
-- Devolución de equipos
-- Auditoría de acciones
-
----
-
-### 🌌 Observaciones Astronómicas
-- Registro de observaciones
-- Asociación con préstamos vigentes
-- Selección de objetos celestes
-
----
-
-### 🤖 Evaluación Inteligente (IA)
-- Evaluación del equipo utilizado para una observación
-- Clasificación:
-  - IDEAL
-  - ADECUADO
-  - NO RECOMENDABLE
-- Uso de servicio externo de IA (Gemini)
-
----
-
-### 📊 Reportes y Consultas
-- Préstamos por período
-- Ranking de objetos observados
-- Socios que utilizaron un telescopio específico
-- Auditoría de préstamos
-
----
-
-## 📡 API REST
-
-El sistema expondrá endpoints REST para:
-
-- Gestión de usuarios
-- Gestión de equipos
-- Préstamos
-- Observaciones
-- Consultas
-
-Incluye documentación mediante **Swagger**.
-
----
-
-## 🧪 Validaciones y Reglas de Negocio
-
-El sistema contempla múltiples validaciones, entre ellas:
-
-- Disponibilidad de equipos
-- Compatibilidad entre telescopio y montura
-- Reglas para astrofotografía
-- Estados de préstamos
-- Seguridad en credenciales
-
----
-
-## 📂 Estructura del Proyecto
-
-```
-/Solution
- ├── LogicaNegocio
- ├── LogicaAplicacion
- ├── Infraestructura
- ├── Web
- └── WebAPI
-```
-
----
-
-## 📌 Estado del Proyecto
-
-Este proyecto se encuentra en fase de **diseño y planificación**.
-
-Actualmente:
-- Se está definiendo la arquitectura
-- Se están estableciendo las responsabilidades de cada capa
-- No se han implementado funcionalidades aún
-
----
-
-## 📖 Consideraciones
-
-- El sistema seguirá principios SOLID
-- Se aplicará Domain Driven Design (DDD)
-- Se utilizarán ViewModels en la capa Web
-- Se manejarán errores mediante excepciones
-- Se priorizará código mantenible y escalable
-
----
-
-## 👨‍💻 Autor
-
-Fernando Arriondo
+Iniciar la solución ejecutando la Web API y la WebApp de forma independiente.
