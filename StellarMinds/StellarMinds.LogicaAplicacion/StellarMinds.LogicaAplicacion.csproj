@@ -11,8 +11,4 @@
     <ProjectReference Include="..\StellarMinds.LogicaNegocio\StellarMinds.LogicaNegocio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CasosUso\" />
-  </ItemGroup>
-
 </Project>

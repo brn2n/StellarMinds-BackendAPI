@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StellarMinds.LogicaAplicacion.CasosUso
+namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {
-    internal class AgregarAlumno
+    internal class BajaEquipo
     {
     }
 }
