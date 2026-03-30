@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StellarMinds.LogicaNegocio.Entidades
+namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
 {
-    public class Usuario
+    public abstract class Usuario
     {
         public int Id { get; set; }
 
-        public NombreCompleto NombreCompleto { get; set; }
+        public string NombreCompleto { get; set; }
 
         public VOTelefono Telefono { get; set; }
     }
