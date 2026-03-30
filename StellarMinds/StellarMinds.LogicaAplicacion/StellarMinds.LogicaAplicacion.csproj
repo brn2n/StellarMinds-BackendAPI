@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CasosUso\Usuarios\" />
+    <Folder Include="CasosUso\" />
   </ItemGroup>
 
 </Project>
