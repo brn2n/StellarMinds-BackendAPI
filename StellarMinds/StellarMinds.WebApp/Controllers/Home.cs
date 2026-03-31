@@ -2,7 +2,7 @@
 
 namespace StellarMinds.WebApp.Controllers
 {
-    public class Index : Controller
+    public class Home : Controller
     {
         public IActionResult Index()
         {

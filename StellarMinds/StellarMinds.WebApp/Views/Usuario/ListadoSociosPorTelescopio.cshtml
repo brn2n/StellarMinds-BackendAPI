@@ -1,0 +1,26 @@
+﻿@model IEnumerable<StellarMinds.LogicaNegocio.Entidades.Usuario.Usuarios.Socio>
+
+@{
+    ViewData["Title"] = "ListadoSociosPorTelescopio";
+}
+
+<h1>ListadoSociosPorTelescopio</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
