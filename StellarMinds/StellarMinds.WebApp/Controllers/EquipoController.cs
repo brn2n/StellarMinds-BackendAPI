@@ -10,12 +10,12 @@ namespace StellarMinds.WebApp.Controllers
             return View();
         }
 
-        public IActionResult BajaEquipo()
+        public IActionResult BajaEquipo()//por id
         {
             return View();
         }
 
-        public IActionResult EditarEquipo()
+        public IActionResult EditarEquipo()//por id
         {
             return View();
         }
