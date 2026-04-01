@@ -4,6 +4,7 @@ namespace StellarMinds.WebApp.Controllers
 {
     public class EquipoController : Controller
     {
+        //ESTO SOLO LO HACEN LOS ADMINISTRADORES
         public IActionResult AltaEquipo()
         {
             return View();
