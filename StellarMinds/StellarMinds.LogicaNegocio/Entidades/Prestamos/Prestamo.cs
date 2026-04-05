@@ -8,7 +8,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 {
     public class Prestamo
     {
-        public DateTime fechaInicio { get; set; } = DateTime.Now;
+        public DateTime FechaInicio { get; set; } = DateTime.Now;
         public VOFechaFin VOFechaFin { get; set; }
         public Montura Montura { get; set; }
         public Ocular Ocular { get; set; }
@@ -18,6 +18,15 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
         public Prestamo()
         {
             
+        }
+
+        public Prestamo(VOFechaFin voFechaFin, Montura montura, Ocular ocular, Telescopio telescopio, Camara camara)
+        {
+            VOFechaFin = voFechaFin;
+            Montura = montura;
+            Ocular = ocular;
+            Telescopio = telescopio;
+            Camara = camara;
         }
     }
 }

@@ -8,13 +8,20 @@ namespace StellarMinds.LogicaNegocio.Entidades.NochesObservaciones
 {
     public class NocheObservacion
     {
-        public DateTime fechaObservacion { get; set; }
+        public DateTime FechaObservacion { get; set; }
         public Prestamo Prestamo { get; set; }
         public ObjetoCeleste ObjetoCeleste { get; set; }
 
         public NocheObservacion()
         {
             
+        }
+
+        public NocheObservacion(DateTime fechaObservacion, Prestamo prestamo, ObjetoCeleste objetoCeleste)
+        {
+            FechaObservacion = fechaObservacion;
+            Prestamo = prestamo;
+            ObjetoCeleste = objetoCeleste;
         }
     }
 }

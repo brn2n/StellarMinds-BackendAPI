@@ -6,13 +6,20 @@ namespace StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes
 {
     public class ObjetoCeleste
     {
-        public string nombre { get; set; }
-        public string tipo { get; set; }
-        public int magnitud { get; set; }
+        public string Nombre { get; set; }
+        public string Tipo { get; set; }
+        public int Magnitud { get; set; }
 
         public ObjetoCeleste()
         {
             
+        }
+
+        public ObjetoCeleste(string nombre, string tipo, int magnitud)
+        {
+            Nombre = nombre;
+            Tipo = tipo;
+            Magnitud = magnitud;
         }
     }
 }
