@@ -12,7 +12,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.NochesObservaciones
         public Prestamo Prestamo { get; set; }
         public ObjetoCeleste ObjetoCeleste { get; set; }
 
-        public NocheObservacion()
+        private NocheObservacion()
         {
             
         }

@@ -10,7 +10,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes
         public string Tipo { get; set; }
         public int Magnitud { get; set; }
 
-        public ObjetoCeleste()
+        private ObjetoCeleste()
         {
             
         }

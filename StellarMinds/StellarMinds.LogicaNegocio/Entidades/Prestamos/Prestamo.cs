@@ -15,7 +15,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
         public Telescopio Telescopio { get; set; }
         public Camara Camara { get; set; }
 
-        public Prestamo()
+        private Prestamo()
         {
             
         }

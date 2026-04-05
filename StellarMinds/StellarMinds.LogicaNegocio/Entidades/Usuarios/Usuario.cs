@@ -15,6 +15,12 @@ namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
         public VOUsername Username { get; set; }
         public VOPassword VOPassword { get; set; }
 
+        public RolUsuario RolUsuario { get; set; }
+
+        private Usuario()
+        {
+        }
+
         protected Usuario(VONombreCompleto nombreCompleto, VOTelefono telefono, VOUsername username, VOPassword voPassword)
         {
             NombreCompleto = nombreCompleto;

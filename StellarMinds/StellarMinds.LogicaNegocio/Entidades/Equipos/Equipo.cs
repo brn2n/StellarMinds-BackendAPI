@@ -11,7 +11,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
         public string Modelo { get; set; }
         public int CantDisponible { get; set; }
         
-        protected Equipo()
+        private Equipo()
         {
             
         }
