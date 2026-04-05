@@ -6,14 +6,22 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
 {
     public abstract class Equipo
     {
-        public int id { get; set; }
-        public string marca { get; set; }
-        public string modelo { get; set; }
-        public int cantDisponible { get; set; }
-
+        public int Id { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
+        public int CantDisponible { get; set; }
+        
         protected Equipo()
         {
             
+        }
+
+        protected Equipo(int id, string marca, string modelo, int cantDisponible)
+        {
+            Id = id;
+            Marca = marca;
+            Modelo = modelo;
+            CantDisponible = cantDisponible;
         }
     }
 }
