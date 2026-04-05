@@ -396,6 +396,10 @@ cmake-build-*/
 # File-based project format
 *.iws
 
+# JetBrains Rider
+.idea/
+*.sln.iml
+
 # IntelliJ
 out/
 
