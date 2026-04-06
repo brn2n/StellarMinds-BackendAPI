@@ -2,13 +2,13 @@
 
 namespace StellarMinds.LogicaNegocio.Excepciones.EntidadesException.UsuarioException
 {
-    public class InvalidPasswordException : LogicaNegocioExcepcion
+    public class PasswordInvalidException : LogicaNegocioExcepcion
     {
-        public InvalidPasswordException()
+        public PasswordInvalidException()
         {
         }
 
-        public InvalidPasswordException(string? message) : base(message)
+        public PasswordInvalidException(string? message) : base(message)
         {
         }
     }
