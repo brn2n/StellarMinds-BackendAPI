@@ -1,6 +1,6 @@
 namespace StellarMinds.LogicaNegocio.Entidades.Equipos;
 
-public enum TipoSensor
+public enum TipoSensorCamara
 {
     CMOS,
     CCD
