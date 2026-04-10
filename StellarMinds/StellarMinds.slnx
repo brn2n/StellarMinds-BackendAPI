@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="Shared/Shared.csproj" Id="4088b9ba-ab65-48b9-9bed-969b4e8008f5" />
   <Project Path="StellarMinds.Infraestructura/StellarMinds.Infraestructura.csproj" />
   <Project Path="StellarMinds.LogicaAplicacion/StellarMinds.LogicaAplicacion.csproj" />
   <Project Path="StellarMinds.LogicaNegocio/StellarMinds.LogicaNegocio.csproj" />
