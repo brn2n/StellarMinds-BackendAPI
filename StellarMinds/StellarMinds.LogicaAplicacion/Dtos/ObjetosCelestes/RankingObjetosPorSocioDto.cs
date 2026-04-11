@@ -4,7 +4,10 @@ using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes
 {
-    internal class RankingObjetosPorSocioDto
+    public record RankingObjetosPorSocioDto
     {
+        public string NombreObjeto { get; set; }
+        public string Tipo { get; set; }
+        public int CantidadObservaciones { get; set; }
     }
 }

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.Equipos
 {
-    internal class BajaEquipoDto
+    public record BajaEquipoDto
     {
+        public string IdEquipo { get; set; }
     }
 }

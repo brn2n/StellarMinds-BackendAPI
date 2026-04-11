@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.Prestamos
 {
-    internal class AltaPrestamoDto
+    public record AltaPrestamoDto
     {
     }
 }

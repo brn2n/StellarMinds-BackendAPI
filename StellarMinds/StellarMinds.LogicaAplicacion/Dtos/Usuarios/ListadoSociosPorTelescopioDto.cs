@@ -4,7 +4,9 @@ using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.Usuarios
 {
-    internal class ListadoSociosPorTelescopioDto
+    public record ListadoSociosPorTelescopioDto
     {
+        public string NombreCompleto { get; set; }
+        public string Email { get; set; }
     }
 }

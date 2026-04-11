@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.Equipos
 {
-    internal class AltaEquipoDto
+    record class AltaEquipoDto
     {
     }
 }

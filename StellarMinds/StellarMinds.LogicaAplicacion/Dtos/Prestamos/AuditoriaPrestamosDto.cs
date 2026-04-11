@@ -4,7 +4,11 @@ using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.Prestamos
 {
-    internal class AuditoriaPrestamosDto
+    public record AuditoriaPrestamosDto
     {
+        public int IdPrestamo { get; set; }
+        public string Usuario { get; set; }
+        public string Accion { get; set; }
+        public DateTime Fecha { get; set; }
     }
 }

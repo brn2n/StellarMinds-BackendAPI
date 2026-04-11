@@ -4,7 +4,10 @@ using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones
 {
-    internal class AltaObservacionDto
+    public record AltaObservacionDto
     {
+        public int IdPrestamo { get; set; }
+        public int IdObjetoCeleste { get; set; }
+        public DateTime FechaObservacion { get; set; }
     }
 }

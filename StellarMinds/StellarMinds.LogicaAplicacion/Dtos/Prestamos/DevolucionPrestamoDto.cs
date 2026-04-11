@@ -4,7 +4,8 @@ using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.Prestamos
 {
-    internal class DevolucionPrestamoDto
+    public record DevolucionPrestamoDto
     {
+        public int IdPrestamo { get; set; }
     }
 }
