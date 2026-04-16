@@ -1,0 +1,23 @@
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Entidades.Usuarios;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
+{
+    public class ListarUsuarios : ICUGetAll<Usuario>
+    {
+        private IRepositorioSocio _repo;
+
+        public ListarUsuarios(IRepositorioSocio repositorioUsuarios)
+        {
+            _repo = repositorioUsuarios;
+        }
+        public IEnumerable<Usuario> Ejecutar()
+        {
+            return _repo.GetAll();
+        }
+    }
+}

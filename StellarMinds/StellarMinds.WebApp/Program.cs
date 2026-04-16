@@ -1,3 +1,10 @@
+using StellarMinds.Infraestructura.InterfacesRepositorio;
+using StellarMinds.Infraestructura.ListaMemoria;
+using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
+using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Entidades.Usuarios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +15,14 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// Contenedor de inyeccion de dependencias
+// inyecto los repositorios
+builder.Services.AddScoped<IRepositorioSocio, RepositorioSocio>();
+
+// Inyecto los casos de uso de Alumno
+builder.Services.AddScoped<ICUAlta<AltaSocioDto>, AltaSocio>();
+builder.Services.AddScoped<ICUGetAll<Usuario>, ListarUsuarios>();
 
 var app = builder.Build();
 

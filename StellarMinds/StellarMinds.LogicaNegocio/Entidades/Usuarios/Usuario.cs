@@ -15,18 +15,17 @@ namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
         public VOUsername Username { get; set; }
         public VOPassword VOPassword { get; set; }
 
-        public RolUsuario RolUsuario { get; set; }
-
         private Usuario()
         {
         }
 
-        protected Usuario(VONombreCompleto nombreCompleto, VOTelefono telefono, VOUsername username, VOPassword voPassword)
+        protected Usuario(int id, VONombreCompleto nombreCompleto, VOTelefono telefono, VOUsername username, VOPassword vOPassword)
         {
+            Id = id;
             NombreCompleto = nombreCompleto;
             Telefono = telefono;
             Username = username;
-            VOPassword = voPassword;
+            VOPassword = vOPassword;
         }
     }
 }
