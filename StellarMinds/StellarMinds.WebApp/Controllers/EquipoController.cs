@@ -18,6 +18,7 @@ namespace StellarMinds.WebApp.Controllers
         public IActionResult EditarEquipo()//por id
         {
             return View();
+
         }
     }
 }
