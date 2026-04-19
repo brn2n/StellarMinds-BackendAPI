@@ -9,10 +9,6 @@ namespace StellarMinds.WebApp.Controllers
             return View();
         }
 
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear(); // borra toda la sesión
-            return RedirectToAction("Login", "Login");
-        }
+
     }
 }

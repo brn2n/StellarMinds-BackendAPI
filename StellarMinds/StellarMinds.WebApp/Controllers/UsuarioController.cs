@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using StellarMinds.LogicaNegocio.Excepciones.EntidadesException.UsuarioException;
+using StellarMinds.WebApp.Filter;
 
 namespace StellarMinds.WebApp.Controllers
 {
@@ -18,12 +18,14 @@ namespace StellarMinds.WebApp.Controllers
             _listar = listar;
         }
 
-
+        [Logueado]
         public IActionResult Index()
         {
             return View(_listar.Ejecutar());
         }
 
+        [Logueado]
+        [Admin]
         public IActionResult Create()
         {
             return View();
@@ -50,8 +52,6 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("ERROOOOOOOOOOOOOOOORRRR ERRROR");
-                Console.WriteLine(e);
                 ViewBag.message = e.Message;
                 return View(socio);
             }

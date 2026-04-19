@@ -20,9 +20,21 @@ namespace StellarMinds.WebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            if (usuario == "colo" && password == "123")
+            {
+                HttpContext.Session.SetString("Usuario", usuario);
+                HttpContext.Session.SetString("Rol", "Socio");
+
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
+        }
 
-
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Login");
         }
     }
 }
