@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StellarMinds.Infraestructura.ListaMemoria
 {
-    public class RepositorioPrestamo
+    internal class RepositorioAdministrador
     {
     }
 }
