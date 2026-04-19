@@ -9,12 +9,16 @@ namespace StellarMinds.WebApp.Controllers
 {
     public class UsuarioController : Controller
     {
-        private ICUAlta<AltaSocioDto> _alta;
+        private ICUAlta<AltaSocioDto> _altaSocio;
+        private ICUAlta<AltaAdministradorDto> _altaAdministrador;
+        private ICUAlta<AltaCoordinadorDto> _altaCoordinador;
         private ICUGetAll<Usuario> _listar;
 
-        public UsuarioController(ICUAlta<AltaSocioDto> alta, ICUGetAll<Usuario> listar)
+        public UsuarioController(ICUAlta<AltaSocioDto> altaSocio, ICUAlta<AltaAdministradorDto> altaAdministrador, ICUAlta<AltaCoordinadorDto> altaCoordinador, ICUGetAll<Usuario> listar)
         {
-            _alta = alta;
+            _altaSocio = altaSocio;
+            _altaAdministrador = altaAdministrador;
+            _altaCoordinador = altaCoordinador;
             _listar = listar;
         }
 
@@ -33,31 +37,49 @@ namespace StellarMinds.WebApp.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(AltaSocioDto socio)
+        public IActionResult Create(AltaUsuarioDto usuario)
         {
             try
             {
-                _alta.Ejecutar(new AltaSocioDto(socio.Id,
-                                                      socio.nombre,
-                                                      socio.apellido,
-                                                      socio.telefono,
-                                                      socio.username,
-                                                      socio.password));
+                if (usuario.rol == "Socio")
+                {
+                    _altaSocio.Ejecutar(new AltaSocioDto(usuario.Id,
+                                                          usuario.nombre,
+                                                          usuario.apellido,
+                                                          usuario.telefono,
+                                                          usuario.username,
+                                                          usuario.password));
+                }
+                else if (usuario.rol == "Coordinador")
+                {
+                    _altaCoordinador.Ejecutar(new AltaCoordinadorDto(usuario.Id,
+                                                                  usuario.nombre,
+                                                                  usuario.apellido,
+                                                                  usuario.telefono,
+                                                                  usuario.username,
+                                                                  usuario.password));
+                }
+                else {
+                    _altaAdministrador.Ejecutar(new AltaAdministradorDto(usuario.Id,
+                                                                      usuario.nombre,
+                                                                      usuario.apellido,
+                                                                      usuario.telefono,
+                                                                      usuario.username,
+                                                                      usuario.password));
+                }
                 return RedirectToAction("Index");
             }
             catch (NameInvalidException e)
             {
                 ViewBag.message = e.Message;
-                return View(socio);
+                return View(usuario);
             }
             catch (Exception e)
             {
                 ViewBag.message = e.Message;
-                return View(socio);
+                return View(usuario);
             }
         }
-
-
 
         public IActionResult ListadoSociosPorTelescopio()
         {

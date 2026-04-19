@@ -1,4 +1,5 @@
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+using StellarMinds.Infraestructura.ListaMemoria;
 using StellarMinds.Infraestructura.ListaMemoria.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
@@ -21,6 +22,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<IRepositorioSocio, RepositorioSocio>();
 builder.Services.AddScoped<IRepositorioAdmin, RepositorioAdministrador>();
 builder.Services.AddScoped<IRepositorioCoordinador, RepositorioCoordinador>();
+builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
 // Inyecto los casos de uso
 builder.Services.AddScoped<ICUAlta<AltaSocioDto>, AltaSocio>();

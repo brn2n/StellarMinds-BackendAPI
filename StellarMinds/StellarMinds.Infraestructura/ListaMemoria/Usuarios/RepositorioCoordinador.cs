@@ -1,4 +1,4 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio;
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using System;
@@ -7,17 +7,12 @@ using System.Text;
 
 namespace StellarMinds.Infraestructura.ListaMemoria.Usuarios
 {
-    public class RepositorioSocio : IRepositorioSocio
+    public class RepositorioCoordinador : IRepositorioCoordinador
     {
-        private static List<Socio> _usuario { get; set; } = new List<Socio>();
-        public void Add(Socio Obj)
+        private static List<Coordinador> _usuario { get; set; } = new List<Coordinador>();
+        public void Add(Coordinador Obj)
         {
             _usuario.Add(Obj);
-        }
-
-        public IEnumerable<Socio> GetAll()
-        {
-            return _usuario;
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio;
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StellarMinds.Infraestructura.ListaMemoria
+namespace StellarMinds.Infraestructura.ListaMemoria.Usuarios
 {
     public class RepositorioSocio : IRepositorioSocio
     {

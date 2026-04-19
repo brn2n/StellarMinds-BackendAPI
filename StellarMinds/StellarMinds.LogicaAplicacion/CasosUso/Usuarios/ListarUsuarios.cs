@@ -9,9 +9,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
     public class ListarUsuarios : ICUGetAll<Usuario>
     {
-        private IRepositorioSocio _repo;
+        private IRepositorioUsuario _repo;
 
-        public ListarUsuarios(IRepositorioSocio repositorioUsuarios)
+        public ListarUsuarios(IRepositorioUsuario repositorioUsuarios)
         {
             _repo = repositorioUsuarios;
         }

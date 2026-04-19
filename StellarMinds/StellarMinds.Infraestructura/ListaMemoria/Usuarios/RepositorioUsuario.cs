@@ -8,7 +8,7 @@ using System.Text;
 
 namespace StellarMinds.Infraestructura.ListaMemoria
 {
-    public class RepositorioSocio : IRepositorioUsuario
+    public class RepositorioUsuario : IRepositorioUsuario
     {
         private static List<Usuario> _usuario { get; set; } = new List<Usuario>();
 

@@ -1,4 +1,4 @@
-﻿@model StellarMinds.LogicaAplicacion.Dtos.Usuarios.AltaSocioDto
+﻿@model StellarMinds.LogicaAplicacion.Dtos.Usuarios.AltaUsuarioDto
 
 @{
     ViewData["Title"] = "Create";
@@ -41,6 +41,15 @@
                 <label asp-for="password" class="control-label"></label>
                 <input asp-for="password" class="form-control" />
                 <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="rol" class="form-rol">SELECCIONE UN ROL</label>
+                <select asp-for="rol" class="form-rol">
+                    <option disabled selected>Seleccione una opcion</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Socio">Socio</option>
+                    <option value="Coordinador">Coordinador</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
