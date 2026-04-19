@@ -1,4 +1,4 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio;
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
@@ -9,9 +9,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
     public class AltaCoordinador : ICUAlta<AltaCoordinadorDto>
     {
-        private IRepositorioSocio _repo;
+        private IRepositorioCoordinador _repo;
 
-        public AltaCoordinador(IRepositorioSocio repo)
+        public AltaCoordinador(IRepositorioCoordinador repo)
         {
             _repo = repo;
         }

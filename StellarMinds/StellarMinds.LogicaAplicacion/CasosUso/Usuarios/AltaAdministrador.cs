@@ -1,4 +1,4 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio;
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
@@ -9,9 +9,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
     public class AltaAdministrador : ICUAlta<AltaAdministradorDto>
     {
-        private IRepositorioSocio _repo;
+        private IRepositorioAdmin _repo;
 
-        public AltaAdministrador(IRepositorioSocio repo)
+        public AltaAdministrador(IRepositorioAdmin repo)
         {
             _repo = repo;
         }
@@ -22,7 +22,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
             {
                 throw new Exception("El usuario no puede ser nulo");
             }
-            _repo.Add(new AltaAdministrador(usuario.Id, new VONombreCompleto(usuario.nombre, usuario.apellido), new VOTelefono(usuario.telefono), new VOUsername(usuario.username), new VOPassword(usuario.password)));
+            _repo.Add(new Administrador(usuario.Id, new VONombreCompleto(usuario.nombre, usuario.apellido), new VOTelefono(usuario.telefono), new VOUsername(usuario.username), new VOPassword(usuario.password)));
         }
     }
 }

@@ -1,5 +1,5 @@
-using StellarMinds.Infraestructura.InterfacesRepositorio;
-using StellarMinds.Infraestructura.ListaMemoria;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+using StellarMinds.Infraestructura.ListaMemoria.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -19,9 +19,13 @@ builder.Services.AddSession(options =>
 // Contenedor de inyeccion de dependencias
 // inyecto los repositorios
 builder.Services.AddScoped<IRepositorioSocio, RepositorioSocio>();
+builder.Services.AddScoped<IRepositorioAdmin, RepositorioAdministrador>();
+builder.Services.AddScoped<IRepositorioCoordinador, RepositorioCoordinador>();
 
-// Inyecto los casos de uso de Alumno
+// Inyecto los casos de uso
 builder.Services.AddScoped<ICUAlta<AltaSocioDto>, AltaSocio>();
+builder.Services.AddScoped<ICUAlta<AltaAdministradorDto>, AltaAdministrador>();
+builder.Services.AddScoped<ICUAlta<AltaCoordinadorDto>, AltaCoordinador>();
 builder.Services.AddScoped<ICUGetAll<Usuario>, ListarUsuarios>();
 
 var app = builder.Build();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StellarMinds.Infraestructura.ListaMemoria
+namespace StellarMinds.Infraestructura.ListaMemoria.Usuarios
 {
     internal class RepositorioAdministrador
     {
