@@ -7,23 +7,22 @@ using StellarMinds.LogicaNegocio.VO.VOUsuario;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
-    public class AltaSocio : ICUAlta<AltaSocioDto>
+    public class AltaCoordinador : ICUAlta<AltaCoordinadorDto>
     {
         private IRepositorioSocio _repo;
 
-        public AltaSocio(IRepositorioSocio repo)
-
+        public AltaCoordinador(IRepositorioSocio repo)
         {
             _repo = repo;
         }
 
-        public void Ejecutar(AltaSocioDto usuario)
+        public void Ejecutar(AltaCoordinadorDto usuario)
         {
             if (usuario == null)
             {
                 throw new Exception("El usuario no puede ser nulo");
             }
-            _repo.Add(new Socio(usuario.Id, new VONombreCompleto(usuario.nombre, usuario.apellido), new VOTelefono(usuario.telefono), new VOUsername(usuario.username), new VOPassword(usuario.password)));
+            _repo.Add(new Coordinador(usuario.Id, new VONombreCompleto(usuario.nombre, usuario.apellido), new VOTelefono(usuario.telefono), new VOUsername(usuario.username), new VOPassword(usuario.password)));
         }
     }
 }
