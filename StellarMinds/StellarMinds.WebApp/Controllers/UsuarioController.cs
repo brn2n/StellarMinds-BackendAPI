@@ -59,7 +59,8 @@ namespace StellarMinds.WebApp.Controllers
                                                                   usuario.username,
                                                                   usuario.password));
                 }
-                else {
+                else
+                {
                     _altaAdministrador.Ejecutar(new AltaAdministradorDto(usuario.Id,
                                                                       usuario.nombre,
                                                                       usuario.apellido,
@@ -85,5 +86,11 @@ namespace StellarMinds.WebApp.Controllers
         {
             return View();
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("login");
+        }
+
     }
 }

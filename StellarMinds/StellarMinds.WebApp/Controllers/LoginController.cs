@@ -15,7 +15,7 @@ namespace StellarMinds.WebApp.Controllers
             if (usuario == "luchosan" && password == "123")
             {
                 HttpContext.Session.SetString("Usuario", usuario);
-                HttpContext.Session.SetString("Rol", "Admin");
+                HttpContext.Session.SetString("Rol", "Administrador");
 
                 return RedirectToAction("Index", "Home");
             }

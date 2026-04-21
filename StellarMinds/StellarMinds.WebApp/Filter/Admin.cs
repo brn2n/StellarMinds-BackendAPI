@@ -7,7 +7,7 @@ namespace StellarMinds.WebApp.Filter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            if (context.HttpContext.Session.GetString("Rol") != "Admin")
+            if (context.HttpContext.Session.GetString("Rol") != "Administrador")
                 context.Result = new RedirectToActionResult("index", null, null);
         }
     }
