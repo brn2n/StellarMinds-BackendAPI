@@ -9,9 +9,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
     public class AltaSocio : ICUAlta<AltaSocioDto>
     {
-        private IRepositorioSocio _repo;
+        private IRepositorioUsuario _repo;
 
-        public AltaSocio(IRepositorioSocio repo)
+        public AltaSocio(IRepositorioUsuario repo)
 
         {
             _repo = repo;

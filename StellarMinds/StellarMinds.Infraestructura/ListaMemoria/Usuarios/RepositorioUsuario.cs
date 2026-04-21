@@ -12,6 +12,21 @@ namespace StellarMinds.Infraestructura.ListaMemoria
     {
         private static List<Usuario> _usuario { get; set; } = new List<Usuario>();
 
+        public void Add(Socio Obj)
+        {
+            _usuario.Add(Obj);
+        }
+
+        public void Add(Coordinador Obj)
+        {
+            _usuario.Add(Obj);
+        }
+
+        public void Add(Administrador Obj)
+        {
+            _usuario.Add(Obj);
+        }
+
         public IEnumerable<Usuario> GetAll()
         {
             return _usuario;

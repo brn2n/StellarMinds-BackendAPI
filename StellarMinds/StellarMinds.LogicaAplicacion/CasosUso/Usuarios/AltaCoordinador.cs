@@ -9,9 +9,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
     public class AltaCoordinador : ICUAlta<AltaCoordinadorDto>
     {
-        private IRepositorioCoordinador _repo;
+        private IRepositorioUsuario _repo;
 
-        public AltaCoordinador(IRepositorioCoordinador repo)
+        public AltaCoordinador(IRepositorioUsuario repo)
         {
             _repo = repo;
         }

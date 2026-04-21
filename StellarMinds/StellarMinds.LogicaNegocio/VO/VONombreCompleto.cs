@@ -9,7 +9,7 @@
         {
             this.Nombre = nombre;
             this.Apellido = apellido;
-            Validar();
+            //Validar();
         }
 
         private void Validar()

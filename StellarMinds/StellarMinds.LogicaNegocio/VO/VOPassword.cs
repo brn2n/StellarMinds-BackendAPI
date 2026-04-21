@@ -11,7 +11,7 @@ namespace StellarMinds.LogicaNegocio.VO.VOUsuario
         public VOPassword(string value)
         {
             Value = value;
-            Validar();
+            //Validar();
         }
 
         private void Validar()
