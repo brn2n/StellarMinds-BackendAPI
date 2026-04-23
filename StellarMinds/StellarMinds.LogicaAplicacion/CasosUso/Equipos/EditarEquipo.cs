@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos.Editar
+namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {
     internal class EditarEquipo
     {
