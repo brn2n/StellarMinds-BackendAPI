@@ -9,19 +9,7 @@ namespace StellarMinds.WebApp.Controllers
 {
     public class UsuarioController : Controller
     {
-        //private ICUAlta<AltaSocioDto> _altaSocio;
-        //private ICUAlta<AltaAdministradorDto> _altaAdministrador;
-        //private ICUAlta<AltaCoordinadorDto> _altaCoordinador;
         private ICUGetAll<Usuario> _listar;
-
-        //public UsuarioController(ICUAlta<AltaSocioDto> altaSocio, ICUAlta<AltaAdministradorDto> altaAdministrador, ICUAlta<AltaCoordinadorDto> altaCoordinador, ICUGetAll<Usuario> listar)
-        //{
-        //    _altaSocio = altaSocio;
-        //    _altaAdministrador = altaAdministrador;
-        //    _altaCoordinador = altaCoordinador;
-        //    _listar = listar;
-        //}
-
         private ICUAlta<AltaUsuarioDto> _alta;
 
         public UsuarioController(ICUAlta<AltaUsuarioDto> altaUsuario, ICUGetAll<Usuario> listar)

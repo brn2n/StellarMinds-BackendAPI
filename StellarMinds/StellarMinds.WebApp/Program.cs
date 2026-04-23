@@ -22,9 +22,6 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
 // Inyecto los casos de uso
-builder.Services.AddScoped<ICUAlta<AltaSocioDto>, AltaSocio>();
-builder.Services.AddScoped<ICUAlta<AltaAdministradorDto>, AltaAdministrador>();
-builder.Services.AddScoped<ICUAlta<AltaCoordinadorDto>, AltaCoordinador>();
 builder.Services.AddScoped<ICUGetAll<Usuario>, ListarUsuarios>();
 builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
 

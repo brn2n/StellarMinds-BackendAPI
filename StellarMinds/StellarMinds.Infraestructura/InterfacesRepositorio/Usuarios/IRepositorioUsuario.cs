@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios
 {
-    public interface IRepositorioUsuario : IRepositorioGetAll<Usuario>, IRepositorioAdd<Socio>, IRepositorioAdd<Coordinador>, IRepositorioAdd<Administrador>
+    public interface IRepositorioUsuario : IRepositorioGetAll<Usuario>, IRepositorioAdd<Usuario>
     {
 
     }
