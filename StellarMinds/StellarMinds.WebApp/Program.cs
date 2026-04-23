@@ -26,6 +26,7 @@ builder.Services.AddScoped<ICUAlta<AltaSocioDto>, AltaSocio>();
 builder.Services.AddScoped<ICUAlta<AltaAdministradorDto>, AltaAdministrador>();
 builder.Services.AddScoped<ICUAlta<AltaCoordinadorDto>, AltaCoordinador>();
 builder.Services.AddScoped<ICUGetAll<Usuario>, ListarUsuarios>();
+builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
 
 var app = builder.Build();
 

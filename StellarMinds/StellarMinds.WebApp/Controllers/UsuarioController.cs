@@ -9,16 +9,24 @@ namespace StellarMinds.WebApp.Controllers
 {
     public class UsuarioController : Controller
     {
-        private ICUAlta<AltaSocioDto> _altaSocio;
-        private ICUAlta<AltaAdministradorDto> _altaAdministrador;
-        private ICUAlta<AltaCoordinadorDto> _altaCoordinador;
+        //private ICUAlta<AltaSocioDto> _altaSocio;
+        //private ICUAlta<AltaAdministradorDto> _altaAdministrador;
+        //private ICUAlta<AltaCoordinadorDto> _altaCoordinador;
         private ICUGetAll<Usuario> _listar;
 
-        public UsuarioController(ICUAlta<AltaSocioDto> altaSocio, ICUAlta<AltaAdministradorDto> altaAdministrador, ICUAlta<AltaCoordinadorDto> altaCoordinador, ICUGetAll<Usuario> listar)
+        //public UsuarioController(ICUAlta<AltaSocioDto> altaSocio, ICUAlta<AltaAdministradorDto> altaAdministrador, ICUAlta<AltaCoordinadorDto> altaCoordinador, ICUGetAll<Usuario> listar)
+        //{
+        //    _altaSocio = altaSocio;
+        //    _altaAdministrador = altaAdministrador;
+        //    _altaCoordinador = altaCoordinador;
+        //    _listar = listar;
+        //}
+
+        private ICUAlta<AltaUsuarioDto> _alta;
+
+        public UsuarioController(ICUAlta<AltaUsuarioDto> altaUsuario, ICUGetAll<Usuario> listar)
         {
-            _altaSocio = altaSocio;
-            _altaAdministrador = altaAdministrador;
-            _altaCoordinador = altaCoordinador;
+            _alta = altaUsuario;
             _listar = listar;
         }
 
@@ -35,50 +43,18 @@ namespace StellarMinds.WebApp.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public IActionResult Create(AltaUsuarioDto usuario)
+        public IActionResult Create(AltaUsuarioDto obj)
         {
             try
             {
-                if (usuario.rol == "Socio")
-                {
-                    _altaSocio.Ejecutar(new AltaSocioDto(usuario.Id,
-                                                          usuario.nombre,
-                                                          usuario.apellido,
-                                                          usuario.telefono,
-                                                          usuario.username,
-                                                          usuario.password));
-                }
-                else if (usuario.rol == "Coordinador")
-                {
-                    _altaCoordinador.Ejecutar(new AltaCoordinadorDto(usuario.Id,
-                                                                  usuario.nombre,
-                                                                  usuario.apellido,
-                                                                  usuario.telefono,
-                                                                  usuario.username,
-                                                                  usuario.password));
-                }
-                else
-                {
-                    _altaAdministrador.Ejecutar(new AltaAdministradorDto(usuario.Id,
-                                                                      usuario.nombre,
-                                                                      usuario.apellido,
-                                                                      usuario.telefono,
-                                                                      usuario.username,
-                                                                      usuario.password));
-                }
+                _alta.Ejecutar(obj);
                 return RedirectToAction("Index");
-            }
-            catch (NameInvalidException e)
-            {
-                ViewBag.message = e.Message;
-                return View(usuario);
             }
             catch (Exception e)
             {
                 ViewBag.message = e.Message;
-                return View(usuario);
+                return View();
             }
         }
 
