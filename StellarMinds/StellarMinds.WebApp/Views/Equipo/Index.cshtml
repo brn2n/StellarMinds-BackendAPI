@@ -47,6 +47,9 @@
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
+                <td>
+                    @item.GetType().Name
+                </td>
         </tr>
 }
     </tbody>

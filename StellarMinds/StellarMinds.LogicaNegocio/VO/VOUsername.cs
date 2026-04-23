@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaNegocio.VO.VOUsuario
+﻿namespace StellarMinds.LogicaNegocio.VO.VOUsuario
 {
     public record class VOUsername
     {
@@ -16,7 +12,7 @@ namespace StellarMinds.LogicaNegocio.VO.VOUsuario
 
         private void Validar()
         {
-            throw new NotImplementedException(); // Aquí puedes implementar la lógica de validación 
+            //    throw new NotImplementedException(); // Aquí puedes implementar la lógica de validación 
         }
     }
 }
