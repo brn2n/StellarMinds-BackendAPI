@@ -1,4 +1,4 @@
-﻿@model StellarMinds.WebApp.Models.VMTelescopio
+﻿@model StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos.AltaEquipoDto
 
 @{
     ViewData["Title"] = "AltaEquipo";
@@ -6,12 +6,92 @@
 
 <h1>AltaEquipo</h1>
 
-<h4>VMTelescopio</h4>
+<h4>AltaEquipoDto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AltaEquipo">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoEquipo" class="control-label"></label>
+                <input asp-for="TipoEquipo" class="form-control" />
+                <span asp-validation-for="TipoEquipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Marca" class="control-label"></label>
+                <input asp-for="Marca" class="form-control" />
+                <span asp-validation-for="Marca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Modelo" class="control-label"></label>
+                <input asp-for="Modelo" class="form-control" />
+                <span asp-validation-for="Modelo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantDisponible" class="control-label"></label>
+                <input asp-for="CantDisponible" class="form-control" />
+                <span asp-validation-for="CantDisponible" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apertura" class="control-label"></label>
+                <input asp-for="Apertura" class="form-control" />
+                <span asp-validation-for="Apertura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RelacionFocal" class="control-label"></label>
+                <input asp-for="RelacionFocal" class="form-control" />
+                <span asp-validation-for="RelacionFocal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DistanciaFocal" class="control-label"></label>
+                <input asp-for="DistanciaFocal" class="form-control" />
+                <span asp-validation-for="DistanciaFocal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peso" class="control-label"></label>
+                <input asp-for="Peso" class="form-control" />
+                <span asp-validation-for="Peso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoMontura" class="control-label"></label>
+                <input asp-for="TipoMontura" class="form-control" />
+                <span asp-validation-for="TipoMontura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CargaUtilSoportada" class="control-label"></label>
+                <input asp-for="CargaUtilSoportada" class="form-control" />
+                <span asp-validation-for="CargaUtilSoportada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoSensor" class="control-label"></label>
+                <input asp-for="TipoSensor" class="form-control" />
+                <span asp-validation-for="TipoSensor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResolucionMP" class="control-label"></label>
+                <input asp-for="ResolucionMP" class="form-control" />
+                <span asp-validation-for="ResolucionMP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EsColor" class="control-label"></label>
+                <input asp-for="EsColor" class="form-control" />
+                <span asp-validation-for="EsColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DistanciaFocalOcular" class="control-label"></label>
+                <input asp-for="DistanciaFocalOcular" class="form-control" />
+                <span asp-validation-for="DistanciaFocalOcular" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CampoVision" class="control-label"></label>
+                <input asp-for="CampoVision" class="form-control" />
+                <span asp-validation-for="CampoVision" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
