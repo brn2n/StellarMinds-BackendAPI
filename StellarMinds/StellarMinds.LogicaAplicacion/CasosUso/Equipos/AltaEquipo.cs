@@ -1,12 +1,7 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
-using StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos;
-using StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos;
-using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
+using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {

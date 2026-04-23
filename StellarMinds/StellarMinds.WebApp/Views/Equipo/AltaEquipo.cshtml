@@ -1,4 +1,7 @@
-﻿@model StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos.AltaEquipoDto
+﻿@model StellarMinds.LogicaAplicacion.Dtos.Equipos.AltaEquipoDto
+
+@using StellarMinds.LogicaNegocio.Entidades.Equipos
+@using Microsoft.AspNetCore.Mvc.Rendering
 
 @{
     ViewData["Title"] = "AltaEquipo";
@@ -6,103 +9,119 @@
 
 <h1>AltaEquipo</h1>
 
-<h4>AltaEquipoDto</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AltaEquipo">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
+                <label asp-for="Id"></label>
                 <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
             </div>
+
+            <!-- SELECT EN VEZ DE INPUT -->
             <div class="form-group">
-                <label asp-for="TipoEquipo" class="control-label"></label>
-                <input asp-for="TipoEquipo" class="form-control" />
-                <span asp-validation-for="TipoEquipo" class="text-danger"></span>
+                <label asp-for="TipoEquipo"></label>
+                <select asp-for="TipoEquipo" id="tipoEquipo" class="form-control">
+                    <option value="">Seleccione</option>
+                    <option value="Telescopio">Telescopio</option>
+                    <option value="Montura">Montura</option>
+                    <option value="Camara">Camara</option>
+                    <option value="Ocular">Ocular</option>
+                </select>
             </div>
+
             <div class="form-group">
-                <label asp-for="Marca" class="control-label"></label>
+                <label asp-for="Marca"></label>
                 <input asp-for="Marca" class="form-control" />
-                <span asp-validation-for="Marca" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Modelo" class="control-label"></label>
+                <label asp-for="Modelo"></label>
                 <input asp-for="Modelo" class="form-control" />
-                <span asp-validation-for="Modelo" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="CantDisponible" class="control-label"></label>
+                <label asp-for="CantDisponible"></label>
                 <input asp-for="CantDisponible" class="form-control" />
-                <span asp-validation-for="CantDisponible" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Apertura" class="control-label"></label>
-                <input asp-for="Apertura" class="form-control" />
-                <span asp-validation-for="Apertura" class="text-danger"></span>
+
+            <!-- TELESCOPIO -->
+            <div id="telescopio" style="display:none;">
+                <h5>Telescopio</h5>
+
+                <input asp-for="Apertura" class="form-control" placeholder="Apertura" />
+                <input asp-for="RelacionFocal" class="form-control" placeholder="Relacion Focal" />
+                <input asp-for="DistanciaFocal" class="form-control" placeholder="Distancia Focal" />
+                <input asp-for="Peso" class="form-control" placeholder="Peso" />
             </div>
-            <div class="form-group">
-                <label asp-for="RelacionFocal" class="control-label"></label>
-                <input asp-for="RelacionFocal" class="form-control" />
-                <span asp-validation-for="RelacionFocal" class="text-danger"></span>
+
+            <!-- MONTURA -->
+            <div id="montura" style="display:none;">
+                <h5>Montura</h5>
+
+                <select asp-for="TipoMontura"
+                        asp-items="Html.GetEnumSelectList<TipoMontura>()"
+                        class="form-control">
+                    <option value="">Seleccione</option>
+                </select>
+
+                <input asp-for="CargaUtilSoportada" class="form-control" placeholder="Carga" />
+
+                <!-- CHECKBOX BIEN -->
+                <div class="form-check">
+                    <input asp-for="Computarizada" class="form-check-input" />
+                    <label asp-for="Computarizada" class="form-check-label"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DistanciaFocal" class="control-label"></label>
-                <input asp-for="DistanciaFocal" class="form-control" />
-                <span asp-validation-for="DistanciaFocal" class="text-danger"></span>
+
+            <!-- CAMARA -->
+            <div id="camara" style="display:none;">
+                <h5>Camara</h5>
+
+                <select asp-for="TipoSensorCamara"
+                        asp-items="Html.GetEnumSelectList<TipoSensorCamara>()"
+                        class="form-control">
+                    <option value="">Seleccione</option>
+                </select>
+
+                <input asp-for="Resolucion" class="form-control" placeholder="Resolucion" />
+                <input asp-for="TamanioPixel" class="form-control" placeholder="Tamaño Pixel" />
             </div>
-            <div class="form-group">
-                <label asp-for="Peso" class="control-label"></label>
-                <input asp-for="Peso" class="form-control" />
-                <span asp-validation-for="Peso" class="text-danger"></span>
+
+            <!-- OCULAR -->
+            <div id="ocular" style="display:none;">
+                <h5>Ocular</h5>
+
+                <input asp-for="Diametro" class="form-control" placeholder="Diametro" />
+                <input asp-for="AnguloVision" class="form-control" placeholder="Angulo Vision" />
             </div>
-            <div class="form-group">
-                <label asp-for="TipoMontura" class="control-label"></label>
-                <input asp-for="TipoMontura" class="form-control" />
-                <span asp-validation-for="TipoMontura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CargaUtilSoportada" class="control-label"></label>
-                <input asp-for="CargaUtilSoportada" class="form-control" />
-                <span asp-validation-for="CargaUtilSoportada" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoSensor" class="control-label"></label>
-                <input asp-for="TipoSensor" class="form-control" />
-                <span asp-validation-for="TipoSensor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ResolucionMP" class="control-label"></label>
-                <input asp-for="ResolucionMP" class="form-control" />
-                <span asp-validation-for="ResolucionMP" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EsColor" class="control-label"></label>
-                <input asp-for="EsColor" class="form-control" />
-                <span asp-validation-for="EsColor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DistanciaFocalOcular" class="control-label"></label>
-                <input asp-for="DistanciaFocalOcular" class="form-control" />
-                <span asp-validation-for="DistanciaFocalOcular" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CampoVision" class="control-label"></label>
-                <input asp-for="CampoVision" class="form-control" />
-                <span asp-validation-for="CampoVision" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+
+            <br />
+
+            <input type="submit" value="Crear" class="btn btn-primary" />
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function toggleCampos() {
+            let tipo = document.getElementById("tipoEquipo").value;
+
+            document.getElementById("telescopio").style.display = "none";
+            document.getElementById("montura").style.display = "none";
+            document.getElementById("camara").style.display = "none";
+            document.getElementById("ocular").style.display = "none";
+
+            if (tipo === "Telescopio") document.getElementById("telescopio").style.display = "block";
+            if (tipo === "Montura") document.getElementById("montura").style.display = "block";
+            if (tipo === "Camara") document.getElementById("camara").style.display = "block";
+            if (tipo === "Ocular") document.getElementById("ocular").style.display = "block";
+        }
+
+        document.getElementById("tipoEquipo").addEventListener("change", toggleCampos);
+        window.onload = toggleCampos;
+    </script>
 }

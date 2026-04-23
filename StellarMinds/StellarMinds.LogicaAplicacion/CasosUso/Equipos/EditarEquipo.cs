@@ -1,8 +1,4 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
-using StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {
@@ -16,9 +12,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
         }
 
 
-        public void Execute(int id, AltaEquipoDto Obj)
-        {
-            //_repo.Update(id, AutorMapper.FromDto(Obj));
-        }
+        // public void Execute(int id, AltaEquipoDto Obj)
+        //{
+        //_repo.Update(id, AutorMapper.FromDto(Obj));
+        //}
     }
 }

@@ -1,12 +1,10 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {
-    public class ListarEquipos
+    public class ListarEquipos : ICUGetAll<Equipo>
     {
         private IRepositorioEquipo _repo;
 
@@ -15,7 +13,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
             _repo = repo;
         }
 
-        public IEnumerable<Equipo> Execute()
+        public IEnumerable<Equipo> Ejecutar()
         {
             return _repo.GetAll();
         }

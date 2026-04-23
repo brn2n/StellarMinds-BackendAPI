@@ -1,14 +1,14 @@
-using StellarMinds.Infraestructura.InterfacesRepositorio;
-using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.Infraestructura.ListaMemoria;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
+using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
-using StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos;
-using StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos.StellarMinds.LogicaAplicacion.Dtos.Equipos;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +33,7 @@ builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
 
 // Inyecto los casos de uso EQUIPO
 builder.Services.AddScoped<ICUAlta<AltaEquipoDto>, AltaEquipo>();
-
+builder.Services.AddScoped<ICUGetAll<Equipo>, ListarEquipos>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
