@@ -10,11 +10,15 @@ namespace StellarMinds.WebApp.Controllers
     {
         private ICUGetAll<Equipo> _listar;
         private ICUAlta<AltaEquipoDto> _alta;
+        private ICUDelete<AltaEquipoDto> _delete;
+        private ICUGetById<Equipo> _get;
 
-        public EquipoController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<Equipo> listarEquipo)
+        public EquipoController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<Equipo> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<Equipo> getEquipoId)
         {
             _alta = altaEquipo;
             _listar = listarEquipo;
+            _delete = deleteEquipo;
+            _get = getEquipoId;
         }
 
         public IActionResult Index()
@@ -45,9 +49,24 @@ namespace StellarMinds.WebApp.Controllers
             }
         }
 
-        public IActionResult BajaEquipo()//por id
+        public IActionResult Delete(int id)
         {
-            return View();
+            return View(_get.Execute(id));
+
+        }
+
+        [HttpPost]
+        public IActionResult Delete(AltaEquipoDto equipo)
+        {
+            try
+            {
+                _delete.Execute(equipo.Id);
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index");
+            }
         }
 
         public IActionResult EditarEquipo()//por id

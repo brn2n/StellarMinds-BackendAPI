@@ -15,9 +15,10 @@ namespace StellarMinds.Infraestructura.ListaMemoria
                 _equipos.Add(equipo);
             }
 
-        public void Delete(int Id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Equipo unEquipo = GetById(id);
+            _equipos.Remove(unEquipo);
         }
 
         public IEnumerable<Equipo> GetAll()
@@ -27,7 +28,20 @@ namespace StellarMinds.Infraestructura.ListaMemoria
 
         public Equipo GetById(int id)
         {
-            throw new NotImplementedException();
+            Equipo unEquipo = null;
+            foreach (var e in _equipos)
+            {
+                if (e.Id == id)
+                {
+                    unEquipo = e;
+                    return unEquipo;
+                }
+            }
+            if (unEquipo == null)
+            {
+                throw new Exception($"No se encontro el equipo {id}");
+            }
+            return unEquipo;
         }
 
         public void Update(int id, Equipo obj)

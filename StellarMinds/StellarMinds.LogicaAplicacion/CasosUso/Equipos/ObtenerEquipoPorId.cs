@@ -1,20 +1,24 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
-using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Entidades.Equipos;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {
-    public class BajaEquipo : ICUDelete<AltaEquipoDto>
+    public class ObtenerEquipoPorId : ICUGetById<Equipo>
     {
         private IRepositorioEquipo _repo;
 
-        public BajaEquipo (IRepositorioEquipo repo)
+        public ObtenerEquipoPorId(IRepositorioEquipo repo)
         {
             _repo = repo;
         }
-        public void Execute(int id)
+
+        public Equipo Execute(int id)
         {
-            _repo.Delete(id);
+            return _repo.GetById(id);
         }
     }
 }
