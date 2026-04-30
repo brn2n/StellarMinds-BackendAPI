@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StellarMinds.LogicaNegocio.Entidades.Equipos.Equipo>
+﻿@model IEnumerable<StellarMinds.LogicaAplicacion.Dtos.Equipos.ListarEquipoDto>
 
 @{
     ViewData["Title"] = "Index";
@@ -47,7 +47,7 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
                 <td>
-                    @item.GetType().Name
+                    @Html.DisplayFor(modelItem => item.TipoEquipo)
                 </td>
         </tr>
 }

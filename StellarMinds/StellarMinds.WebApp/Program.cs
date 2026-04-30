@@ -33,9 +33,10 @@ builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
 
 // Inyecto los casos de uso EQUIPO
 builder.Services.AddScoped<ICUAlta<AltaEquipoDto>, AltaEquipo>();
-builder.Services.AddScoped<ICUGetAll<Equipo>, ListarEquipos>();
-builder.Services.AddScoped<ICUGetById<Equipo>, ObtenerEquipoPorId>();
+builder.Services.AddScoped<ICUGetAll<ListarEquipoDto>, ListarEquipos>();
+builder.Services.AddScoped<ICUGetById<ListarEquipoDto>, ObtenerEquipoPorId>();
 builder.Services.AddScoped<ICUDelete<AltaEquipoDto>, BajaEquipo>();
+builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

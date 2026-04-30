@@ -14,5 +14,12 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
             Diametro = diametro;
             AnguloVision = anguloVision;
         }
+
+        public void Update(Ocular obj)
+        {
+            base.Update(obj);
+            Diametro = obj.Diametro;
+            AnguloVision = obj.AnguloVision;
+        }
     }
 }

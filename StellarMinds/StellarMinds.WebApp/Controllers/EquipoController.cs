@@ -8,17 +8,19 @@ namespace StellarMinds.WebApp.Controllers
 {
     public class EquipoController : Controller
     {
-        private ICUGetAll<Equipo> _listar;
+        private ICUGetAll<ListarEquipoDto> _listar;
         private ICUAlta<AltaEquipoDto> _alta;
         private ICUDelete<AltaEquipoDto> _delete;
-        private ICUGetById<Equipo> _get;
+        private ICUGetById<ListarEquipoDto> _get;
+        private ICUEdit<ListarEquipoDto> _update;
 
-        public EquipoController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<Equipo> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<Equipo> getEquipoId)
+        public EquipoController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<ListarEquipoDto> updateEquipo)
         {
             _alta = altaEquipo;
             _listar = listarEquipo;
             _delete = deleteEquipo;
             _get = getEquipoId;
+            _update = updateEquipo;
         }
 
         public IActionResult Index()
@@ -69,9 +71,24 @@ namespace StellarMinds.WebApp.Controllers
             }
         }
 
-        public IActionResult EditarEquipo()//por id
+        public IActionResult Edit(int id)
         {
-            return View();
+            return View(_get.Execute(id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ListarEquipoDto equipo)
+        {
+            try
+            {
+                _update.Execute(equipo.Id, equipo);
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("index");
+            }
 
         }
     }

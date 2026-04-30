@@ -16,5 +16,13 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
             CargaUtilSoportada = cargaUtilSoportada;
             Computarizada = computarizada;
         }
+
+        public void Update(Montura obj)
+        {
+            base.Update(obj);
+            TipoMontura = obj.TipoMontura;
+            CargaUtilSoportada = obj.CargaUtilSoportada;
+            Computarizada = obj.Computarizada;
+        }
     }
 }

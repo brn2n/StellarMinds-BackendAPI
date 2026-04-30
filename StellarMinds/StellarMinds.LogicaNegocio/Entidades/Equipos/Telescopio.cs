@@ -19,5 +19,14 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
             DistanciaFocal = distanciaFocal;
             Peso = peso;
         }
+
+        public void Update(Telescopio obj)
+        {
+            base.Update(obj);
+            Apertura = obj.Apertura;
+            RelacionFocal = obj.RelacionFocal;
+            DistanciaFocal= obj.DistanciaFocal;
+            Peso = obj.Peso;
+        }
     }
 }

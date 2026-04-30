@@ -46,7 +46,8 @@ namespace StellarMinds.Infraestructura.ListaMemoria
 
         public void Update(int id, Equipo obj)
         {
-            throw new NotImplementedException();
+            Equipo unEquipo = GetById(id);
+            unEquipo.Update(obj);
         }
     }
 }

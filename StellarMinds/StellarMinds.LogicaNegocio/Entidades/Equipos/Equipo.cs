@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace StellarMinds.LogicaNegocio.Entidades.Equipos
 {
     public abstract class Equipo
@@ -22,6 +19,13 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
             Marca = marca;
             Modelo = modelo;
             CantDisponible = cantDisponible;
+        }
+
+        public void Update(Equipo obj)
+        {
+            Marca = obj.Marca;
+            Modelo = obj.Modelo;
+            CantDisponible = obj.CantDisponible;
         }
     }
 }

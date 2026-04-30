@@ -1,10 +1,12 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaAplicacion.Mapper;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {
-    public class ListarEquipos : ICUGetAll<Equipo>
+    public class ListarEquipos : ICUGetAll<ListarEquipoDto>
     {
         private IRepositorioEquipo _repo;
 
@@ -13,9 +15,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
             _repo = repo;
         }
 
-        public IEnumerable<Equipo> Ejecutar()
+        public IEnumerable<ListarEquipoDto> Ejecutar()
         {
-            return _repo.GetAll();
+            return EquipoMapper.ToListDto(_repo.GetAll());
         }
     }
 }

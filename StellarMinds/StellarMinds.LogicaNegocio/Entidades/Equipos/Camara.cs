@@ -16,5 +16,13 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
             Resolucion = resolucion;
             TamanioPixel = tamanioPixel;
         }
+
+        public void Update(Camara obj)
+        {
+            base.Update(obj);
+            TipoSensorCamara = obj.TipoSensorCamara;
+            Resolucion = obj.Resolucion;
+        }
+
     }
 }

@@ -1,8 +1,11 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaAplicacion.Mapper;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {
-    public class EditarEquipo
+    public class EditarEquipo : ICUEdit<ListarEquipoDto>
     {
         private IRepositorioEquipo _repo;
 
@@ -11,10 +14,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
             _repo = repo;
         }
 
-
-        // public void Execute(int id, AltaEquipoDto Obj)
-        //{
-        //_repo.Update(id, AutorMapper.FromDto(Obj));
-        //}
+        public void Execute(int id, ListarEquipoDto Obj)
+        {
+            _repo.Update(id,EquipoMapper.FromDto(Obj));
+        }
     }
 }

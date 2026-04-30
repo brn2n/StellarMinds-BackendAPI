@@ -1,0 +1,121 @@
+﻿@using StellarMinds.LogicaNegocio.Entidades.Equipos
+@model StellarMinds.LogicaAplicacion.Dtos.Equipos.ListarEquipoDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ListarEquipoDto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- SELECT EN VEZ DE INPUT -->
+            <div class="form-group" >
+                <label asp-for="TipoEquipo"></label>
+                <select asp-for="TipoEquipo" id="tipoEquipo" class="form-control">
+                    <option value="">Seleccione</option>
+                    <option value="Telescopio">Telescopio</option>
+                    <option value="Montura">Montura</option>
+                    <option value="Camara">Camara</option>
+                    <option value="Ocular">Ocular</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Marca"></label>
+                <input asp-for="Marca" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Modelo"></label>
+                <input asp-for="Modelo" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CantDisponible"></label>
+                <input asp-for="CantDisponible" class="form-control" />
+            </div>
+
+            <!-- TELESCOPIO -->
+            <div id="telescopio" style="display:none;">
+                <h5>Telescopio</h5>
+
+                <input asp-for="Apertura" class="form-control" placeholder="Apertura" />
+                <input asp-for="RelacionFocal" class="form-control" placeholder="Relacion Focal" />
+                <input asp-for="DistanciaFocal" class="form-control" placeholder="Distancia Focal" />
+                <input asp-for="Peso" class="form-control" placeholder="Peso" />
+            </div>
+
+            <!-- MONTURA -->
+            <div id="montura" style="display:none;">
+                <h5>Montura</h5>
+
+                <select asp-for="TipoMontura"
+                        asp-items="Html.GetEnumSelectList<TipoMontura>()"
+                        class="form-control">
+                    <option value="">Seleccione</option>
+                </select>
+
+                <input asp-for="CargaUtilSoportada" class="form-control" placeholder="Carga" />
+
+                <!-- CHECKBOX BIEN -->
+                <div class="form-check">
+                    <input asp-for="Computarizada" class="form-check-input" />
+                    <label asp-for="Computarizada" class="form-check-label"></label>
+                </div>
+            </div>
+
+            <!-- CAMARA -->
+            <div id="camara" style="display:none;">
+                <h5>Camara</h5>
+
+                <select asp-for="TipoSensorCamara"
+                        asp-items="Html.GetEnumSelectList<TipoSensorCamara>()"
+                        class="form-control">
+                    <option value="">Seleccione</option>
+                </select>
+
+                <input asp-for="Resolucion" class="form-control" placeholder="Resolucion" />
+                <input asp-for="TamanioPixel" class="form-control" placeholder="Tamaño Pixel" />
+            </div>
+
+            <!-- OCULAR -->
+            <div id="ocular" style="display:none;">
+                <h5>Ocular</h5>
+
+                <input asp-for="Diametro" class="form-control" placeholder="Diametro" />
+                <input asp-for="AnguloVision" class="form-control" placeholder="Angulo Vision" />
+            </div>
+
+            <br />
+
+            <input type="submit" value="Crear" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function toggleCampos() {
+            let tipo = document.getElementById("tipoEquipo").value;
+
+            document.getElementById("telescopio").style.display = "none";
+            document.getElementById("montura").style.display = "none";
+            document.getElementById("camara").style.display = "none";
+            document.getElementById("ocular").style.display = "none";
+
+            if (tipo === "Telescopio") document.getElementById("telescopio").style.display = "block";
+            if (tipo === "Montura") document.getElementById("montura").style.display = "block";
+            if (tipo === "Camara") document.getElementById("camara").style.display = "block";
+            if (tipo === "Ocular") document.getElementById("ocular").style.display = "block";
+        }
+
+        document.getElementById("tipoEquipo").addEventListener("change", toggleCampos);
+        window.onload = toggleCampos;
+    </script>
+}
