@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
-using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.WebApp.Filter;
 
 namespace StellarMinds.WebApp.Controllers
@@ -58,7 +57,7 @@ namespace StellarMinds.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(AltaEquipoDto equipo)
+        public IActionResult Delete(ListarEquipoDto equipo)
         {
             try
             {

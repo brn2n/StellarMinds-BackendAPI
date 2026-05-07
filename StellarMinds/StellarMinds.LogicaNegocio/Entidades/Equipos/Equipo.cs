@@ -7,10 +7,10 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public int CantDisponible { get; set; }
-        
+
         private Equipo()
         {
-            
+
         }
 
         protected Equipo(int id, string marca, string modelo, int cantDisponible)
@@ -23,6 +23,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
 
         public void Update(Equipo obj)
         {
+            Id = obj.Id;
             Marca = obj.Marca;
             Modelo = obj.Modelo;
             CantDisponible = obj.CantDisponible;
