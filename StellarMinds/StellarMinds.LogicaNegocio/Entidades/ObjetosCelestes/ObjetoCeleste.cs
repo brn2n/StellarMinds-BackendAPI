@@ -2,9 +2,10 @@
 {
     public class ObjetoCeleste
     {
-        public string Nombre { get; set; }
-        public string Tipo { get; set; }
-        public int Magnitud { get; set; }
+        public int Id { get; private set; }
+        public string Nombre { get; private set; }
+        public string Tipo { get; private set; }
+        public int Magnitud { get; private set; }
 
         private ObjetoCeleste()
         {
@@ -16,6 +17,12 @@
             Nombre = nombre;
             Tipo = tipo;
             Magnitud = magnitud;
+            Validar();
+        }
+
+        private void Validar()
+        {
+            //HACER VALIDACIONES
         }
     }
 }
