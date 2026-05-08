@@ -4,15 +4,15 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 {
     public class Prestamo
     {
-        public DateTime FechaInicio { get; set; } = DateTime.Now;
-        public DateTime VOFechaFin { get; set; }
-        public List<Equipo> Equipos { get; set; }
-        public Ocular Ocular { get; set; }
-        public Telescopio Telescopio { get; set; }
-        public Camara Camara { get; set; }
-        public Montura Montura { get; set; }
+        public DateTime FechaInicio { get; private set; } = DateTime.Now;
+        public DateTime VOFechaFin { get; private set; }
+        public List<Equipo> Equipos { get; private set; }
+        public Ocular Ocular { get; private set; }
+        public Telescopio Telescopio { get; private set; }
+        public Camara Camara { get; private set; }
+        public Montura Montura { get; private set; }
 
-        public Estado Estado { get; set; } = Estado.EN_PRESTAMO;
+        public Estado Estado { get; private set; } = Estado.EN_PRESTAMO;
 
         private Prestamo()
         {
@@ -27,6 +27,12 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
             Telescopio = telescopio;
             Camara = camara;
             Estado = estado;
+            Validar();
+        }
+
+        private void Validar()
+        {
+            //HACER VALIDACIONES
         }
     }
 }

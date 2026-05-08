@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes
+﻿namespace StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes
 {
     public class ObjetoCeleste
     {
-        public string Nombre { get; set; }
-        public string Tipo { get; set; }
-        public int Magnitud { get; set; }
+        public string Nombre { get; private set; }
+        public string Tipo { get; private set; }
+        public int Magnitud { get; private set; }
 
         private ObjetoCeleste()
         {
-            
+
         }
 
         public ObjetoCeleste(string nombre, string tipo, int magnitud)
@@ -20,6 +16,12 @@ namespace StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes
             Nombre = nombre;
             Tipo = tipo;
             Magnitud = magnitud;
+            Validar();
+        }
+
+        private void Validar()
+        {
+            //HACER VALIDACIONES
         }
     }
 }
