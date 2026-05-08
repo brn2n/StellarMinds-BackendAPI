@@ -1,8 +1,5 @@
 ﻿using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StellarMinds.LogicaNegocio.Entidades.NochesObservaciones
 {
@@ -14,7 +11,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.NochesObservaciones
 
         private NocheObservacion()
         {
-            
+
         }
 
         public NocheObservacion(DateTime fechaObservacion, Prestamo prestamo, ObjetoCeleste objetoCeleste)

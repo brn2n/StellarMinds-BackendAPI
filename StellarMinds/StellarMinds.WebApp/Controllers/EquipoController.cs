@@ -26,7 +26,6 @@ namespace StellarMinds.WebApp.Controllers
         {
             return View(_listar.Ejecutar());
         }
-        //ESTO SOLO LO HACEN LOS ADMINISTRADORES
         public IActionResult AltaEquipo()
         {
             return View();

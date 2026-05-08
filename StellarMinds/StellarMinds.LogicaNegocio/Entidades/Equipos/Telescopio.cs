@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaNegocio.Entidades.Equipos
+﻿namespace StellarMinds.LogicaNegocio.Entidades.Equipos
 {
     public class Telescopio : Equipo
     {
-        public double Apertura { get; set; }
-        public string RelacionFocal { get; set; }
-        public double DistanciaFocal { get; set; }
-        public double Peso { get; set; }
+        public double Apertura { get; private set; }
+        public string RelacionFocal { get; private set; }
+        public double DistanciaFocal { get; private set; }
+        public double Peso { get; private set; }
+
+        private Telescopio() { }
 
         public Telescopio(int id, string marca, string modelo, int cantDisponible, double apertura, string relacionFocal, double distanciaFocal, double peso)
             : base(id, marca, modelo, cantDisponible)
@@ -25,7 +23,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
             base.Update(obj);
             Apertura = obj.Apertura;
             RelacionFocal = obj.RelacionFocal;
-            DistanciaFocal= obj.DistanciaFocal;
+            DistanciaFocal = obj.DistanciaFocal;
             Peso = obj.Peso;
         }
     }

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaNegocio.Entidades.Equipos
+﻿namespace StellarMinds.LogicaNegocio.Entidades.Equipos
 {
     public class Montura : Equipo
     {
-        public TipoMontura TipoMontura { get; set; }
-        public double CargaUtilSoportada { get; set; }
-        public bool Computarizada { get; set; }
+        public TipoMontura TipoMontura { get; private set; }
+        public double CargaUtilSoportada { get; private set; }
+        public bool Computarizada { get; private set; }
 
+        private Montura()
+        {
+        }
         public Montura(int id, string marca, string modelo, int cantDisponible, TipoMontura tipoMontura, double cargaUtilSoportada, bool computarizada) : base(id, marca, modelo, cantDisponible)
         {
             TipoMontura = tipoMontura;

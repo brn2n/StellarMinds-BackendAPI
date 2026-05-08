@@ -1,7 +1,4 @@
 ﻿using StellarMinds.LogicaNegocio.VO.VOUsuario;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
 {
@@ -10,5 +7,6 @@ namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
         public Administrador(int id, VONombreCompleto nombreCompleto, VOTelefono telefono, VOUsername username, VOPassword vOPassword) : base(id, nombreCompleto, telefono, username, vOPassword)
         {
         }
+        private Administrador() { }
     }
 }

@@ -7,4 +7,5 @@ public class Socio : Usuario
     public Socio(int id, VONombreCompleto nombreCompleto, VOTelefono telefono, VOUsername username, VOPassword vOPassword) : base(id, nombreCompleto, telefono, username, vOPassword)
     {
     }
+    private Socio() { }
 }
