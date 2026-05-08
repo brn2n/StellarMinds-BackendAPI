@@ -2,6 +2,7 @@
 {
     public class ObjetoCeleste
     {
+        public int Id { get; private set; }
         public string Nombre { get; private set; }
         public string Tipo { get; private set; }
         public int Magnitud { get; private set; }
