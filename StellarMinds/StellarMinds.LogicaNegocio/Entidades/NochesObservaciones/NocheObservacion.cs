@@ -1,5 +1,6 @@
 ﻿using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
+using StellarMinds.LogicaNegocio.Excepciones;
 
 namespace StellarMinds.LogicaNegocio.Entidades.NochesObservaciones
 {
@@ -19,12 +20,26 @@ namespace StellarMinds.LogicaNegocio.Entidades.NochesObservaciones
             FechaObservacion = fechaObservacion;
             Prestamo = prestamo;
             ObjetoCeleste = objetoCeleste;
+
             Validar();
         }
 
         private void Validar()
         {
-            //HACER VALIDACIONES
+            if (FechaObservacion == default)
+            {
+                throw new NocheObservacionInvalidaException();
+            }
+
+            if (Prestamo == null)
+            {
+                throw new NocheObservacionInvalidaException();
+            }
+
+            if (ObjetoCeleste == null)
+            {
+                throw new NocheObservacionInvalidaException();
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes
+﻿using StellarMinds.LogicaNegocio.Excepciones;
+
+namespace StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes
 {
     public class ObjetoCeleste
     {
@@ -17,12 +19,21 @@
             Nombre = nombre;
             Tipo = tipo;
             Magnitud = magnitud;
+
             Validar();
         }
 
         private void Validar()
         {
-            //HACER VALIDACIONES
+            if (string.IsNullOrWhiteSpace(Nombre))
+            {
+                throw new ObjetoCelesteInvalidoException();
+            }
+
+            if (string.IsNullOrWhiteSpace(Tipo))
+            {
+                throw new ObjetoCelesteInvalidoException();
+            }
         }
     }
 }

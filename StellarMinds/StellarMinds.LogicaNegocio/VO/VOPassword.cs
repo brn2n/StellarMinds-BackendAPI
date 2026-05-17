@@ -1,18 +1,24 @@
-﻿namespace StellarMinds.LogicaNegocio.VO.VOUsuario
+﻿using StellarMinds.LogicaNegocio.Excepciones;
+
+namespace StellarMinds.LogicaNegocio.VO.VOUsuario
 {
     public record class VOPassword
     {
-        public string Value { get; private set; }
+        public string Value { get; }
 
         public VOPassword(string value)
         {
             Value = value;
-            //Validar();
+
+            Validar();
         }
 
         private void Validar()
         {
-            //    throw new NotImplementedException(); // Aquí puedes implementar la lógica de validación para la contraseña, como verificar su longitud, complejidad, etc.
+            if (string.IsNullOrWhiteSpace(Value) || Value.Length < 6)
+            {
+                throw new VOPasswordInvalidoException();
+            }
         }
     }
 }

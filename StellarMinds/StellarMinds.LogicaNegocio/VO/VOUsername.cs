@@ -1,18 +1,24 @@
-﻿namespace StellarMinds.LogicaNegocio.VO.VOUsuario
+﻿using StellarMinds.LogicaNegocio.Excepciones;
+
+namespace StellarMinds.LogicaNegocio.VO.VOUsuario
 {
     public record class VOUsername
     {
-        public string Value { get; private set; }
+        public string Value { get; }
 
         public VOUsername(string value)
         {
             Value = value;
-            //Validar();
+
+            Validar();
         }
 
         private void Validar()
         {
-            //    throw new NotImplementedException(); // Aquí puedes implementar la lógica de validación 
+            if (string.IsNullOrWhiteSpace(Value) || Value.Length < 3 || Value.Length > 20)
+            {
+                throw new VOUsernameInvalidoException();
+            }
         }
     }
 }

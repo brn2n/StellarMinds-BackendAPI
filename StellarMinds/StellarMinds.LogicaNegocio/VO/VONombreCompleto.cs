@@ -1,20 +1,29 @@
-﻿namespace StellarMinds.LogicaNegocio.VO.VOUsuario
+﻿using StellarMinds.LogicaNegocio.Excepciones;
+
+namespace StellarMinds.LogicaNegocio.VO.VOUsuario
 {
     public record VONombreCompleto
     {
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
+        public string Nombre { get; }
+        public string Apellido { get; }
 
         public VONombreCompleto(string nombre, string apellido)
         {
-            this.Nombre = nombre;
-            this.Apellido = apellido;
-            //Validar();
+            Nombre = nombre;
+            Apellido = apellido;
+
+            Validar();
         }
 
         private void Validar()
         {
-            // throw new NotImplementedException(); //AGREGAR VALIDACION
+            if (string.IsNullOrWhiteSpace(Nombre) ||
+                string.IsNullOrWhiteSpace(Apellido) ||
+                Nombre.Length > 50 ||
+                Apellido.Length > 50)
+            {
+                throw new VONombreCompletoInvalidoException();
+            }
         }
     }
 }
