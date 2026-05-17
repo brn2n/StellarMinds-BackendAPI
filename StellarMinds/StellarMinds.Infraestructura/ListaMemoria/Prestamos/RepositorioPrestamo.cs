@@ -13,14 +13,11 @@ namespace StellarMinds.Infraestructura.ListaMemoria.Prestamos
 
         public bool EnPrestamo(int id)
         {
-            foreach (var p in _prestamos)
-            {
-                if ((p.Camara.Id == id || p.Telescopio.Id == id || p.Ocular.Id == id || p.Montura.Id == id) && p.Estado == Estado.EN_PRESTAMO)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return _prestamos.Any(p => (p.Camara.Id == id
+                                             || p.Telescopio.Id == id
+                                             || p.Ocular.Id == id
+                                             || p.Montura.Id == id)
+                                             && p.Estado == Estado.EN_PRESTAMO);
         }
 
         public IEnumerable<Prestamo> GetAll()

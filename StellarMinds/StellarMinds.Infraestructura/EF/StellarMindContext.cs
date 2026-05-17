@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StellarMinds.LogicaNegocio.Entidades.NochesObservaciones;
 using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
 
 namespace StellarMinds.Infraestructura.EF
@@ -7,7 +6,7 @@ namespace StellarMinds.Infraestructura.EF
     public class StellarMindContext : DbContext
     {
         public DbSet<ObjetoCeleste> ObjetosCelestes { get; set; }
-        public DbSet<NocheObservacion> NochesObservaciones { get; set; }
+        //public DbSet<NocheObservacion> NochesObservaciones { get; set; }
         //public DbSet<Prestamo> Prestamos { get; set; }
         //public DbSet<Usuario> Usuarios { get; set; }
         //public DbSet<Equipo> Equipos { get; set; }

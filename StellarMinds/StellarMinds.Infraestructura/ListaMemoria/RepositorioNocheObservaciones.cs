@@ -18,7 +18,12 @@ namespace StellarMinds.Infraestructura.ListaMemoria
 
         public NocheObservacion GetById(int id)
         {
-            return _nochesObservaciones.Find(n => n.Id == id);
+            NocheObservacion unaNocheObservacion = _nochesObservaciones.Find(n => n.Id == id);
+            if (unaNocheObservacion == null)
+            {
+                throw new Exception("No se encontró la noche de observación con el ID proporcionado.");
+            }
+            return unaNocheObservacion;
         }
     }
 }

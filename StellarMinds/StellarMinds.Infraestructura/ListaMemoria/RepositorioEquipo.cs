@@ -25,15 +25,7 @@ namespace StellarMinds.Infraestructura.ListaMemoria
 
         public Equipo GetById(int id)
         {
-            Equipo unEquipo = null;
-            foreach (var e in _equipos)
-            {
-                if (e.Id == id)
-                {
-                    unEquipo = e;
-                    return unEquipo;
-                }
-            }
+            Equipo unEquipo = _equipos.Find(e => e.Id == id);
             if (unEquipo == null)
             {
                 throw new Exception($"No se encontro el equipo {id}");
