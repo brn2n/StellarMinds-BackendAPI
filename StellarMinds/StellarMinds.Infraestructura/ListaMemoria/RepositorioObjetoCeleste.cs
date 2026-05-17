@@ -19,7 +19,9 @@ namespace StellarMinds.Infraestructura.ListaMemoria
 
         public ObjetoCeleste GetById(int id)
         {
-            return _objetosCelestes.Find(o => o.Id == id);
+            ObjetoCeleste unObjetoCeleste = _objetosCelestes.Find(o => o.Id == id);
+            if (unObjetoCeleste == null) throw new Exception("No se encontró el objeto celeste con el ID proporcionado.");
+            return unObjetoCeleste;
         }
     }
 }
