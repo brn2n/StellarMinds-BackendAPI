@@ -1,16 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StellarMinds.LogicaNegocio.Entidades.NochesObservaciones;
 using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
 
 namespace StellarMinds.Infraestructura.EF
 {
     public class StellarMindContext : DbContext
     {
-        public DbSet<ObjetoCeleste> ObjetoCeleste { get; set; }
+        public DbSet<ObjetoCeleste> ObjetosCelestes { get; set; }
+        public DbSet<NocheObservacion> NochesObservaciones { get; set; }
+        //public DbSet<Prestamo> Prestamos { get; set; }
+        //public DbSet<Usuario> Usuarios { get; set; }
+        //public DbSet<Equipo> Equipos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"SERVER=(localdb)\MsSqlLocalDb;DATABASE=StellarMinds;Integrated Security=true;");
-            //base.OnConfiguring(optionsBuilder);
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Initial Catalog=StellarMindDB;Integrated Security=True;");
         }
     }
 }

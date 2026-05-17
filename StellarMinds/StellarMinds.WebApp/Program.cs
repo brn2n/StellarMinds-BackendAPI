@@ -1,12 +1,13 @@
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.Infraestructura.ListaMemoria;
+using StellarMinds.Infraestructura.ListaMemoria.Prestamos;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
-using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 
 
@@ -25,6 +26,7 @@ builder.Services.AddSession(options =>
 // inyecto los repositorios
 
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+builder.Services.AddScoped<IRepositorioPrestamos, RepositorioPrestamo>();
 builder.Services.AddScoped<IRepositorioEquipo, RepositorioEquipo>();
 
 // Inyecto los casos de uso USUARIO

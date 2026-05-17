@@ -4,6 +4,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 {
     public class Prestamo
     {
+        public int Id { get; private set; }
         public DateTime FechaInicio { get; private set; } = DateTime.Now;
         public DateTime VOFechaFin { get; private set; }
         public List<Equipo> Equipos { get; private set; }
