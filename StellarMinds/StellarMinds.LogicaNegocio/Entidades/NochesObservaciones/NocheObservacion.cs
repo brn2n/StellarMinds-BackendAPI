@@ -5,6 +5,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.NochesObservaciones
 {
     public class NocheObservacion
     {
+        public int Id { get; private set; }
         public DateTime FechaObservacion { get; private set; }
         public Prestamo Prestamo { get; private set; }
         public ObjetoCeleste ObjetoCeleste { get; private set; }
