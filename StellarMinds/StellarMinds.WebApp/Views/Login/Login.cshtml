@@ -4,9 +4,7 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-
-<h4>LoginUsuariosDto</h4>
+<h1>Inicie Sesión</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,6 +20,7 @@
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <input type="submit" value="Log In" class="btn btn-primary" />
             </div>
@@ -29,9 +28,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
