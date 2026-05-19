@@ -1,3 +1,4 @@
+using StellarMinds.Infraestructura.EF;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
@@ -9,6 +10,7 @@ using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
+using RepositorioEquipo = StellarMinds.Infraestructura.EF.RepositorioEquipo;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +41,12 @@ builder.Services.AddScoped<ICUGetAll<ListarEquipoDto>, ListarEquipos>();
 builder.Services.AddScoped<ICUGetById<ListarEquipoDto>, ObtenerEquipoPorId>();
 builder.Services.AddScoped<ICUDelete<AltaEquipoDto>, BajaEquipo>();
 builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
+
+//Inyecto el Context de la BD
+builder.Services.AddDbContext<StellarMindContext>(
+    //option => option.UseSqlServer(builder.Configuration.GetConnectionString("Libreria"))
+    );
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

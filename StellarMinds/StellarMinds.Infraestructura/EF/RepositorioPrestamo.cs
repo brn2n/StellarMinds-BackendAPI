@@ -2,7 +2,12 @@
 {
     //public class RepositorioPrestamo : IRepositorioPrestamos
     //{
-    //    StellarMindContext _context = new StellarMindContext();
+    //    private StellarMindContext _context;
+    //    public RepositorioPrestamo(StellarMindContext context)
+    //    {
+    //        _context = context;
+    //    }
+
     //    public void Add(Prestamo Obj)
     //    {
     //        if (Obj == null) throw new Exception("El préstamo no puede ser nulo.");

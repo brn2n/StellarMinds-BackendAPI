@@ -1,10 +1,10 @@
 ﻿namespace StellarMinds.LogicaNegocio.VO.VOUsuario
 {
-    public record class VOPassword : VOString
+    public record class VOPassword
     {
         public string Value { get; }
 
-        public VOPassword(string value) : base(value)
+        public VOPassword(string value)
         {
             Value = value;
             //Validar();

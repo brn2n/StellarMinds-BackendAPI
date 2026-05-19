@@ -2,7 +2,12 @@
 {
     //public class RepositorioNocheObservaciones : IRepositorioNochesObservaciones
     //{
-    //    StellarMindContext _context = new StellarMindContext();
+    //    
+    //    private StellarMindContext _context;
+    //    public RepositorioNocheObservaciones(StellarMindContext context)
+    //    {
+    //        _context = context;
+    //    }
     //    public int Add(NocheObservacion Obj)
     //    {
     //        if (Obj == null) throw new Exception("La noche de observación no puede ser nula.");

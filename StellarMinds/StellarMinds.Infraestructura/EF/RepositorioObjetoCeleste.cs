@@ -5,7 +5,12 @@ namespace StellarMinds.Infraestructura.EF
 {
     public class RepositorioObjetoCeleste : IRepositorioObjetosCelestes
     {
-        StellarMindContext _context = new StellarMindContext();
+        private StellarMindContext _context;
+
+        public RepositorioObjetoCeleste(StellarMindContext context)
+        {
+            _context = context;
+        }
         public void Add(ObjetoCeleste Obj)
         {
             if (Obj == null) throw new Exception("El objeto celeste no puede ser nulo.");
