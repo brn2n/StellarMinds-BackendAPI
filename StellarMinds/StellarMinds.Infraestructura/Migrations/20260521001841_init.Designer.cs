@@ -11,7 +11,7 @@ using StellarMinds.Infraestructura.EF;
 namespace StellarMinds.Infraestructura.Migrations
 {
     [DbContext(typeof(StellarMindContext))]
-    [Migration("20260519220345_init")]
+    [Migration("20260521001841_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -35,11 +35,6 @@ namespace StellarMinds.Infraestructura.Migrations
                     b.Property<int>("CantDisponible")
                         .HasColumnType("int");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
                     b.Property<string>("Marca")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -48,11 +43,16 @@ namespace StellarMinds.Infraestructura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TipoEquipo")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Equipos");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Equipo");
+                    b.HasDiscriminator<string>("TipoEquipo").HasValue("Equipo");
 
                     b.UseTphMappingStrategy();
                 });
@@ -91,8 +91,9 @@ namespace StellarMinds.Infraestructura.Migrations
                     b.Property<int>("TamanioPixel")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoSensorCamara")
-                        .HasColumnType("int");
+                    b.Property<string>("TipoSensorCamara")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Camara");
                 });
@@ -107,8 +108,9 @@ namespace StellarMinds.Infraestructura.Migrations
                     b.Property<bool>("Computarizada")
                         .HasColumnType("bit");
 
-                    b.Property<int>("TipoMontura")
-                        .HasColumnType("int");
+                    b.Property<string>("TipoMontura")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Montura");
                 });

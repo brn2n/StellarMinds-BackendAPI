@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StellarMinds.Infraestructura.EF.Config.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
 
@@ -11,15 +12,22 @@ namespace StellarMinds.Infraestructura.EF
         //public DbSet<Prestamo> Prestamos { get; set; }
         //public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Equipo> Equipos { get; set; }
-        public DbSet<Camara> EquipoCamara { get; set; }
-        public DbSet<Montura> EquipoMontura { get; set; }
-        public DbSet<Ocular> EquipoOcular { get; set; }
-        public DbSet<Telescopio> EquipoTelescopio { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Initial Catalog=StellarMindDB;Integrated Security=True;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new EquipoConfiguration());
+            modelBuilder.ApplyConfiguration(new CamaraConfiguration());
+            modelBuilder.ApplyConfiguration(new MonturaConfiguration());
+            modelBuilder.ApplyConfiguration(new OcularConfiguration());
+            modelBuilder.ApplyConfiguration(new TelescopioConfiguration());
+
         }
     }
 }
