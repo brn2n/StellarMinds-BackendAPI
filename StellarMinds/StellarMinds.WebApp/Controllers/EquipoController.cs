@@ -2,10 +2,13 @@
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.WebApp.Filter;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace StellarMinds.WebApp.Controllers
 {
-    public class EquipoController : Controller
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class EquipoController : ControllerBase
     {
         private ICUGetAll<ListarEquipoDto> _listar;
         private ICUAlta<AltaEquipoDto> _alta;
@@ -24,7 +27,19 @@ namespace StellarMinds.WebApp.Controllers
 
         public IActionResult Index()
         {
-            return View(_listar.Ejecutar());
+            try
+            {
+                var paises = _listar.Ejecutar();
+                if (!paises.Any())
+                {
+                    return NoContent();
+                }
+                return Ok(paises);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new Error(500, "Hupp ahora estoy en otra cosa"));
+            }
         }
         public IActionResult AltaEquipo()
         {

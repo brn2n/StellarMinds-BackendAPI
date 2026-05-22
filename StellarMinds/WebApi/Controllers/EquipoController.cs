@@ -1,0 +1,135 @@
+﻿using Libreria.Infraestuctura.AccesoDatos.Excepciones;
+using Microsoft.AspNetCore.Mvc;
+using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Excepciones.Error;
+using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
+
+namespace StellarMinds.WebApp.Controllers
+{
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class EquipoController : ControllerBase
+    {
+        private ICUGetAll<ListarEquipoDto> _listar;
+        private ICUAlta<AltaEquipoDto> _alta;
+        private ICUDelete<AltaEquipoDto> _delete;
+        private ICUGetById<ListarEquipoDto> _get;
+        private ICUEdit<ListarEquipoDto> _update;
+
+        public EquipoController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<ListarEquipoDto> updateEquipo)
+        {
+            _alta = altaEquipo;
+            _listar = listarEquipo;
+            _delete = deleteEquipo;
+            _get = getEquipoId;
+            _update = updateEquipo;
+        }
+
+        public IActionResult Index()
+        {
+            try
+            {
+                var paises = _listar.Ejecutar();
+                if (!paises.Any())
+                {
+                    return NoContent();
+                }
+                return Ok(paises);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+            }
+        }
+
+
+        // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL CREATE !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
+
+        [HttpPost]
+        public IActionResult AltaEquipo([FromBody] AltaEquipoDto equipo)
+        {
+            try
+            {
+                _alta.Ejecutar(equipo);
+                return Ok();
+            }
+            catch (BadRequestException e)
+            {
+                return StatusCode(400, e.Error());
+            }
+            catch (LogicaNegocioExcepcion e)
+            {
+                return StatusCode(400, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+            }
+        }
+
+        //[HttpPost]
+        //public IActionResult Create([FromBody] PaisDtoAlta pais)
+        //{
+        //    try
+        //    {
+        //        _add.Execute(new PaisDtoAlta(Nombre: pais.Nombre,
+        //                                     CantidadHabitantes: pais.CantidadHabitantes)
+        //        );
+        //        //  return CreatedAtAction("GetById", new { id = id }, _getById.Execute(id));
+        //        return Ok(Co
+        //    }
+        //    catch (BadRequestException e)
+        //    {
+        //        return StatusCode(400, e.Error());
+        //    }
+        //    catch (LogicaNegocioException e)
+        //    {
+        //        return StatusCode(400, e.Error());
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return StatusCode(500, new Error(500, "Hupp ahora estoy en otra cosa"));
+        //    }
+        //}
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(ListarEquipoDto equipo)
+        {
+            try
+            {
+                _delete.Execute(equipo.Id);
+                return Ok();
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, e.Error());
+            }
+            catch (ConflictException e)
+            {
+                return StatusCode(409, e.Error());
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+            }
+        }
+
+        // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL EDIT !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
+        [HttpPost]
+        public IActionResult Edit(ListarEquipoDto equipo)
+        {
+            try
+            {
+                _update.Execute(equipo.Id, equipo);
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("index");
+            }
+
+        }
+    }
+}
