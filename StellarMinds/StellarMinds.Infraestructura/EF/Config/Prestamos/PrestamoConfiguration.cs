@@ -12,23 +12,27 @@ namespace StellarMinds.Infraestructura.EF.Config.Prestamos
 
             builder.HasOne(p => p.Telescopio)
                    .WithMany()
+                   .HasForeignKey(p => p.Telescopio.Id)
                    .IsRequired()
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(p => p.Montura)
                    .WithMany()
+                   .HasForeignKey(p => p.Montura.Id)
                    .IsRequired()
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(p => p.Ocular)
                    .WithMany()
+                   .HasForeignKey(p => p.Ocular.Id)
                    .IsRequired(false)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(p => p.Camara)
                    .WithMany()
+                   .HasForeignKey(p => p.Camara.Id)
                    .IsRequired(false)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(p => p.Estado)
                    .HasConversion<string>()

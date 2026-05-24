@@ -12,13 +12,15 @@ namespace StellarMinds.Infraestructura.EF.Config.NocheObservaciones
 
             builder.HasOne(p => p.Prestamo)
                    .WithMany()
+                   .HasForeignKey(p => p.Prestamo.Id)
                    .IsRequired()
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(p => p.ObjetoCeleste)
                    .WithMany()
+                   .HasForeignKey(p => p.ObjetoCeleste.Id)
                    .IsRequired()
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
