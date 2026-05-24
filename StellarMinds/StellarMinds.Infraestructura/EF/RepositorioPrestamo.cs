@@ -32,6 +32,11 @@ namespace StellarMinds.Infraestructura.EF
         {
             return _context.Prestamos.ToList();
         }
+
+        public Prestamo GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

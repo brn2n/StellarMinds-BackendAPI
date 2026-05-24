@@ -6,7 +6,7 @@
         public double CargaUtilSoportada { get; private set; }
         public bool Computarizada { get; private set; }
 
-        private Montura()
+        protected Montura()
         {
         }
         public Montura(int id, string marca, string modelo, int cantDisponible, TipoMontura tipoMontura, double cargaUtilSoportada, bool computarizada) : base(id, marca, modelo, cantDisponible)

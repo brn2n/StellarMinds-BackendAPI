@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
 namespace StellarMinds.Infraestructura.ListaMemoria.Prestamos
@@ -23,6 +24,16 @@ namespace StellarMinds.Infraestructura.ListaMemoria.Prestamos
         public IEnumerable<Prestamo> GetAll()
         {
             return _prestamos;
+        }
+
+        public Prestamo GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IRepositorioAdd<Prestamo>.Add(Prestamo Obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

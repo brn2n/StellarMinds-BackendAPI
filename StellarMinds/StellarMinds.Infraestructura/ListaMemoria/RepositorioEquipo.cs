@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 
 namespace StellarMinds.Infraestructura.ListaMemoria
@@ -37,6 +38,11 @@ namespace StellarMinds.Infraestructura.ListaMemoria
         {
             Equipo unEquipo = GetById(id);
             unEquipo.Update(obj);
+        }
+
+        int IRepositorioAdd<Equipo>.Add(Equipo Obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

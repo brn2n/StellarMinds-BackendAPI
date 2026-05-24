@@ -3,8 +3,10 @@ using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
+using StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
@@ -39,6 +41,9 @@ builder.Services.AddScoped<ICUGetAll<ListarEquipoDto>, ListarEquipos>();
 builder.Services.AddScoped<ICUGetById<ListarEquipoDto>, ObtenerEquipoPorId>();
 builder.Services.AddScoped<ICUDelete<AltaEquipoDto>, BajaEquipo>();
 builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
+
+// Inyecto los casos de uso Prestamo
+builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
 
 //Inyecto el Context de la BD
 builder.Services.AddDbContext<StellarMindContext>(

@@ -2,7 +2,7 @@
 
 namespace StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos
 {
-    public interface IRepositorioPrestamos : IRepositorioGetAll<Prestamo>, IRepositorioAdd<Prestamo>
+    public interface IRepositorioPrestamos : IRepositorioAdd<Prestamo>, IRepositorioGetAll<Prestamo>, IRepositorioGetById<Prestamo>
     {
         bool EnPrestamo(int id);
     }

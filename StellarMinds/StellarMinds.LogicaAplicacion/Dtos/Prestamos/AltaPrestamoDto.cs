@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaAplicacion.Dtos.Prestamos
+﻿namespace StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos
 {
-    public record AltaPrestamoDto
-    {
-    }
+    public record AltaPrestamoDto(
+        int Id,
+        DateTime FechaFin,
+        int? TelescopioId,
+        int? MonturaId,
+        int? CamaraId,
+        int? OcularId
+    );
 }

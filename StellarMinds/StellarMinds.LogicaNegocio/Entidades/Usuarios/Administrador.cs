@@ -7,6 +7,6 @@ namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
         public Administrador(int id, VONombreCompleto nombreCompleto, VOTelefono telefono, VOUsername username, VOPassword vOPassword) : base(id, nombreCompleto, telefono, username, vOPassword)
         {
         }
-        private Administrador() { }
+        protected Administrador() { }
     }
 }

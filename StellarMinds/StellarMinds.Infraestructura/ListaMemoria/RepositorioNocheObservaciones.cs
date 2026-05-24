@@ -6,9 +6,11 @@ namespace StellarMinds.Infraestructura.ListaMemoria
     public class RepositorioNocheObservaciones : IRepositorioNochesObservaciones
     {
         private static List<NocheObservacion> _nochesObservaciones { get; set; } = new List<NocheObservacion>();
-        public void Add(NocheObservacion Obj)
+        public int Add(NocheObservacion Obj)
         {
             _nochesObservaciones.Add(Obj);
+            return Obj.Id;
+
         }
 
         public IEnumerable<NocheObservacion> GetAll()

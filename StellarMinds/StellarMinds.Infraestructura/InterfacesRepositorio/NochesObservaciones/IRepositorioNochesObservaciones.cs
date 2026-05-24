@@ -2,7 +2,7 @@
 
 namespace StellarMinds.Infraestructura.InterfacesRepositorio.NochesObservaciones
 {
-    public interface IRepositorioNochesObservaciones : IRepositorioAdd<NocheObservacion>, IRepositorioGetAll<NocheObservacion>, IRepositorioGetById<NocheObservacion>
+    public interface IRepositorioNochesObservaciones : IRepositorioAdd<NocheObservacion>, IRepositorioGetAll<NocheObservacion>
     {
     }
 }
