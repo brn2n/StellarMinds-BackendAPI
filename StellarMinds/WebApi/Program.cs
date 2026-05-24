@@ -1,3 +1,13 @@
+using StellarMinds.Infraestructura.EF;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
+using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
+using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using RepositorioEquipo = StellarMinds.Infraestructura.EF.RepositorioEquipo;
 
 
@@ -47,15 +57,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseSession();
-
 app.UseAuthorization();
 
 app.MapStaticAssets();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Login}/{action=Login}/{id?}")
-    .WithStaticAssets();
 
 app.Run();
