@@ -5,8 +5,8 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
     public class Prestamo
     {
         public int Id { get; private set; }
-        public DateTime FechaInicio { get; private set; } = DateTime.Now;
-        public DateTime VOFechaFin { get; private set; }
+        public DateTime FechaInicio { get; private set; }
+        public DateTime FechaFin { get; private set; }
         public Ocular Ocular { get; private set; }
         public Telescopio Telescopio { get; private set; }
         public Camara Camara { get; private set; }
@@ -19,9 +19,10 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 
         }
 
-        public Prestamo(DateTime voFechaFin, Montura montura, Ocular ocular, Telescopio telescopio, Camara camara, Estado estado)
+        public Prestamo(DateTime fechaFin, Montura montura, Ocular ocular, Telescopio telescopio, Camara camara, Estado estado)
         {
-            VOFechaFin = voFechaFin;
+            FechaFin = fechaFin;
+            FechaInicio = DateTime.Now;
             Montura = montura;
             Ocular = ocular;
             Telescopio = telescopio;
@@ -32,7 +33,21 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 
         private void Validar()
         {
-            //HACER VALIDACIONES
+            if (FechaFin <= FechaInicio)
+            {
+                throw new ArgumentException("La fecha de fin debe ser posterior a la fecha de inicio.");
+            }
+            if (Camara == null && Ocular == null)
+            {
+                throw new ArgumentException("Debe seleccionarse al menos una camara o un ocular.");
+            }
+            if (Camara != null)
+            {
+                if (Montura.TipoMontura != TipoMontura.Ecuatorial && Montura.TipoMontura != TipoMontura.Hibrida)
+                {
+                    throw new ArgumentException("Para prestar una cámara, la montura debe ser ecuatorial o híbrida.");
+                }
+            }
         }
     }
 }

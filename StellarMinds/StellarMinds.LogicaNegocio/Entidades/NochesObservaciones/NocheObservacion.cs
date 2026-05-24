@@ -27,19 +27,19 @@ namespace StellarMinds.LogicaNegocio.Entidades.NochesObservaciones
 
         private void Validar()
         {
-            if (FechaObservacion == default)
+            if (FechaObservacion < DateTime.Now)
             {
-                throw new NocheObservacionInvalidaException();
+                throw new NocheObservacionInvalidaException("La fecha de observación no puede ser en el pasado.");
             }
 
             if (Prestamo == null)
             {
-                throw new NocheObservacionInvalidaException();
+                throw new NocheObservacionInvalidaException("El préstamo no puede ser nulo.");
             }
 
             if (ObjetoCeleste == null)
             {
-                throw new NocheObservacionInvalidaException();
+                throw new NocheObservacionInvalidaException("El objeto celeste no puede ser nulo.");
             }
         }
     }

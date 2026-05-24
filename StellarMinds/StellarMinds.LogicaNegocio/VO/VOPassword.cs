@@ -1,4 +1,7 @@
-﻿namespace StellarMinds.LogicaNegocio.VO.VOUsuario
+﻿using StellarMinds.LogicaNegocio.Excepciones;
+using System.Text.RegularExpressions;
+
+namespace StellarMinds.LogicaNegocio.VO.VOUsuario
 {
     public record class VOPassword
     {
@@ -7,12 +10,22 @@
         public VOPassword(string value)
         {
             Value = value;
-            //Validar();
+            Validar();
         }
 
         private void Validar()
         {
-            //    throw new NotImplementedException(); // Aquí puedes implementar la lógica de validación para la contraseña, como verificar su longitud, complejidad, etc.
+            if (Value == null)
+            {
+                throw new VOPasswordInvalidoException();
+            }
+
+            string patronRegEx = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?"":{}|<>]).{8,}$";
+
+            if (!Regex.IsMatch(Value, patronRegEx))
+            {
+                throw new VOPasswordInvalidoException();
+            }
         }
     }
 }

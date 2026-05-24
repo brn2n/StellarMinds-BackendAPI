@@ -10,7 +10,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
         public VOUsername Username { get; set; }
         public VOPassword VOPassword { get; set; }
 
-        protected Usuario()
+        private Usuario()
         {
         }
 
@@ -21,6 +21,15 @@ namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
             Telefono = telefono;
             Username = username;
             VOPassword = vOPassword;
+            Validar();
+        }
+
+        private void Validar()
+        {
+            if (Username == null || Telefono == null || VOPassword == null || NombreCompleto == null)
+            {
+                throw new ArgumentException("Los campos no pueden ser nulos.");
+            }
         }
     }
 }

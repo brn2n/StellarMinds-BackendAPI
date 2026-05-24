@@ -1,4 +1,5 @@
 using StellarMinds.LogicaNegocio.Excepciones;
+using System.Text.RegularExpressions;
 
 namespace StellarMinds.LogicaNegocio.VO
 {
@@ -15,9 +16,11 @@ namespace StellarMinds.LogicaNegocio.VO
 
         private void Validar()
         {
-            if (Valor < -30 || Valor > 30)
+            string patronMagnitud = @"^-?\d+([.,]\d{2})$";
+
+            if (!Regex.IsMatch(Valor.ToString(), patronMagnitud))
             {
-                throw new VOMagnitudAparenteInvalidaException();
+                throw new VOMagnitudAparenteInvalidaException("La magnitud debe ser un numero con exactamente dos decimales.");
             }
         }
     }
