@@ -11,11 +11,12 @@ namespace StellarMinds.Infraestructura.EF
         {
             _context = context;
         }
-        public void Add(ObjetoCeleste Obj)
+        public int Add(ObjetoCeleste Obj)
         {
             if (Obj == null) throw new Exception("El objeto celeste no puede ser nulo.");
             _context.ObjetosCelestes.Add(Obj);
             _context.SaveChanges();
+            return Obj.Id;
         }
 
         public IEnumerable<ObjetoCeleste> GetAll()
@@ -25,7 +26,9 @@ namespace StellarMinds.Infraestructura.EF
 
         public ObjetoCeleste GetById(int id)
         {
-            return _context.ObjetosCelestes.Find(id);
+            ObjetoCeleste unObjetoCeleste = _context.ObjetosCelestes.Find(id);
+            if (unObjetoCeleste == null) throw new Exception("El ObjetoCeleste no existe.");
+            return unObjetoCeleste;
         }
     }
 }

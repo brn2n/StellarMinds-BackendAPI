@@ -12,11 +12,12 @@ namespace StellarMinds.Infraestructura.EF
             _context = context;
         }
 
-        public void Add(Equipo Obj)
+        public int Add(Equipo Obj)
         {
             if (Obj == null) throw new Exception("El equipo no puede ser nulo.");
             _context.Equipos.Add(Obj);
             _context.SaveChanges();
+            return Obj.Id;
         }
 
         public void Delete(int Id)
