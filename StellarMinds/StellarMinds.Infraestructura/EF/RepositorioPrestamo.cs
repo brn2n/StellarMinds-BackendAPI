@@ -35,7 +35,9 @@ namespace StellarMinds.Infraestructura.EF
 
         public Prestamo GetById(int id)
         {
-            throw new NotImplementedException();
+            Prestamo unPrestamo = _context.Prestamos.Find(id);
+            if (unPrestamo == null) throw new Exception("El Prestamo no existe.");
+            return unPrestamo;
         }
     }
 }

@@ -6,10 +6,11 @@ namespace StellarMinds.Infraestructura.ListaMemoria
     public class RepositorioObjetoCeleste : IRepositorioObjetosCelestes
     {
         private static List<ObjetoCeleste> _objetosCelestes { get; set; } = new List<ObjetoCeleste>();
-        public void Add(ObjetoCeleste Obj)
+        public int Add(ObjetoCeleste Obj)
         {
             if (Obj == null) throw new Exception("El objeto celeste no puede ser nulo.");
             _objetosCelestes.Add(Obj);
+            return Obj.Id;
         }
 
         public IEnumerable<ObjetoCeleste> GetAll()
