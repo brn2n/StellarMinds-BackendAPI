@@ -68,30 +68,6 @@ namespace StellarMinds.WebApp.Controllers
             }
         }
 
-        //[HttpPost]
-        //public IActionResult Create([FromBody] PaisDtoAlta pais)
-        //{
-        //    try
-        //    {
-        //        _add.Execute(new PaisDtoAlta(Nombre: pais.Nombre,
-        //                                     CantidadHabitantes: pais.CantidadHabitantes)
-        //        );
-        //        //  return CreatedAtAction("GetById", new { id = id }, _getById.Execute(id));
-        //        return Ok(Co
-        //    }
-        //    catch (BadRequestException e)
-        //    {
-        //        return StatusCode(400, e.Error());
-        //    }
-        //    catch (LogicaNegocioException e)
-        //    {
-        //        return StatusCode(400, e.Error());
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(500, new Error(500, "Hupp ahora estoy en otra cosa"));
-        //    }
-        //}
 
         [HttpDelete("{id}")]
         public IActionResult Delete(ListarEquipoDto equipo)
