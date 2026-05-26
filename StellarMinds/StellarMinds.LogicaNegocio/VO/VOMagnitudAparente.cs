@@ -5,8 +5,11 @@ namespace StellarMinds.LogicaNegocio.VO
 {
     public record class VOMagnitudAparente
     {
-        public double Valor { get; }
+        public double Valor { get; private set; }
 
+        private VOMagnitudAparente()
+        {
+        }
         public VOMagnitudAparente(double valor)
         {
             Valor = valor;

@@ -1,23 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
-using StellarMinds.LogicaNegocio.Entidades.Equipos;
 
-namespace WebApp.Controllers
+namespace WebApi.Controllers
 {
-    public class PrestamoController : Controller
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class PrestamoController : ControllerBase
     {
-        private readonly ICUAlta<AltaPrestamoDto> _altaPrestamo;
-        private readonly IRepositorioEquipo _repoEquipo;
+        private ICUAlta<AltaPrestamoDto> _altaPrestamo;
 
-        public PrestamoController(
-            ICUAlta<AltaPrestamoDto> altaPrestamo,
-            IRepositorioEquipo repoEquipo)
+        public PrestamoController(ICUAlta<AltaPrestamoDto> altaPrestamo)
         {
             _altaPrestamo = altaPrestamo;
-            _repoEquipo = repoEquipo;
+        }
+
+        [HttpPost]
+        public IActionResult Alta([FromBody] AltaPrestamoDto dto)
+        {
+            try
+            {
+                _altaPrestamo.Ejecutar(dto);
+                return Ok("Prestamo creado");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

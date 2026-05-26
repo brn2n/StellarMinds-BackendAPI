@@ -6,6 +6,11 @@ namespace StellarMinds.LogicaNegocio.VO
     {
         public string Valor { get; }
 
+        private VONombreObjetoCeleste()
+        {
+
+        }
+
         public VONombreObjetoCeleste(string valor)
         {
             Valor = valor;

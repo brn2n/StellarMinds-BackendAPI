@@ -25,7 +25,7 @@ namespace StellarMinds.WebApp.Controllers
             _get = getEquipoId;
             _update = updateEquipo;
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
             try
@@ -116,7 +116,7 @@ namespace StellarMinds.WebApp.Controllers
         }
 
         // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL EDIT !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
-        [HttpPost]
+        [HttpPut("{id}")]
         public IActionResult Edit(ListarEquipoDto equipo)
         {
             try

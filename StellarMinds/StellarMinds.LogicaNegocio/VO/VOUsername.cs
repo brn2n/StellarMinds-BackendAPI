@@ -6,6 +6,9 @@ namespace StellarMinds.LogicaNegocio.VO.VOUsuario
     {
         public string Value { get; }
 
+        public VOUsername()
+        { 
+        }
         public VOUsername(string value)
         {
             Value = value;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StellarMinds.Infraestructura.EF.Config.Equipos;
 using StellarMinds.Infraestructura.EF.Config.NocheObservaciones;
+using StellarMinds.Infraestructura.EF.Config.ObjetosCelestes;
 using StellarMinds.Infraestructura.EF.Config.Prestamos;
 using StellarMinds.Infraestructura.EF.Config.Usuarios;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
@@ -39,6 +40,7 @@ namespace StellarMinds.Infraestructura.EF
             modelBuilder.ApplyConfiguration(new AdministradorConfiguration());
             modelBuilder.ApplyConfiguration(new SocioConfiguration());
             modelBuilder.ApplyConfiguration(new CoordinadorConfiguration());
+            modelBuilder.ApplyConfiguration(new ObjetoCelesteConfiguration());
         }
     }
 }

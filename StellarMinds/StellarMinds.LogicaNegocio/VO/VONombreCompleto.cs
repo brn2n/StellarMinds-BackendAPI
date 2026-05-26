@@ -7,6 +7,10 @@ namespace StellarMinds.LogicaNegocio.VO.VOUsuario
         public string Nombre { get; }
         public string Apellido { get; }
 
+        private VONombreCompleto()
+        {
+         
+        }
         public VONombreCompleto(string nombre, string apellido)
         {
             Nombre = nombre;

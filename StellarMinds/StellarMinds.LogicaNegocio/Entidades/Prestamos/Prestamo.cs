@@ -7,10 +7,18 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
         public int Id { get; private set; }
         public DateTime FechaInicio { get; private set; }
         public DateTime FechaFin { get; private set; }
+
         public Ocular Ocular { get; private set; }
+        public int OcularId { get; private set; }
+
         public Telescopio Telescopio { get; private set; }
+        public int TelescopioId { get; private set; }
+
         public Camara Camara { get; private set; }
+        public int CamaraId { get; private set; }
+
         public Montura Montura { get; private set; }
+        public int MonturaId { get; private set; }
 
         public Estado Estado { get; private set; } = Estado.EN_PRESTAMO;
 

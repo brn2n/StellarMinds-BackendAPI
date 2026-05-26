@@ -16,13 +16,12 @@ using RepositorioEquipo = StellarMinds.Infraestructura.EF.RepositorioEquipo;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+
+builder.Services.AddSwaggerGen();
 
 // Contenedor de inyeccion de dependencias
 // inyecto los repositorios
@@ -45,6 +44,8 @@ builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
 // Inyecto los casos de uso Prestamo
 builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
 
+//builder.Services.AddScoped<SeedData>();
+
 //Inyecto el Context de la BD
 builder.Services.AddDbContext<StellarMindContext>(
     //option => option.UseSqlServer(builder.Configuration.GetConnectionString("Libreria"))
@@ -52,18 +53,29 @@ builder.Services.AddDbContext<StellarMindContext>(
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
+//if (app.Environment.IsDevelopment())
+//{
+//    // Creo un scope para poder usar los servicios que inyecte, en este caso el SeedData, que es el encargado de llenar la base de datos con datos de prueba
+//    using (var scope = app.Services.CreateScope())
+//    {
+//        var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
+//        seeder.Run();
+//    }
+//}
+
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
+app.MapControllers();
 
 app.Run();
