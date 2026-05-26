@@ -9,7 +9,7 @@ namespace StellarMinds.WebApp.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class EquipoController : ControllerBase
+    public class EquiposController : ControllerBase
     {
         private ICUGetAll<ListarEquipoDto> _listar;
         private ICUAlta<AltaEquipoDto> _alta;
@@ -17,7 +17,7 @@ namespace StellarMinds.WebApp.Controllers
         private ICUGetById<ListarEquipoDto> _get;
         private ICUEdit<ListarEquipoDto> _update;
 
-        public EquipoController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<ListarEquipoDto> updateEquipo)
+        public EquiposController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<ListarEquipoDto> updateEquipo)
         {
             _alta = altaEquipo;
             _listar = listarEquipo;

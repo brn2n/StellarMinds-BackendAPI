@@ -7,11 +7,11 @@ namespace WebApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class PrestamoController : ControllerBase
+    public class PrestamosController : ControllerBase
     {
         private ICUAlta<AltaPrestamoDto> _altaPrestamo;
 
-        public PrestamoController(ICUAlta<AltaPrestamoDto> altaPrestamo)
+        public PrestamosController(ICUAlta<AltaPrestamoDto> altaPrestamo)
         {
             _altaPrestamo = altaPrestamo;
         }

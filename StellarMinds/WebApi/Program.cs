@@ -51,20 +51,22 @@ builder.Services.AddDbContext<StellarMindContext>(
     //option => option.UseSqlServer(builder.Configuration.GetConnectionString("Libreria"))
     );
 
+builder.Services.AddScoped<SeedData>();
+
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
-//if (app.Environment.IsDevelopment())
-//{
-//    // Creo un scope para poder usar los servicios que inyecte, en este caso el SeedData, que es el encargado de llenar la base de datos con datos de prueba
-//    using (var scope = app.Services.CreateScope())
-//    {
-//        var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
-//        seeder.Run();
-//    }
-//}
+if (app.Environment.IsDevelopment())
+{
+    // Creo un scope para poder usar los servicios que inyecte, en este caso el SeedData, que es el encargado de llenar la base de datos con datos de prueba
+    using (var scope = app.Services.CreateScope())
+    {
+        var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
+        seeder.Run();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
