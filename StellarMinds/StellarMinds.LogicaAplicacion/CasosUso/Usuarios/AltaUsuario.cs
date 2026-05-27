@@ -1,6 +1,7 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaAplicacion.Mapper;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using StellarMinds.LogicaNegocio.VO.VOUsuario;
 
@@ -21,19 +22,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
                 throw new Exception("El usuario no puede ser nulo");
             }
 
-            if (obj.rol == "Socio") {
-                _repo.Add(new Socio(obj.Id, new VONombreCompleto(obj.nombre, obj.apellido), new VOTelefono(obj.telefono), new VOUsername(obj.username), new VOPassword(obj.password)));
-            }
-
-            if (obj.rol == "Administrador")
-            {
-                _repo.Add(new Administrador(obj.Id, new VONombreCompleto(obj.nombre, obj.apellido), new VOTelefono(obj.telefono), new VOUsername(obj.username), new VOPassword(obj.password)));
-            }
-
-            if (obj.rol == "Coordinador")
-            {
-                _repo.Add(new Coordinador(obj.Id, new VONombreCompleto(obj.nombre, obj.apellido), new VOTelefono(obj.telefono), new VOUsername(obj.username), new VOPassword(obj.password)));
-            }
+            _repo.Add(UsuarioMapper.FromDto(obj));
         }
     }
 }
