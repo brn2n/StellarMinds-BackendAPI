@@ -39,6 +39,12 @@ namespace StellarMinds.Infraestructura.EF
             if (unPrestamo == null) throw new Exception("El Prestamo no existe.");
             return unPrestamo;
         }
+
+        public void Update(int id, Prestamo obj)
+        {
+            _context.Prestamos.Update(obj);
+            _context.SaveChanges();
+        }
     }
 }
 

@@ -13,13 +13,16 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
     {
         private readonly IRepositorioPrestamos _repoPrestamo;
         private readonly IRepositorioEquipo _repoEquipo;
+        private readonly IRepositorioAuditoriaPrestamo _repoAuditoria;
 
         public AltaPrestamo(
             IRepositorioPrestamos repoPrestamo,
-            IRepositorioEquipo repoEquipo)
+            IRepositorioEquipo repoEquipo,
+            IRepositorioAuditoriaPrestamo repoAuditoria)
         {
             _repoPrestamo = repoPrestamo;
             _repoEquipo = repoEquipo;
+            _repoAuditoria = repoAuditoria;
         }
 
         public void Ejecutar(AltaPrestamoDto dto)
@@ -42,6 +45,11 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             );
 
             _repoPrestamo.Add(prestamo);
+
+            _repoAuditoria.Add(new AuditoriaPrestamo(
+                "Se reporta Alta Prestamo",
+                prestamo.Id
+                ));
         }
 
         private Telescopio? ObtenerTelescopioDisponible(int? id)

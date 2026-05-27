@@ -57,5 +57,15 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
                 }
             }
         }
+
+        public void Devolver()
+        {
+            if (Estado != Estado.EN_PRESTAMO)
+            {
+                throw new Exception("El préstamo no está en estado EN PRÉSTAMO.");
+            }
+
+            Estado = Estado.DEVUELTO;
+        }
     }
 }

@@ -1,10 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
-namespace StellarMinds.LogicaAplicacion.CasosUso.Prestamos
+namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 {
-    internal class DevolucionPrestamo
+    public class DevolverPrestamo : ICUDelete<Prestamo>
     {
+        private readonly IRepositorioPrestamos _repoPrestamo;
+        private readonly IRepositorioAuditoriaPrestamo _repoAuditoria;
+
+        public DevolverPrestamo(IRepositorioPrestamos repoPrestamo)
+        {
+            _repoPrestamo = repoPrestamo;
+        }
+
+        public void Execute(int id)
+        {
+            Prestamo prestamo = _repoPrestamo.GetById(id);
+
+            prestamo.Devolver();
+
+            _repoPrestamo.Update(id, prestamo);
+            _repoAuditoria.Add(new AuditoriaPrestamo(
+                "Devolucion Prestamo",
+                prestamo.Id
+                ));
+        }
     }
 }

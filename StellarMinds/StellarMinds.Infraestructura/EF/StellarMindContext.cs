@@ -17,6 +17,7 @@ namespace StellarMinds.Infraestructura.EF
         public DbSet<ObjetoCeleste> ObjetosCelestes { get; set; }
         public DbSet<NocheObservacion> NochesObservaciones { get; set; }
         public DbSet<Prestamo> Prestamos { get; set; }
+        public DbSet<AuditoriaPrestamo> AuditoriasPrestamos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Equipo> Equipos { get; set; }
 
