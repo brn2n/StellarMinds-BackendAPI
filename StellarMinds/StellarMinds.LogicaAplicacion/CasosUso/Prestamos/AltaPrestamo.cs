@@ -1,11 +1,11 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
+using StellarMinds.LogicaAplicacion.CUExceptions.CUEquipo;
+using StellarMinds.LogicaAplicacion.CUExceptions.CUPrestamo;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
-using StellarMinds.LogicaAplicacion.CUExceptions.CUEquipo;
-using StellarMinds.LogicaAplicacion.CUExceptions.CUPrestamo;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 {

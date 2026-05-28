@@ -112,6 +112,27 @@ namespace StellarMinds.Infraestructura.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AuditoriasPrestamos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Accion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PrestamoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AuditoriasPrestamos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AuditoriasPrestamos_Prestamos_PrestamoId",
+                        column: x => x.PrestamoId,
+                        principalTable: "Prestamos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NochesObservaciones",
                 columns: table => new
                 {
@@ -135,6 +156,11 @@ namespace StellarMinds.Infraestructura.Migrations
                         principalTable: "Prestamos",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AuditoriasPrestamos_PrestamoId",
+                table: "AuditoriasPrestamos",
+                column: "PrestamoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NochesObservaciones_ObjetoCelesteId",
@@ -170,6 +196,9 @@ namespace StellarMinds.Infraestructura.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AuditoriasPrestamos");
+
             migrationBuilder.DropTable(
                 name: "NochesObservaciones");
 

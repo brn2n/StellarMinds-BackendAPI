@@ -12,7 +12,7 @@ using StellarMinds.Infraestructura.EF;
 namespace StellarMinds.Infraestructura.Migrations
 {
     [DbContext(typeof(StellarMindContext))]
-    [Migration("20260526212701_init")]
+    [Migration("20260528220744_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -103,6 +103,31 @@ namespace StellarMinds.Infraestructura.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ObjetosCelestes");
+                });
+
+            modelBuilder.Entity("StellarMinds.LogicaNegocio.Entidades.Prestamos.AuditoriaPrestamo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Accion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PrestamoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrestamoId");
+
+                    b.ToTable("AuditoriasPrestamos");
                 });
 
             modelBuilder.Entity("StellarMinds.LogicaNegocio.Entidades.Prestamos.Prestamo", b =>
@@ -298,6 +323,17 @@ namespace StellarMinds.Infraestructura.Migrations
 
                     b.Navigation("Magnitud")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("StellarMinds.LogicaNegocio.Entidades.Prestamos.AuditoriaPrestamo", b =>
+                {
+                    b.HasOne("StellarMinds.LogicaNegocio.Entidades.Prestamos.Prestamo", "Prestamo")
+                        .WithMany()
+                        .HasForeignKey("PrestamoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prestamo");
                 });
 
             modelBuilder.Entity("StellarMinds.LogicaNegocio.Entidades.Prestamos.Prestamo", b =>

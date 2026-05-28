@@ -31,6 +31,11 @@ namespace StellarMinds.Infraestructura.ListaMemoria.Prestamos
             throw new NotImplementedException();
         }
 
+        public void Update(int id, Prestamo obj)
+        {
+            throw new NotImplementedException();
+        }
+
         int IRepositorioAdd<Prestamo>.Add(Prestamo Obj)
         {
             throw new NotImplementedException();
