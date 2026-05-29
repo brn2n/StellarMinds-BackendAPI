@@ -1,5 +1,4 @@
 ﻿using StellarMinds.LogicaNegocio.Entidades.Equipos;
-using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using StellarMinds.LogicaNegocio.VO.VOUsuario;
 
@@ -22,8 +21,8 @@ namespace StellarMinds.Infraestructura.EF
             if (!_context.Equipos.Any())
                 CrearEquipos();
 
-            if (!_context.Prestamos.Any())
-                CrearPrestamos();
+            //if (!_context.Prestamos.Any())
+            //    CrearPrestamos();
         }
 
         private void CrearUsuarios()
@@ -62,7 +61,7 @@ namespace StellarMinds.Infraestructura.EF
         private void CrearEquipos()
         {
             var telescopio = new Telescopio(
-                0,
+                1,
                 "ACME",
                 "Valenton 130EQ",
                 3,
@@ -73,7 +72,7 @@ namespace StellarMinds.Infraestructura.EF
             );
 
             var montura = new Montura(
-                0,
+                2,
                 "ACME",
                 "Guilleton",
                 2,
@@ -83,7 +82,7 @@ namespace StellarMinds.Infraestructura.EF
             );
 
             var camara = new Camara(
-                0,
+                3,
                 "ACME",
                 "Colon",
                 2,
@@ -93,7 +92,7 @@ namespace StellarMinds.Infraestructura.EF
             );
 
             var ocular = new Ocular(
-                0,
+                4,
                 "Baader",
                 "Hyperion",
                 5,
@@ -109,24 +108,24 @@ namespace StellarMinds.Infraestructura.EF
             _context.SaveChanges();
         }
 
-        private void CrearPrestamos()
-        {
-            var telescopio = _context.Equipos.OfType<Telescopio>().First();
-            var montura = _context.Equipos.OfType<Montura>().First();
-            var camara = _context.Equipos.OfType<Camara>().First();
-            var ocular = _context.Equipos.OfType<Ocular>().First();
+        //private void CrearPrestamos()
+        //{
+        //    var telescopio = _context.Equipos.OfType<Telescopio>().First();
+        //    var montura = _context.Equipos.OfType<Montura>().First();
+        //    var camara = _context.Equipos.OfType<Camara>().First();
+        //    var ocular = _context.Equipos.OfType<Ocular>().First();
 
-            var prestamo = new Prestamo(
-                DateTime.Now.AddDays(7),
-                montura,
-                ocular,
-                telescopio,
-                camara,
-                Estado.EN_PRESTAMO
-            );
+        //    var prestamo = new Prestamo(
+        //        DateTime.Now.AddDays(7),
+        //        montura,
+        //        ocular,
+        //        telescopio,
+        //        camara,
+        //        Estado.EN_PRESTAMO
+        //    );
 
-            _context.Prestamos.Add(prestamo);
-            _context.SaveChanges();
-        }
+        //    _context.Prestamos.Add(prestamo);
+        //    _context.SaveChanges();
+        //}
     }
 }
