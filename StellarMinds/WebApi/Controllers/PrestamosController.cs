@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 
@@ -7,14 +6,8 @@ namespace WebApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class PrestamosController : ControllerBase
+    public class PrestamosController(ICUAlta<AltaPrestamoDto> _altaPrestamo) : ControllerBase
     {
-        private ICUAlta<AltaPrestamoDto> _altaPrestamo;
-
-        public PrestamosController(ICUAlta<AltaPrestamoDto> altaPrestamo)
-        {
-            _altaPrestamo = altaPrestamo;
-        }
 
         [HttpPost]
         public IActionResult Alta([FromBody] AltaPrestamoDto dto)
@@ -29,5 +22,7 @@ namespace WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
     }
 }

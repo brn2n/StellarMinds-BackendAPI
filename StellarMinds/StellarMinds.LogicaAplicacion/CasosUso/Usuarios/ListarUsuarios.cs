@@ -1,13 +1,11 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
-using StellarMinds.LogicaNegocio.Entidades.Usuarios;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using StellarMinds.LogicaAplicacion.Mapper;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
-    public class ListarUsuarios : ICUGetAll<Usuario>
+    public class ListarUsuarios : ICUGetAll<ListarUsuariosDto>
     {
         private IRepositorioUsuario _repo;
 
@@ -15,9 +13,10 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
         {
             _repo = repositorioUsuarios;
         }
-        public IEnumerable<Usuario> Ejecutar()
+        public IEnumerable<ListarUsuariosDto> Ejecutar()
         {
-            return _repo.GetAll();
+            return UsuarioMapper.ToListDto(_repo.GetAll());
         }
+
     }
 }

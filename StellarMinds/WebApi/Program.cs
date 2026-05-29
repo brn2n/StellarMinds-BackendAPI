@@ -10,7 +10,6 @@ using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
-using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using RepositorioEquipo = StellarMinds.Infraestructura.EF.RepositorioEquipo;
 
 
@@ -33,7 +32,7 @@ builder.Services.AddScoped<IRepositorioEquipo, RepositorioEquipo>();
 builder.Services.AddScoped<IRepositorioAuditoriaPrestamo, RepositorioAuditoriaPrestamo>();
 
 // Inyecto los casos de uso USUARIO
-builder.Services.AddScoped<ICUGetAll<Usuario>, ListarUsuarios>();
+builder.Services.AddScoped<ICUGetAll<ListarUsuariosDto>, ListarUsuarios>();
 builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
 
 // Inyecto los casos de uso EQUIPO

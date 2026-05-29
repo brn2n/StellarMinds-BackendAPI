@@ -27,5 +27,37 @@ namespace StellarMinds.LogicaAplicacion.Mapper
 
             throw new Exception("Rol de usuario inválido");
         }
+
+
+        public static ListarUsuariosDto toDto(Usuario usuario)
+        {
+            if (usuario == null) throw new ArgumentNullException(nameof(usuario));
+
+            if (usuario is Coordinador c)
+            {
+                return new ListarUsuariosDto(c.NombreCompleto.Nombre, c.NombreCompleto.Apellido, c.Telefono.Value, c.Username.Value, "Coordinador");
+            }
+
+            if (usuario is Administrador a)
+            {
+                return new ListarUsuariosDto(a.NombreCompleto.Nombre, a.NombreCompleto.Apellido, a.Telefono.Value, a.Username.Value, "Administrador");
+            }
+
+            if (usuario is Socio s)
+            {
+                return new ListarUsuariosDto(s.NombreCompleto.Nombre, s.NombreCompleto.Apellido, s.Telefono.Value, s.Username.Value, "Socio");
+            }
+            throw new ArgumentException("Tipo de equipo desconocido", nameof(usuario));
+        }
+
+        public static IEnumerable<ListarUsuariosDto> ToListDto(IEnumerable<Usuario> usuarios)
+        {
+            List<ListarUsuariosDto> aux = new List<ListarUsuariosDto>();
+            foreach (Usuario item in usuarios)
+            {
+                aux.Add(toDto(item));
+            }
+            return aux;
+        }
     }
 }
