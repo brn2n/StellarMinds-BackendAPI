@@ -27,6 +27,11 @@ namespace StellarMinds.Infraestructura.EF
             _context.SaveChanges();
         }
 
+        public IEnumerable<Equipo> GetTelescopios()
+        {
+            return _context.Equipos.OfType<Telescopio>().ToList();
+        }
+
         public IEnumerable<Equipo> GetAll()
         {
             return _context.Equipos.ToList();

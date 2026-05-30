@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+﻿ using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 
 namespace StellarMinds.Infraestructura.EF
@@ -21,6 +22,15 @@ namespace StellarMinds.Infraestructura.EF
         public IEnumerable<Usuario> GetAll()
         {
             return _context.Usuarios.ToList();
+        }
+
+
+
+        public Usuario GetById(int id)
+        {
+            Usuario unUsuario = _context.Usuarios.Find(id);
+            if (unUsuario == null) throw new Exception("El Usuario no existe.");
+            return unUsuario;
         }
     }
 }
