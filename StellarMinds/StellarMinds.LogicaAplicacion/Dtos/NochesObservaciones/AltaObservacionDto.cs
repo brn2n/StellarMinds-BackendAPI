@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones
+﻿namespace StellarMinds.LogicaAplicacion.Dtos.ObservacionDtos
 {
-    public record AltaObservacionDto
+    public class AltaObservacionDto
     {
-        public int IdPrestamo { get; set; }
-        public int IdObjetoCeleste { get; set; }
+        public int SocioId { get; set; }
+        public int PrestamoId { get; set; }
+        public int ObjetoCelesteId { get; set; }
         public DateTime FechaObservacion { get; set; }
     }
 }

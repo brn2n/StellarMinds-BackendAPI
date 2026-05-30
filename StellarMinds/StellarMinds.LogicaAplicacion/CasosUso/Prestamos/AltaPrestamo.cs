@@ -1,11 +1,13 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CUExceptions.CUEquipo;
 using StellarMinds.LogicaAplicacion.CUExceptions.CUPrestamo;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
+using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 {
@@ -13,15 +15,18 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
     {
         private readonly IRepositorioPrestamos _repoPrestamo;
         private readonly IRepositorioEquipo _repoEquipo;
+        private readonly IRepositorioUsuario _repoUsuario;
         private readonly IRepositorioAuditoriaPrestamo _repoAuditoria;
 
         public AltaPrestamo(
             IRepositorioPrestamos repoPrestamo,
             IRepositorioEquipo repoEquipo,
+            IRepositorioUsuario repoUsuario,
             IRepositorioAuditoriaPrestamo repoAuditoria)
         {
             _repoPrestamo = repoPrestamo;
             _repoEquipo = repoEquipo;
+            _repoUsuario = repoUsuario;
             _repoAuditoria = repoAuditoria;
         }
 
@@ -30,6 +35,14 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             if (dto == null)
                 throw new PrestamoNuloException();
 
+            Usuario usuario = _repoUsuario.GetById(dto.SocioId);
+
+            if (usuario == null)
+                throw new Exception("No existe el usuario seleccionado.");
+
+            if (usuario is not Socio socio)
+                throw new Exception("El usuario seleccionado no es un socio.");
+
             Telescopio? telescopio = ObtenerTelescopioDisponible(dto.TelescopioId);
             Montura? montura = ObtenerMonturaDisponible(dto.MonturaId);
             Camara? camara = ObtenerCamaraDisponible(dto.CamaraId);
@@ -37,6 +50,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 
             Prestamo prestamo = new Prestamo(
                 dto.FechaFin,
+                socio,
                 montura,
                 ocular,
                 telescopio,
@@ -49,7 +63,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             _repoAuditoria.Add(new AuditoriaPrestamo(
                 "Se reporta Alta Prestamo",
                 prestamo.Id
-                ));
+            ));
         }
 
         private Telescopio? ObtenerTelescopioDisponible(int? id)

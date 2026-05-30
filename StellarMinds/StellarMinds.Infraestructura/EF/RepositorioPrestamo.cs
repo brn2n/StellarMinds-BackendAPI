@@ -40,6 +40,16 @@ namespace StellarMinds.Infraestructura.EF
             return unPrestamo;
         }
 
+        public IEnumerable<Prestamo> ListarEntreFechas(int socioId, int mes, int anio)
+        {
+            return _context.Prestamos
+                .Where(p =>
+                    p.SocioId == socioId &&
+                    p.FechaInicio.Month == mes &&
+                    p.FechaInicio.Year == anio)
+                .ToList();
+        }
+
         public void Update(int id, Prestamo obj)
         {
             _context.Prestamos.Update(obj);

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaAplicacion.Dtos.Prestamos
+﻿namespace StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos
 {
-    public record ListadoPrestamosDto
+    public class ListadoPrestamoSocioDto
     {
-        public int IdPrestamo { get; set; }
+        public int Id { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public string Estado { get; set; }
-        public bool Atrasado { get; set; }
+        public bool EstaAtrasado { get; set; }
     }
 }

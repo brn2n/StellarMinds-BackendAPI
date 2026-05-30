@@ -3,9 +3,11 @@ using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
+using StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+using StellarMinds.LogicaAplicacion.Dtos.ObservacionDtos;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -45,6 +47,10 @@ builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
 // Inyecto los casos de uso Prestamo
 builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
 builder.Services.AddScoped<ICUDelete<Prestamo>, DevolverPrestamo>();
+
+
+//Inyecto los casos de uso de NocheObservacion
+builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
 
 //builder.Services.AddScoped<SeedData>();
 

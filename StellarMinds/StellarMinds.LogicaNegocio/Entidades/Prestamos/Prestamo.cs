@@ -1,4 +1,5 @@
-﻿using StellarMinds.LogicaNegocio.Entidades.Equipos;
+﻿using StellarMinds.LogicaNegocio.Entidades.Usuarios;
+using StellarMinds.LogicaNegocio.Entidades.Equipos;
 
 namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 {
@@ -7,6 +8,9 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
         public int Id { get; private set; }
         public DateTime FechaInicio { get; private set; }
         public DateTime FechaFin { get; private set; }
+
+        public Socio Socio { get; private set; }
+        public int SocioId { get; private set; }
 
         public Ocular Ocular { get; private set; }
         public int OcularId { get; private set; }
@@ -24,46 +28,62 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 
         private Prestamo()
         {
-
         }
 
-        public Prestamo(DateTime fechaFin, Montura montura, Ocular ocular, Telescopio telescopio, Camara camara, Estado estado)
+        public Prestamo(
+            DateTime fechaFin,
+            Socio socio,
+            Montura montura,
+            Ocular ocular,
+            Telescopio telescopio,
+            Camara camara,
+            Estado estado)
         {
             FechaFin = fechaFin;
             FechaInicio = DateTime.Now;
+            Socio = socio;
             Montura = montura;
             Ocular = ocular;
             Telescopio = telescopio;
             Camara = camara;
             Estado = estado;
+
             Validar();
         }
 
         private void Validar()
         {
+            if (Socio == null)
+                throw new ArgumentException("Debe indicarse el socio del préstamo.");
+
             if (FechaFin <= FechaInicio)
-            {
                 throw new ArgumentException("La fecha de fin debe ser posterior a la fecha de inicio.");
-            }
+
             if (Camara == null && Ocular == null)
-            {
-                throw new ArgumentException("Debe seleccionarse al menos una camara o un ocular.");
-            }
+                throw new ArgumentException("Debe seleccionarse al menos una cámara o un ocular.");
+
             if (Camara != null)
             {
-                if (Montura.TipoMontura != TipoMontura.Ecuatorial && Montura.TipoMontura != TipoMontura.Hibrida)
+                if (Montura == null)
+                    throw new ArgumentException("Debe seleccionarse una montura.");
+
+                if (Montura.TipoMontura != TipoMontura.Ecuatorial &&
+                    Montura.TipoMontura != TipoMontura.Hibrida)
                 {
                     throw new ArgumentException("Para prestar una cámara, la montura debe ser ecuatorial o híbrida.");
                 }
             }
         }
 
+        public bool EstaVigente()
+        {
+            return Estado == Estado.EN_PRESTAMO && FechaFin >= DateTime.Today;
+        }
+
         public void Devolver()
         {
             if (Estado != Estado.EN_PRESTAMO)
-            {
                 throw new Exception("El préstamo no está en estado EN PRÉSTAMO.");
-            }
 
             Estado = Estado.DEVUELTO;
         }

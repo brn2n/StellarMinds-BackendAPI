@@ -3,6 +3,5 @@
   <Project Path="StellarMinds.Infraestructura/StellarMinds.Infraestructura.csproj" />
   <Project Path="StellarMinds.LogicaAplicacion/StellarMinds.LogicaAplicacion.csproj" />
   <Project Path="StellarMinds.LogicaNegocio/StellarMinds.LogicaNegocio.csproj" />
-  <Project Path="StellarMinds.WebApp/StellarMinds.WebApp.csproj" />
   <Project Path="WebApi/WebApi.csproj" Id="860cc728-ecd4-4259-8583-86728c0d3aef" />
 </Solution>
