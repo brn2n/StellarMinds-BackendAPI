@@ -17,5 +17,15 @@ namespace StellarMinds.Infraestructura.ListaMemoria
         {
             return _usuario;
         }
+
+        public Usuario GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Usuario> GetUsuariosPorTelescopio(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

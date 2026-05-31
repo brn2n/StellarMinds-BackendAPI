@@ -9,7 +9,7 @@ namespace WebApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class UsuariosController(ICUGetAll<ListarUsuariosDto> _listar, ICUAlta<AltaUsuarioDto> _alta) : ControllerBase
+    public class UsuariosController(ICUGetAll<ListarUsuariosDto> _listar, ICUAlta<AltaUsuarioDto> _alta, ICUGetByTelescopio<ListarUsuariosDto> _getByTelescopio) : ControllerBase
     {
 
         [HttpGet]
@@ -27,6 +27,20 @@ namespace WebApi.Controllers
             catch (Exception)
             {
                 return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+            }
+        }
+
+        [HttpPost("ListadoTelescopio")]
+        public IActionResult ListarSocioPorTelescopio(int id)
+        {
+            try
+            {
+                _getByTelescopio.Ejecutar(id);
+                return Ok();
+            }
+            catch (BadRequestException e)
+            {
+                return StatusCode(400, e.Error());
             }
         }
 
@@ -53,6 +67,7 @@ namespace WebApi.Controllers
         }
 
         //Sería un POST? Qué carajos se hace con las sessions? Ahora son solo tokens?
+        [HttpPost("Logout")]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

@@ -5,14 +5,8 @@ using StellarMinds.LogicaAplicacion.Mapper;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
-    public class ListarUsuarios : ICUGetAll<ListarUsuariosDto>
+    public class ListarUsuarios(IRepositorioUsuario _repo) : ICUGetAll<ListarUsuariosDto>
     {
-        private IRepositorioUsuario _repo;
-
-        public ListarUsuarios(IRepositorioUsuario repositorioUsuarios)
-        {
-            _repo = repositorioUsuarios;
-        }
         public IEnumerable<ListarUsuariosDto> Ejecutar()
         {
             return UsuarioMapper.ToListDto(_repo.GetAll());

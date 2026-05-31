@@ -31,6 +31,11 @@ namespace StellarMinds.Infraestructura.ListaMemoria.Prestamos
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Prestamo> ListarEntreFechas(int socioId, int mes, int anio)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(int id, Prestamo obj)
         {
             throw new NotImplementedException();

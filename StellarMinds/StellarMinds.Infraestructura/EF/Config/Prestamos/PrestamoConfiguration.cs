@@ -16,6 +16,12 @@ namespace StellarMinds.Infraestructura.EF.Config.Prestamos
                    .IsRequired()
                    .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasOne(p => p.Socio)
+                   .WithMany()
+                   .HasForeignKey(p => p.SocioId)
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasOne(p => p.Montura)
                    .WithMany()
                    .HasForeignKey(p => p.MonturaId)

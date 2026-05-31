@@ -1,10 +1,11 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 {
-    public class ListarPrestamosSocioEntreFechas : IRepositorioPrestamos
+    public class ListarPrestamosSocioEntreFechas : ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto>
     {
         private readonly IRepositorioPrestamos _repoPrestamo;
 

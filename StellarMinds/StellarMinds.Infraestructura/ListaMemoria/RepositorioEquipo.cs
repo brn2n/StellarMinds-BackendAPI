@@ -34,6 +34,11 @@ namespace StellarMinds.Infraestructura.ListaMemoria
             return unEquipo;
         }
 
+        public IEnumerable<Equipo> GetTelescopios()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(int id, Equipo obj)
         {
             Equipo unEquipo = GetById(id);
