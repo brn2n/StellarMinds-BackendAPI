@@ -1,3 +1,4 @@
+using Microsoft.OpenApi;
 using StellarMinds.Infraestructura.EF;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.ObjetosCelestes;
@@ -12,6 +13,8 @@ using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using System.Reflection;
+using System.Text;
 using RepositorioEquipo = StellarMinds.Infraestructura.EF.RepositorioEquipo;
 
 
@@ -23,7 +26,39 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+    options.IncludeXmlComments(xmlPath);
+
+    options.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Ingrese el token JWT"
+    });
+
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [
+            new OpenApiSecuritySchemeReference("bearer", document)
+        ] = []
+    });
+});
+
+//Seguridad a la API
+var jwtSection = builder.Configuration.GetSection("Jwt");
+builder.Services.Configure<JwtSettings>(jwtSection);
+var jwtSettings = jwtSection.Get<JwtSettings>();
+builder.Services.AddSingleton(jwtSettings);
+builder.Services.AddScoped<IJwtGenerator<UsuarioListadoDto>, JwtGenerator>();
+var key = Encoding.ASCII.GetBytes(jwtSettings.Key);
+
 
 // Contenedor de inyeccion de dependencias
 // inyecto los repositorios
@@ -65,6 +100,8 @@ builder.Services.AddDbContext<StellarMindContext>(
     );
 
 builder.Services.AddScoped<SeedData>();
+
+
 
 var app = builder.Build();
 
