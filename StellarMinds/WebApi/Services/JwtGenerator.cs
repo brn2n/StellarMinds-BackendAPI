@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Libreria.WepApi.Services
 {
-    public class JwtGenerator : IJwtGenerator<>
+    public class JwtGenerator : IJwtGenerator<JWTUsuarioDto>
     {
 
         private readonly JwtSettings _settings;
@@ -16,14 +17,14 @@ namespace Libreria.WepApi.Services
             _settings = settings;
         }
 
-        public string GenerateToken(UsuarioListadoDto usuario)
+        public string GenerateToken(JWTUsuarioDto usuario)
         {
             var key = Encoding.UTF8.GetBytes(_settings.Key);
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-                new Claim(ClaimTypes.Role, usuario.Rol),
+                new Claim(JwtRegisteredClaimNames.PreferredUsername, usuario.username),
+                new Claim(ClaimTypes.Role, usuario.rol),
                 new Claim(ClaimTypes.Sid, usuario.Id.ToString())
                 // Podés agregar más claims como rol, nombre, etc.
             };
