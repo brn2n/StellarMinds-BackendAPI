@@ -1,11 +1,14 @@
 using StellarMinds.Infraestructura.EF;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.Infraestructura.InterfacesRepositorio.ObjetosCelestes;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
+using StellarMinds.LogicaAplicacion.CasosUso.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -27,6 +30,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddScoped<IRepositorioPrestamos, RepositorioPrestamo>();
+builder.Services.AddScoped<IRepositorioObjetosCelestes, RepositorioObjetoCeleste>();
 builder.Services.AddScoped<IRepositorioEquipo, RepositorioEquipo>();
 builder.Services.AddScoped<IRepositorioAuditoriaPrestamo, RepositorioAuditoriaPrestamo>();
 
@@ -47,6 +51,8 @@ builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
 builder.Services.AddScoped<ICUDelete<AltaPrestamoDto>, DevolverPrestamo>();
 builder.Services.AddScoped<ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto>, ListarPrestamosSocioEntreFechas>();
 
+// Inyecto los casos de uso ObjetosCelestes
+builder.Services.AddScoped<ICUGetAll<RankingObjetosPorSocioDto>, RankingObjetosPorSocio>();
 
 //Inyecto los casos de uso de NocheObservacion
 //builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();

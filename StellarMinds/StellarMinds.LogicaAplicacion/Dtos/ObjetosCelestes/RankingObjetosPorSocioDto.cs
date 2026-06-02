@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes
+﻿namespace StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes
 {
-    public record RankingObjetosPorSocioDto
+    public record RankingObjetosPorSocioDto(string NombreObjeto, string Tipo, int CantidadObservaciones)
     {
-        public string NombreObjeto { get; set; }
-        public string Tipo { get; set; }
-        public int CantidadObservaciones { get; set; }
     }
 }

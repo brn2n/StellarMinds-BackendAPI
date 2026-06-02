@@ -19,6 +19,20 @@ namespace StellarMinds.Infraestructura.EF
             return Obj.Id;
         }
 
+        public IEnumerable<(ObjetoCeleste Objeto, int Cantidad)> GetRankingObjetosPuros()
+        {
+            return _context.NochesObservaciones
+                .GroupBy(no => no.ObjetoCeleste)
+                .Select(grupo => new
+                {
+                    Objeto = grupo.Key,
+                    Cantidad = grupo.Count()
+                })
+                .OrderByDescending(x => x.Cantidad)
+                .AsEnumerable()
+                .Select(x => (x.Objeto, x.Cantidad))
+                .ToList();
+        }
         public IEnumerable<ObjetoCeleste> GetAll()
         {
             return _context.ObjetosCelestes;
