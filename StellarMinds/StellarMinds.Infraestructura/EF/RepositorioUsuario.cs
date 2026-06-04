@@ -28,6 +28,13 @@ namespace StellarMinds.Infraestructura.EF
             return _context.Prestamos.Where(p => p.TelescopioId == id).Select(p => p.Socio).Distinct().OrderByDescending(u => u.NombreCompleto.Nombre).ToList();
         }
 
+        public Usuario GetCoordinadorById()
+        {
+            Usuario unUsuario = _context.Usuarios.OfType<Coordinador>().FirstOrDefault();
+            if (unUsuario == null) throw new Exception("No existe un coordinador registrado.");
+            return unUsuario;
+        }
+
         public Usuario GetById(int id)
         {
             Usuario unUsuario = _context.Usuarios.Find(id);

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StellarMinds.LogicaAplicacion.Dtos.Prestamos
+﻿namespace StellarMinds.LogicaAplicacion.Dtos.Prestamos
 {
-    public record AuditoriaPrestamosDto
+    public record AuditoriaPrestamosDto(int IdPrestamo, string Usuario, string Accion, DateTime Fecha)
     {
-        public int IdPrestamo { get; set; }
-        public string Usuario { get; set; }
-        public string Accion { get; set; }
-        public DateTime Fecha { get; set; }
+
     }
 }
