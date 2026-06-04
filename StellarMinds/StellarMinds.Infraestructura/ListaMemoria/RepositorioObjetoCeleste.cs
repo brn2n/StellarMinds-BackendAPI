@@ -24,5 +24,10 @@ namespace StellarMinds.Infraestructura.ListaMemoria
             if (unObjetoCeleste == null) throw new Exception("No se encontró el objeto celeste con el ID proporcionado.");
             return unObjetoCeleste;
         }
+
+        public IEnumerable<(ObjetoCeleste Objeto, int Cantidad)> GetRankingObjetosPuros()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

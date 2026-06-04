@@ -1,3 +1,4 @@
+using Libreria.WepApi.Services;
 using Microsoft.OpenApi;
 using StellarMinds.Infraestructura.EF;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
@@ -56,7 +57,7 @@ var jwtSection = builder.Configuration.GetSection("Jwt");
 builder.Services.Configure<JwtSettings>(jwtSection);
 var jwtSettings = jwtSection.Get<JwtSettings>();
 builder.Services.AddSingleton(jwtSettings);
-builder.Services.AddScoped<IJwtGenerator<UsuarioListadoDto>, JwtGenerator>();
+builder.Services.AddScoped<IJwtGenerator<JWTUsuarioDto>, JwtGenerator>();
 var key = Encoding.ASCII.GetBytes(jwtSettings.Key);
 
 
@@ -92,7 +93,7 @@ builder.Services.AddScoped<ICUGetAll<RankingObjetosPorSocioDto>, RankingObjetosP
 //Inyecto los casos de uso de NocheObservacion
 //builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
 
-//builder.Services.AddScoped<SeedData>();
+builder.Services.AddScoped<SeedData>();
 
 //Inyecto el Context de la BD
 builder.Services.AddDbContext<StellarMindContext>(

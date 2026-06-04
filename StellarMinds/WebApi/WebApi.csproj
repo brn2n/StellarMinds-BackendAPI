@@ -21,4 +21,9 @@
     <ProjectReference Include="..\StellarMinds.LogicaNegocio\StellarMinds.LogicaNegocio.csproj" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<WarningLevel>5</WarningLevel>
+	</PropertyGroup>
+
 </Project>
