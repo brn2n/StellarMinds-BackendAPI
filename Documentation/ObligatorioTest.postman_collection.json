@@ -1,0 +1,140 @@
+{
+  "info": {
+    "_postman_id": "bf77fff9-94fd-443f-8eff-7467d60a45c2",
+    "name": "ObligatorioTest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30378453"
+  },
+  "item": [
+    {
+      "name": "RF1",
+      "item": [
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RF2",
+      "item": []
+    },
+    {
+      "name": "RF3",
+      "item": [
+        {
+          "name": "ListadoEquipos",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "AltaEquipo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n        \"tipoEquipo\": \"Camara\",\r\n        \"marca\": \"ACME\",\r\n        \"modelo\": \"Colon\",\r\n        \"cantDisponible\": 2,\r\n        \"apertura\": null,\r\n        \"relacionFocal\": null,\r\n        \"distanciaFocal\": null,\r\n        \"peso\": null,\r\n        \"tipoMontura\": null,\r\n        \"cargaUtilSoportada\": null,\r\n        \"computarizada\": null,\r\n        \"tipoSensorCamara\": 0,\r\n        \"resolucion\": 1280,\r\n        \"tamanioPixel\": 3,\r\n        \"diametro\": null,\r\n        \"anguloVision\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteEquipo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/6",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": 2,\r\n  \"tipoEquipo\": \"Montura\",\r\n  \"marca\": \"string\",\r\n  \"modelo\": \"string\",\r\n  \"cantDisponible\": 0,\r\n  \"apertura\": 0,\r\n  \"relacionFocal\": \"string\",\r\n  \"distanciaFocal\": 0,\r\n  \"peso\": 0,\r\n  \"tipoMontura\": 0,\r\n  \"cargaUtilSoportada\": 0,\r\n  \"computarizada\": true,\r\n  \"tipoSensorCamara\": 0,\r\n  \"resolucion\": 0,\r\n  \"tamanioPixel\": 0,\r\n  \"diametro\": 0,\r\n  \"anguloVision\": 0\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/2",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RF4",
+      "item": []
+    },
+    {
+      "name": "RF5",
+      "item": []
+    },
+    {
+      "name": "RF6",
+      "item": []
+    }
+  ]
+}

@@ -92,18 +92,41 @@ namespace StellarMinds.WebApp.Controllers
         }
 
         // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL EDIT !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
+        //[HttpPut("{id}")]
+        //public IActionResult Edit(int Id, [FromBody] ListarEquipoDto equipo)
+        //{
+        //    try
+        //    {
+        //        _update.Execute(Id, equipo);
+        //        return RedirectToAction("index");
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        return RedirectToAction("index");
+        //    }
+
+        //}
+
         [HttpPut("{id}")]
-        public IActionResult Edit(int Id, [FromBody] ListarEquipoDto equipo)
+        public IActionResult Edit(int id, [FromBody] ListarEquipoDto pais)
         {
             try
             {
-                _update.Execute(Id, equipo);
-                return RedirectToAction("index");
+                _update.Execute(id, pais);
+                return Ok();
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, e.Error());
+            }
+            catch (ConflictException e)
+            {
+                return StatusCode(409, e.Error());
             }
             catch (Exception)
             {
-
-                return RedirectToAction("index");
+                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
             }
 
         }
