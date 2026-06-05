@@ -70,11 +70,11 @@ namespace StellarMinds.WebApp.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(ListarEquipoDto equipo)
+        public IActionResult Delete(int Id)
         {
             try
             {
-                _delete.Execute(equipo.Id);
+                _delete.Execute(Id);
                 return Ok();
             }
             catch (NotFoundException e)
@@ -93,11 +93,11 @@ namespace StellarMinds.WebApp.Controllers
 
         // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL EDIT !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
         [HttpPut("{id}")]
-        public IActionResult Edit(ListarEquipoDto equipo)
+        public IActionResult Edit(int Id, [FromBody] ListarEquipoDto equipo)
         {
             try
             {
-                _update.Execute(equipo.Id, equipo);
+                _update.Execute(Id, equipo);
                 return RedirectToAction("index");
             }
             catch (Exception)
