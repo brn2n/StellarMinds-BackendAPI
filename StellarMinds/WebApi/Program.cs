@@ -84,8 +84,10 @@ builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
 
 // Inyecto los casos de uso Prestamo
 builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
-builder.Services.AddScoped<ICUDelete<AltaPrestamoDto>, DevolverPrestamo>();
+builder.Services.AddScoped<ICUDelete<int>, DevolverPrestamo>();
 builder.Services.AddScoped<ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto>, ListarPrestamosSocioEntreFechas>();
+builder.Services.AddScoped<ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto>, ListarPrestamosEnPrestamoPorSocio>();
+
 
 // Inyecto los casos de uso ObjetosCelestes
 builder.Services.AddScoped<ICUGetAll<RankingObjetosPorSocioDto>, RankingObjetosPorSocio>();

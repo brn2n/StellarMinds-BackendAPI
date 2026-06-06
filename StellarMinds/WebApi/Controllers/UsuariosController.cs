@@ -37,12 +37,12 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("ListadoTelescopio")]
-        public IActionResult ListarSocioPorTelescopio(int id)
+        public IActionResult ListarSocioPorTelescoio(int id)
         {
             try
             {
-                _getByTelescopio.Ejecutar(id);
-                return Ok();
+                var usuarios = _getByTelescopio.Ejecutar(id);
+                return Ok(usuarios);
             }
             catch (BadRequestException e)
             {
@@ -51,7 +51,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(AltaUsuarioDto obj)
+        public IActionResult Create([FromBody] AltaUsuarioDto obj)
         {
             try
             {
@@ -68,7 +68,12 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message,
+                    stack = e.StackTrace
+                });
             }
         }
 

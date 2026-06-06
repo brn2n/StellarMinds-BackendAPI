@@ -40,6 +40,13 @@ namespace StellarMinds.Infraestructura.EF
             return unPrestamo;
         }
 
+        public IEnumerable<Prestamo> GetPrestamosEnPrestamoPorSocio(int socioId)
+        {
+            return _context.Prestamos
+                .Where(p => p.SocioId == socioId && p.Estado == Estado.EN_PRESTAMO)
+                .ToList();
+        }
+
         public IEnumerable<Prestamo> ListarEntreFechas(int socioId, int mes, int anio)
         {
             return _context.Prestamos

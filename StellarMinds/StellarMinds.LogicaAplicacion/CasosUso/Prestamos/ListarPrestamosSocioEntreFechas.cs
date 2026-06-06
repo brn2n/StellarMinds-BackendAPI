@@ -18,8 +18,8 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
         {
             return _repoPrestamo.GetAll()
                 .Where(p =>
-                    p.Socio.Id == socioId &&
-                    p.FechaInicio.Month == mes &&
+                    p.SocioId == socioId &&
+                    p.FechaFin.Month == mes &&
                     p.FechaInicio.Year == anio)
                 .Select(p => new ListadoPrestamoSocioDto
                 {
@@ -28,7 +28,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                     FechaFin = p.FechaFin,
                     Estado = p.Estado.ToString(),
                     EstaAtrasado = p.Estado == Estado.EN_PRESTAMO &&
-                                    DateTime.Today > p.FechaFin.Date
+                                   DateTime.Today > p.FechaFin.Date
                 })
                 .ToList();
         }

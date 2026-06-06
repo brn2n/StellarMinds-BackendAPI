@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+﻿using Microsoft.EntityFrameworkCore;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 
 namespace StellarMinds.Infraestructura.EF
@@ -25,7 +26,17 @@ namespace StellarMinds.Infraestructura.EF
 
         public IEnumerable<Usuario> GetUsuariosPorTelescoio(int id)
         {
-            return _context.Prestamos.Where(p => p.TelescopioId == id).Select(p => p.Socio).Distinct().OrderByDescending(u => u.NombreCompleto.Nombre).ToList();
+            var socios = _context.Prestamos
+                .Include(p => p.Socio)
+                .Where(p => p.TelescopioId == id)
+                .Select(p => p.Socio)
+                .ToList();
+
+            return socios
+                .GroupBy(s => s.Id)
+                .Select(g => g.First())
+                .OrderByDescending(s => s.NombreCompleto.Nombre)
+                .ToList();
         }
 
         public Usuario GetCoordinadorById()
@@ -42,9 +53,6 @@ namespace StellarMinds.Infraestructura.EF
             return unUsuario;
         }
 
-        public IEnumerable<Usuario> GetUsuariosPorTelescopio(int id)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

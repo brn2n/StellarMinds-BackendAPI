@@ -5,15 +5,25 @@ using StellarMinds.LogicaAplicacion.Mapper;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 {
-    public class ListadoSociosPorTelescopio(IRepositorioUsuario _repo) : ICUGetByTelescopio<ListarUsuariosDto>
+    public class ListadoSociosPorTelescopio : ICUGetByTelescopio<ListarUsuariosDto>
     {
-        public IEnumerable<ListarUsuariosDto> Ejecutar(int t)
+        private readonly IRepositorioUsuario _repo;
+
+        public ListadoSociosPorTelescopio(IRepositorioUsuario repo)
         {
-            if (t <= 0)
+            _repo = repo;
+        }
+
+        public IEnumerable<ListarUsuariosDto> Ejecutar(int telescopioId)
+        {
+            if (telescopioId <= 0)
             {
-                throw new ArgumentException("El Id no es valido");
+                throw new ArgumentException("El Id del telescopio no es válido.");
             }
-            return UsuarioMapper.ToListDto(_repo.GetUsuariosPorTelescopio(t));
+
+            return UsuarioMapper.ToListDto(
+                _repo.GetUsuariosPorTelescoio(telescopioId)
+            );
         }
     }
 }
