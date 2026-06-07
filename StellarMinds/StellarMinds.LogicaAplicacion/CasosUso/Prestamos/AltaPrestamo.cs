@@ -30,7 +30,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             _repoAuditoria = repoAuditoria;
         }
 
-        public void Ejecutar(AltaPrestamoDto dto)
+        public int Ejecutar(AltaPrestamoDto dto)
         {
             if (dto == null)
                 throw new PrestamoNuloException();
@@ -58,12 +58,12 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 Estado.EN_PRESTAMO
             );
 
-            _repoPrestamo.Add(prestamo);
-
             _repoAuditoria.Add(new AuditoriaPrestamo(
                 "Se reporta Alta Prestamo",
                 prestamo.Id
             ));
+
+            return _repoPrestamo.Add(prestamo);
         }
 
         private Telescopio? ObtenerTelescopioDisponible(int? id)

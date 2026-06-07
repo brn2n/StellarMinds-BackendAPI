@@ -24,7 +24,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
             Validar();
         }
 
-        private void Validar()
+        public void Validar()
         {
             if (CantDisponible <= 0)
             {

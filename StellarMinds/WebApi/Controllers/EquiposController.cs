@@ -51,8 +51,8 @@ namespace StellarMinds.WebApp.Controllers
         {
             try
             {
-                _alta.Ejecutar(equipo);
-                return Ok();
+                int id = _alta.Ejecutar(equipo);
+                return Ok(id);
             }
             catch (BadRequestException e)
             {
@@ -67,6 +67,8 @@ namespace StellarMinds.WebApp.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
             }
         }
+
+
 
 
         [HttpDelete("{id}")]
