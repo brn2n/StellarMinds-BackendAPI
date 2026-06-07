@@ -44,8 +44,6 @@ namespace StellarMinds.WebApp.Controllers
         }
 
 
-        // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL CREATE !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
-
         [HttpPost]
         public IActionResult AltaEquipo([FromBody] AltaEquipoDto equipo)
         {
@@ -77,7 +75,7 @@ namespace StellarMinds.WebApp.Controllers
             try
             {
                 _delete.Execute(Id);
-                return Ok();
+                return Ok(Id);
             }
             catch (NotFoundException e)
             {
