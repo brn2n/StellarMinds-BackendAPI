@@ -3,13 +3,31 @@ using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaAplicacion.Mapper;
 
-namespace StellarMinds.LogicaAplicacion.CasosUso.Prestamos
+namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 {
-    public class AuditoriaPrestamos(IRepositorioAuditoriaPrestamo _repoAudi) : GetPrestamosByCoordinadorID<InfoAuditoriaPrestamosDto>
+    public class AuditoriaPrestamos :
+        ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto>,
+        ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto>
     {
-        public IEnumerable<InfoAuditoriaPrestamosDto> Ejecutar(int t)
+        private readonly IRepositorioAuditoriaPrestamo _repoAudi;
+
+        public AuditoriaPrestamos(IRepositorioAuditoriaPrestamo repoAudi)
         {
-            return AuditoriaPrestamosMapper.ToListDto(_repoAudi.GetByIdCoordinador(t));
+            _repoAudi = repoAudi;
+        }
+
+        public IEnumerable<InfoAuditoriaPrestamosDto> Ejecutar(int? coordinadorId)
+        {
+            var auditorias = coordinadorId.HasValue
+                ? _repoAudi.GetByIdCoordinador(coordinadorId.Value)
+                : _repoAudi.GetAll();
+
+            return AuditoriaPrestamosMapper.ToListDto(auditorias);
+        }
+
+        public IEnumerable<InfoAuditoriaPrestamosDto> Ejecutar(int prestamoId)
+        {
+            return AuditoriaPrestamosMapper.ToListDto(_repoAudi.GetByIdPrestamo(prestamoId));
         }
     }
 }

@@ -5,21 +5,30 @@ namespace StellarMinds.LogicaAplicacion.Mapper
 {
     public class AuditoriaPrestamosMapper
     {
-        public static InfoAuditoriaPrestamosDto toDto(AuditoriaPrestamo objeto)
+        public static InfoAuditoriaPrestamosDto ToDto(AuditoriaPrestamo auditoria)
         {
-            if (objeto == null) throw new ArgumentNullException(nameof(objeto));
+            if (auditoria == null) throw new ArgumentNullException(nameof(auditoria));
 
-            return new InfoAuditoriaPrestamosDto(objeto.Prestamo.Socio.Username.Value, objeto.Accion, objeto.Fecha);
+            string coordinadorNombre = "Sin coordinador";
+
+            if (auditoria.Coordinador != null && auditoria.Coordinador.NombreCompleto != null)
+            {
+                coordinadorNombre = $"{auditoria.Coordinador.NombreCompleto.Nombre} {auditoria.Coordinador.NombreCompleto.Apellido}";
+            }
+
+            return new InfoAuditoriaPrestamosDto(
+                auditoria.Id,
+                auditoria.PrestamoId,
+                auditoria.CoordinadorId,
+                coordinadorNombre,
+                auditoria.Accion,
+                auditoria.Fecha
+            );
         }
 
-        public static IEnumerable<InfoAuditoriaPrestamosDto> ToListDto(IEnumerable<AuditoriaPrestamo> prestamos)
+        public static IEnumerable<InfoAuditoriaPrestamosDto> ToListDto(IEnumerable<AuditoriaPrestamo> auditorias)
         {
-            List<InfoAuditoriaPrestamosDto> aux = new List<InfoAuditoriaPrestamosDto>();
-            foreach (AuditoriaPrestamo item in prestamos)
-            {
-                aux.Add(toDto(item));
-            }
-            return aux;
+            return auditorias.Select(ToDto).ToList();
         }
     }
 }

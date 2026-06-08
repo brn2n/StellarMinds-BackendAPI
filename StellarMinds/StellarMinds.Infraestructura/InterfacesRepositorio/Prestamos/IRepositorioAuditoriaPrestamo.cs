@@ -4,6 +4,8 @@ namespace StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos
 {
     public interface IRepositorioAuditoriaPrestamo : IRepositorioAdd<AuditoriaPrestamo>
     {
-        public IEnumerable<AuditoriaPrestamo> GetByIdCoordinador(int id);
+        IEnumerable<AuditoriaPrestamo> GetAll();
+        IEnumerable<AuditoriaPrestamo> GetByIdCoordinador(int id);
+        IEnumerable<AuditoriaPrestamo> GetByIdPrestamo(int prestamoId);
     }
 }

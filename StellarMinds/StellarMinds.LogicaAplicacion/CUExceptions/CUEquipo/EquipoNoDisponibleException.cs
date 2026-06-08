@@ -3,7 +3,7 @@
     public class equipoNoDisponibleException : Exception
     {
         public equipoNoDisponibleException()
-            : base("El equipo no es Telescopio")
+            : base("El equipo no Disponible")
         {
         }
 

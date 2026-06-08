@@ -4,7 +4,7 @@ using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 {
-    public class DevolverPrestamo : ICUDelete<int>
+    public class DevolverPrestamo : ICUDevolverPrestamo
     {
         private readonly IRepositorioPrestamos _repoPrestamo;
         private readonly IRepositorioAuditoriaPrestamo _repoAuditoria;
@@ -17,7 +17,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             _repoAuditoria = repoAuditoria;
         }
 
-        public void Execute(int id)
+        public void Execute(int id, int coordinadorId)
         {
             Prestamo prestamo = _repoPrestamo.GetById(id);
 
@@ -25,12 +25,11 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 
             _repoPrestamo.Update(id, prestamo);
 
-            _repoAuditoria.Add(
-                new AuditoriaPrestamo(
-                    "Devolucion Prestamo",
-                    prestamo.Id
-                )
-            );
+            _repoAuditoria.Add(new AuditoriaPrestamo(
+                "Se reporta Devolucion Prestamo",
+                prestamo.Id,
+                coordinadorId
+            ));
         }
     }
 }
