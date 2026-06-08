@@ -38,9 +38,14 @@ namespace WebApi.Controllers
             {
                 return StatusCode(400, e.Error());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message,
+                    stack = e.StackTrace
+                });
             }
         }
 

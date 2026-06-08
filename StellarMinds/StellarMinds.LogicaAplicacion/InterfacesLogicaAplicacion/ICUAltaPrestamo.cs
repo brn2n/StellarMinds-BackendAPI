@@ -4,6 +4,6 @@ namespace StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion
 {
     public interface ICUAltaPrestamo
     {
-        void Ejecutar(AltaPrestamoDto dto, int coordinadorId);
+        int Ejecutar(AltaPrestamoDto dto, int coordinadorId);
     }
 }
