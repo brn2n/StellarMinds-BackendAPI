@@ -3,7 +3,6 @@ using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
-using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
 using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
 
@@ -40,6 +39,7 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return StatusCode(500, new
                 {
                     mensaje = e.Message,
