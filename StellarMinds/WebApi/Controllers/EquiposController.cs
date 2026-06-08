@@ -15,9 +15,9 @@ namespace StellarMinds.WebApp.Controllers
         private ICUAlta<AltaEquipoDto> _alta;
         private ICUDelete<AltaEquipoDto> _delete;
         private ICUGetById<ListarEquipoDto> _get;
-        private ICUEdit<ListarEquipoDto> _update;
+        private ICUEdit<AltaEquipoDto> _update;
 
-        public EquiposController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<ListarEquipoDto> updateEquipo)
+        public EquiposController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<AltaEquipoDto> updateEquipo)
         {
             _alta = altaEquipo;
             _listar = listarEquipo;
@@ -43,6 +43,17 @@ namespace StellarMinds.WebApp.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var usuario = _get.Execute(id);
+            if (usuario == null)
+            {
+                return NotFound("No existe un usuario con ese Id");
+            }
+            return Ok(usuario);
+        }
+
 
         [HttpPost]
         public IActionResult AltaEquipo([FromBody] AltaEquipoDto equipo)
@@ -50,7 +61,7 @@ namespace StellarMinds.WebApp.Controllers
             try
             {
                 int id = _alta.Ejecutar(equipo);
-                return Ok(id);
+                return CreatedAtAction(nameof(GetById), new { id = id }, id);
             }
             catch (BadRequestException e)
             {
@@ -109,12 +120,12 @@ namespace StellarMinds.WebApp.Controllers
         //}
 
         [HttpPut("{id}")]
-        public IActionResult Edit(int id, [FromBody] ListarEquipoDto pais)
+        public IActionResult Edit(int id, [FromBody] AltaEquipoDto equipo)
         {
             try
             {
-                _update.Execute(id, pais);
-                return Ok();
+                _update.Execute(id, equipo);
+                return Ok(id);
             }
             catch (NotFoundException e)
             {
@@ -126,9 +137,13 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
-
+            //catch (Exception e)
+            //{
+            //    // Temporalmente para debuggear:
+            //    return StatusCode(500, e.Message + " || " + e.StackTrace);
+            //}
         }
     }
 }

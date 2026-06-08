@@ -7,7 +7,7 @@
 
         private Ocular() { }
 
-        public Ocular(int id, string marca, string modelo, int cantDisponible, double diametro, int anguloVision) : base(id, marca, modelo, cantDisponible)
+        public Ocular(string marca, string modelo, int cantDisponible, double diametro, int anguloVision) : base(marca, modelo, cantDisponible)
         {
             Diametro = diametro;
             AnguloVision = anguloVision;

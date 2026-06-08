@@ -5,7 +5,7 @@ using StellarMinds.LogicaAplicacion.Mapper;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
 {
-    public class EditarEquipo : ICUEdit<ListarEquipoDto>
+    public class EditarEquipo : ICUEdit<AltaEquipoDto>
     {
         private IRepositorioEquipo _repo;
 
@@ -14,9 +14,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
             _repo = repo;
         }
 
-        public void Execute(int id, ListarEquipoDto Obj)
+        public void Execute(int id, AltaEquipoDto Obj)
         {
-            _repo.Update(id,EquipoMapper.FromDto(Obj));
+            _repo.Update(id, EquipoMapper.FromDto(Obj));
         }
     }
 }

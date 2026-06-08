@@ -10,7 +10,7 @@
         {
 
         }
-        public Camara(int id, string marca, string modelo, int cantDisponible, TipoSensorCamara tipoSensorCamara, int resolucion, int tamanioPixel) : base(id, marca, modelo, cantDisponible)
+        public Camara(string marca, string modelo, int cantDisponible, TipoSensorCamara tipoSensorCamara, int resolucion, int tamanioPixel) : base(marca, modelo, cantDisponible)
         {
             TipoSensorCamara = tipoSensorCamara;
             Resolucion = resolucion;

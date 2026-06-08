@@ -4,7 +4,6 @@ using StellarMinds.LogicaNegocio.Entidades.Equipos;
 namespace StellarMinds.LogicaAplicacion.Dtos.Equipos
 {
     public record AltaEquipoDto(
-        int Id,
         string TipoEquipo,
         string Marca,
         string Modelo,
