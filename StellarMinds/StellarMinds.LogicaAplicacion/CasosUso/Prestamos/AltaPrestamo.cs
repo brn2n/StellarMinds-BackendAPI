@@ -144,7 +144,13 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 );
 
             if (estaEnPrestamo)
-                throw new equipoNoDisponibleException();
+            {
+                string tipoEquipo = equipo.GetType().Name;
+
+                throw new equipoNoDisponibleException(
+                    $"El equipo '{tipoEquipo} - {equipo.Marca} {equipo.Modelo}' se encuentra actualmente en préstamo."
+                );
+            }
         }
     }
 }
