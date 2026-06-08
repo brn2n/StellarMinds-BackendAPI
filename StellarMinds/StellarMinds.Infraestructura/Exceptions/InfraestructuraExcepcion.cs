@@ -1,6 +1,6 @@
 ﻿using StellarMinds.LogicaNegocio.Excepciones.Error;
 
-namespace Libreria.Infraestuctura.AccesoDatos.Excepciones
+namespace StellarMinds.Infraestructura.EF.Exceptions
 {
     public abstract class InfraestructuraExcepcion : Exception
     {

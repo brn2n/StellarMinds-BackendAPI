@@ -1,6 +1,8 @@
-﻿namespace StellarMinds.LogicaNegocio.Excepciones.EntidadesException.EquipoException
+﻿using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
+
+namespace StellarMinds.LogicaNegocio.Excepciones.EntidadesException.EquipoException
 {
-    public class EquipoInvalidException : Exception
+    public class EquipoInvalidException : LogicaNegocioExcepcion
     {
         public EquipoInvalidException()
             : base("El equipo no es válido.")

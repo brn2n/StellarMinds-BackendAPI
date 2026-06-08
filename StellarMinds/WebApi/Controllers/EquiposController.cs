@@ -1,5 +1,5 @@
-﻿using Libreria.Infraestuctura.AccesoDatos.Excepciones;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
@@ -39,19 +39,25 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var usuario = _get.Execute(id);
-            if (usuario == null)
+            try
             {
-                return NotFound("No existe un usuario con ese Id");
+                return Ok(_get.Execute(id));
             }
-            return Ok(usuario);
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, new { e.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
+            }
         }
 
 
@@ -69,11 +75,11 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (LogicaNegocioExcepcion e)
             {
-                return StatusCode(400, e.Error());
+                return StatusCode(400, new { e.Message });
             }
             catch (Exception e)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
 
@@ -98,26 +104,10 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
 
-        // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL EDIT !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
-        //[HttpPut("{id}")]
-        //public IActionResult Edit(int Id, [FromBody] ListarEquipoDto equipo)
-        //{
-        //    try
-        //    {
-        //        _update.Execute(Id, equipo);
-        //        return RedirectToAction("index");
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        return RedirectToAction("index");
-        //    }
-
-        //}
 
         [HttpPut("{id}")]
         public IActionResult Edit(int id, [FromBody] AltaEquipoDto equipo)

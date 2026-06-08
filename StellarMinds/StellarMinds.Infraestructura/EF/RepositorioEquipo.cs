@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+﻿using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 
 namespace StellarMinds.Infraestructura.EF
@@ -41,7 +42,7 @@ namespace StellarMinds.Infraestructura.EF
         public Equipo GetById(int id)
         {
             Equipo unEquipo = _context.Equipos.Find(id);
-            if (unEquipo == null) throw new Exception("El equipo no existe.");
+            if (unEquipo == null) throw new NotFoundException("El equipo no existe.");
             return unEquipo;
         }
 

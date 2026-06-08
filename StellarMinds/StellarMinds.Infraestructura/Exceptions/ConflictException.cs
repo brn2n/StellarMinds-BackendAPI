@@ -1,5 +1,5 @@
 ﻿
-namespace Libreria.Infraestuctura.AccesoDatos.Excepciones
+namespace StellarMinds.Infraestructura.EF.Exceptions
 {
     public class ConflictException : InfraestructuraExcepcion
     {
