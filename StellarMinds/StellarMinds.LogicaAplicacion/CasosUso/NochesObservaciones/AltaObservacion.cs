@@ -25,7 +25,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones
             _repoObjetos = repoObjetos;
         }
 
-        public void Ejecutar(AltaObservacionDto dto)
+        public int Ejecutar(AltaObservacionDto dto)
         {
             Prestamo prestamo = _repoPrestamos.GetById(dto.PrestamoId);
 
@@ -52,7 +52,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones
                 objeto
             );
 
-            _repoObservaciones.Add(observacion);
+            return _repoObservaciones.Add(observacion);
         }
     }
 }

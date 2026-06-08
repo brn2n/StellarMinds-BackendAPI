@@ -81,7 +81,7 @@ builder.Services.AddScoped<ICUAlta<AltaEquipoDto>, AltaEquipo>();
 builder.Services.AddScoped<ICUGetAll<ListarEquipoDto>, ListarEquipos>();
 builder.Services.AddScoped<ICUGetById<ListarEquipoDto>, ObtenerEquipoPorId>();
 builder.Services.AddScoped<ICUDelete<AltaEquipoDto>, BajaEquipo>();
-builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
+builder.Services.AddScoped<ICUEdit<AltaEquipoDto>, EditarEquipo>();
 
 // Inyecto los casos de uso Prestamo
 builder.Services.AddScoped<ICUAltaPrestamo, AltaPrestamo>();

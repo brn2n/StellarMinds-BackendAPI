@@ -9,7 +9,7 @@
         protected Montura()
         {
         }
-        public Montura(int id, string marca, string modelo, int cantDisponible, TipoMontura tipoMontura, double cargaUtilSoportada, bool computarizada) : base(id, marca, modelo, cantDisponible)
+        public Montura(string marca, string modelo, int cantDisponible, TipoMontura tipoMontura, double cargaUtilSoportada, bool computarizada) : base(marca, modelo, cantDisponible)
         {
             TipoMontura = tipoMontura;
             CargaUtilSoportada = cargaUtilSoportada;

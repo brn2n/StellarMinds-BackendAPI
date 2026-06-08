@@ -8,11 +8,7 @@ namespace StellarMinds.LogicaNegocio.Excepciones.VOExceptions
         public LogicaNegocioExcepcion()
         {
         }
-
-        public LogicaNegocioExcepcion(string? message)
-        {
-        }
-
+        public LogicaNegocioExcepcion(string mensaje) : base(mensaje) { }
         public LogicaNegocioExcepcion(string? message, Exception? innerException) : base(message, innerException)
         {
         }

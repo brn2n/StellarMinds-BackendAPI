@@ -58,13 +58,13 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 Estado.EN_PRESTAMO
             );
 
-            _repoPrestamo.Add(prestamo);
-
             _repoAuditoria.Add(new AuditoriaPrestamo(
                 "Se reporta Alta Prestamo",
                 prestamo.Id,
                 coordinadorId
             ));
+
+            return _repoPrestamo.Add(prestamo);
         }
 
         private Telescopio? ObtenerTelescopioDisponible(int? id)

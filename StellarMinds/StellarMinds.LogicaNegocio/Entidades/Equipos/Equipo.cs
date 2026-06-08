@@ -15,16 +15,15 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
 
         }
 
-        protected Equipo(int id, string marca, string modelo, int cantDisponible)
+        protected Equipo(string marca, string modelo, int cantDisponible)
         {
-            Id = id;
             Marca = marca;
             Modelo = modelo;
             CantDisponible = cantDisponible;
             Validar();
         }
 
-        private void Validar()
+        public void Validar()
         {
             if (CantDisponible <= 0)
             {
@@ -44,7 +43,6 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
 
         public void Update(Equipo obj)
         {
-            Id = obj.Id;
             Marca = obj.Marca;
             Modelo = obj.Modelo;
             CantDisponible = obj.CantDisponible;

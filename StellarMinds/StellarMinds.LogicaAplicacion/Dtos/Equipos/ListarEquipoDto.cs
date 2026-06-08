@@ -1,7 +1,4 @@
 ﻿using StellarMinds.LogicaNegocio.Entidades.Equipos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StellarMinds.LogicaAplicacion.Dtos.Equipos
 {

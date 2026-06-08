@@ -1,5 +1,5 @@
-﻿using Libreria.Infraestuctura.AccesoDatos.Excepciones;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
@@ -15,9 +15,9 @@ namespace StellarMinds.WebApp.Controllers
         private ICUAlta<AltaEquipoDto> _alta;
         private ICUDelete<AltaEquipoDto> _delete;
         private ICUGetById<ListarEquipoDto> _get;
-        private ICUEdit<ListarEquipoDto> _update;
+        private ICUEdit<AltaEquipoDto> _update;
 
-        public EquiposController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<ListarEquipoDto> updateEquipo)
+        public EquiposController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<AltaEquipoDto> updateEquipo)
         {
             _alta = altaEquipo;
             _listar = listarEquipo;
@@ -39,20 +39,35 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                return Ok(_get.Execute(id));
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, new { e.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
+            }
+        }
 
-        // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL CREATE !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
 
         [HttpPost]
         public IActionResult AltaEquipo([FromBody] AltaEquipoDto equipo)
         {
             try
             {
-                _alta.Ejecutar(equipo);
-                return Ok();
+                int id = _alta.Ejecutar(equipo);
+                return CreatedAtAction(nameof(GetById), new { id = id }, id);
             }
             catch (BadRequestException e)
             {
@@ -60,13 +75,15 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (LogicaNegocioExcepcion e)
             {
-                return StatusCode(400, e.Error());
+                return StatusCode(400, new { e.Message });
             }
             catch (Exception e)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
+
+
 
 
         [HttpDelete("{id}")]
@@ -75,7 +92,7 @@ namespace StellarMinds.WebApp.Controllers
             try
             {
                 _delete.Execute(Id);
-                return Ok();
+                return Ok(Id);
             }
             catch (NotFoundException e)
             {
@@ -87,34 +104,18 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
 
-        // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL EDIT !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
-        //[HttpPut("{id}")]
-        //public IActionResult Edit(int Id, [FromBody] ListarEquipoDto equipo)
-        //{
-        //    try
-        //    {
-        //        _update.Execute(Id, equipo);
-        //        return RedirectToAction("index");
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        return RedirectToAction("index");
-        //    }
-
-        //}
 
         [HttpPut("{id}")]
-        public IActionResult Edit(int id, [FromBody] ListarEquipoDto pais)
+        public IActionResult Edit(int id, [FromBody] AltaEquipoDto equipo)
         {
             try
             {
-                _update.Execute(id, pais);
-                return Ok();
+                _update.Execute(id, equipo);
+                return Ok(id);
             }
             catch (NotFoundException e)
             {
@@ -126,9 +127,13 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
-
+            //catch (Exception e)
+            //{
+            //    // Temporalmente para debuggear:
+            //    return StatusCode(500, e.Message + " || " + e.StackTrace);
+            //}
         }
     }
 }
