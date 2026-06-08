@@ -7,6 +7,5 @@
         int? MonturaId,
         int? CamaraId,
         int? OcularId
-    );
+        );
 }
-

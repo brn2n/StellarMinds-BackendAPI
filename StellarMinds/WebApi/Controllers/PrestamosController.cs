@@ -1,7 +1,9 @@
 ﻿using Libreria.Infraestuctura.AccesoDatos.Excepciones;
 using Microsoft.AspNetCore.Mvc;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
+using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
 using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
 
@@ -10,10 +12,12 @@ namespace WebApi.Controllers
     [Route("api/v1/[controller]")]
     [ApiController]
     public class PrestamosController(
-        ICUAlta<AltaPrestamoDto> _altaPrestamo,
+        ICUAltaPrestamo _altaPrestamo,
         ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto> _listarPrestamosActivosSocio,
         ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto> _listarPrestamosSocioEntreFechas,
-        ICUDelete<int> _devolverPrestamo
+        ICUDevolverPrestamo _devolverPrestamo,
+        ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto> _listarAuditorias,
+        ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto> _detalleAuditoria
     ) : ControllerBase
     {
         [HttpPost]
@@ -21,7 +25,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                _altaPrestamo.Ejecutar(dto);
+                int coordinadorId = 2; // TEMPORAL: después lo sacamos del JWT
+
+                _altaPrestamo.Ejecutar(dto, coordinadorId);
                 return Ok();
             }
             catch (BadRequestException e)
@@ -94,7 +100,10 @@ namespace WebApi.Controllers
         {
             try
             {
-                _devolverPrestamo.Execute(prestamoId);
+                int coordinadorId = 2; // TEMPORAL: después lo sacamos del JWT
+
+                _devolverPrestamo.Execute(prestamoId, coordinadorId);
+
                 return Ok("Préstamo devuelto correctamente.");
             }
             catch (BadRequestException e)
@@ -109,9 +118,53 @@ namespace WebApi.Controllers
             {
                 return StatusCode(400, e.Error());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, e.ToString());
+            }
+        }
+
+        [HttpGet("Auditoria")]
+        public IActionResult ListarAuditoriaPrestamos([FromQuery] int? coordinadorId)
+        {
+            try
+            {
+                var auditorias = _listarAuditorias.Ejecutar(coordinadorId);
+
+                if (!auditorias.Any())
+                    return NoContent();
+
+                return Ok(auditorias);
+            }
+            catch (BadRequestException e)
+            {
+                return StatusCode(400, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new ErrorCodigo(500, e.Message));
+            }
+        }
+
+        [HttpGet("{prestamoId}/Auditoria")]
+        public IActionResult VerAuditoriaPrestamo(int prestamoId)
+        {
+            try
+            {
+                var auditorias = _detalleAuditoria.Ejecutar(prestamoId);
+
+                if (!auditorias.Any())
+                    return NoContent();
+
+                return Ok(auditorias);
+            }
+            catch (BadRequestException e)
+            {
+                return StatusCode(400, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new ErrorCodigo(500, e.Message));
             }
         }
     }

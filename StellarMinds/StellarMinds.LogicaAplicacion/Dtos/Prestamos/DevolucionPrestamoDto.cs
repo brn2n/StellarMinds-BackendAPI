@@ -6,6 +6,6 @@ namespace StellarMinds.LogicaAplicacion.Dtos.Prestamos
 {
     public record DevolucionPrestamoDto
     {
-        public int IdPrestamo { get; set; }
+        int CoordinadorId { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using StellarMinds.Infraestructura.EF;
 namespace StellarMinds.Infraestructura.Migrations
 {
     [DbContext(typeof(StellarMindContext))]
-    [Migration("20260528220744_init")]
-    partial class init
+    [Migration("20260608000305_InicialConAuditoria")]
+    partial class InicialConAuditoria
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,6 +117,9 @@ namespace StellarMinds.Infraestructura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CoordinadorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -124,6 +127,8 @@ namespace StellarMinds.Infraestructura.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CoordinadorId");
 
                     b.HasIndex("PrestamoId");
 
@@ -157,6 +162,9 @@ namespace StellarMinds.Infraestructura.Migrations
                     b.Property<int>("OcularId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SocioId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TelescopioId")
                         .HasColumnType("int");
 
@@ -167,6 +175,8 @@ namespace StellarMinds.Infraestructura.Migrations
                     b.HasIndex("MonturaId");
 
                     b.HasIndex("OcularId");
+
+                    b.HasIndex("SocioId");
 
                     b.HasIndex("TelescopioId");
 
@@ -327,11 +337,19 @@ namespace StellarMinds.Infraestructura.Migrations
 
             modelBuilder.Entity("StellarMinds.LogicaNegocio.Entidades.Prestamos.AuditoriaPrestamo", b =>
                 {
+                    b.HasOne("StellarMinds.LogicaNegocio.Entidades.Usuarios.Usuario", "Coordinador")
+                        .WithMany()
+                        .HasForeignKey("CoordinadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StellarMinds.LogicaNegocio.Entidades.Prestamos.Prestamo", "Prestamo")
                         .WithMany()
                         .HasForeignKey("PrestamoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Coordinador");
 
                     b.Navigation("Prestamo");
                 });
@@ -354,6 +372,12 @@ namespace StellarMinds.Infraestructura.Migrations
                         .HasForeignKey("OcularId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("StellarMinds.LogicaNegocio.Entidades.Usuarios.Socio", "Socio")
+                        .WithMany()
+                        .HasForeignKey("SocioId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("StellarMinds.LogicaNegocio.Entidades.Equipos.Telescopio", "Telescopio")
                         .WithMany()
                         .HasForeignKey("TelescopioId")
@@ -365,6 +389,8 @@ namespace StellarMinds.Infraestructura.Migrations
                     b.Navigation("Montura");
 
                     b.Navigation("Ocular");
+
+                    b.Navigation("Socio");
 
                     b.Navigation("Telescopio");
                 });

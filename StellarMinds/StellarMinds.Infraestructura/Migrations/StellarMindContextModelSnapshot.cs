@@ -114,6 +114,9 @@ namespace StellarMinds.Infraestructura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CoordinadorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -121,6 +124,8 @@ namespace StellarMinds.Infraestructura.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CoordinadorId");
 
                     b.HasIndex("PrestamoId");
 
@@ -329,11 +334,19 @@ namespace StellarMinds.Infraestructura.Migrations
 
             modelBuilder.Entity("StellarMinds.LogicaNegocio.Entidades.Prestamos.AuditoriaPrestamo", b =>
                 {
+                    b.HasOne("StellarMinds.LogicaNegocio.Entidades.Usuarios.Usuario", "Coordinador")
+                        .WithMany()
+                        .HasForeignKey("CoordinadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StellarMinds.LogicaNegocio.Entidades.Prestamos.Prestamo", "Prestamo")
                         .WithMany()
                         .HasForeignKey("PrestamoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Coordinador");
 
                     b.Navigation("Prestamo");
                 });

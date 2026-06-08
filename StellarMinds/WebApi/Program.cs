@@ -12,6 +12,7 @@ using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
+using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using System.Reflection;
@@ -83,10 +84,13 @@ builder.Services.AddScoped<ICUDelete<AltaEquipoDto>, BajaEquipo>();
 builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
 
 // Inyecto los casos de uso Prestamo
-builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
-builder.Services.AddScoped<ICUDelete<int>, DevolverPrestamo>();
+builder.Services.AddScoped<ICUAltaPrestamo, AltaPrestamo>();
+
+builder.Services.AddScoped<ICUDevolverPrestamo, DevolverPrestamo>();
 builder.Services.AddScoped<ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto>, ListarPrestamosSocioEntreFechas>();
 builder.Services.AddScoped<ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto>, ListarPrestamosEnPrestamoPorSocio>();
+builder.Services.AddScoped<ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
+builder.Services.AddScoped<ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
 
 
 // Inyecto los casos de uso ObjetosCelestes

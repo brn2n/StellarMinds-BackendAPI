@@ -11,7 +11,7 @@ using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 {
-    public class AltaPrestamo : ICUAlta<AltaPrestamoDto>
+    public class AltaPrestamo : ICUAltaPrestamo
     {
         private readonly IRepositorioPrestamos _repoPrestamo;
         private readonly IRepositorioEquipo _repoEquipo;
@@ -30,7 +30,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             _repoAuditoria = repoAuditoria;
         }
 
-        public void Ejecutar(AltaPrestamoDto dto)
+        public void Ejecutar(AltaPrestamoDto dto, int coordinadorId)
         {
             if (dto == null)
                 throw new PrestamoNuloException();
@@ -62,7 +62,8 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 
             _repoAuditoria.Add(new AuditoriaPrestamo(
                 "Se reporta Alta Prestamo",
-                prestamo.Id
+                prestamo.Id,
+                coordinadorId
             ));
         }
 
