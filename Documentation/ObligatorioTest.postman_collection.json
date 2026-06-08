@@ -1,9 +1,10 @@
 {
   "info": {
-    "_postman_id": "bf77fff9-94fd-443f-8eff-7467d60a45c2",
+    "_postman_id": "e8757a9f-661e-4507-800c-54ec76ccc602",
     "name": "ObligatorioTest",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "30378453"
+    "_exporter_id": "29148441",
+    "_collection_link": "https://go.postman.co/collection/29148441-e8757a9f-661e-4507-800c-54ec76ccc602?source=collection_link"
   },
   "item": [
     {
@@ -13,7 +14,10 @@
           "name": "New Request",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": ""
+            }
           },
           "response": []
         }
@@ -21,16 +25,170 @@
     },
     {
       "name": "RF2",
-      "item": []
+      "item": [
+        {
+          "name": "AltaUsuario",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Brendon\",\r\n    \"apellido\": \"Sistema\",\r\n    \"telefono\": 99111222,\r\n    \"username\": \"admin\",\r\n    \"password\": \"Admin123!\",\r\n    \"rol\": \"Administrador\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/usuarios",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AltaUsuario - Bad Request",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"\",\r\n    \"apellido\": \"Sistema\",\r\n    \"telefono\": 99111222,\r\n    \"username\": \"admin\",\r\n    \"password\": \"Admin123!\",\r\n    \"rol\": \"Administrador\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/usuarios",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListadoUsuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/usuarios",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     },
     {
       "name": "RF3",
       "item": [
         {
           "name": "ListadoEquipos",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n        \"tipoEquipo\": \"Camara\",\r\n        \"marca\": \"ACME\",\r\n        \"modelo\": \"Colon\",\r\n        \"cantDisponible\": 2,\r\n        \"apertura\": null,\r\n        \"relacionFocal\": null,\r\n        \"distanciaFocal\": null,\r\n        \"peso\": null,\r\n        \"tipoMontura\": null,\r\n        \"cargaUtilSoportada\": null,\r\n        \"computarizada\": null,\r\n        \"tipoSensorCamara\": 0,\r\n        \"resolucion\": 1280,\r\n        \"tamanioPixel\": 3,\r\n        \"diametro\": null,\r\n        \"anguloVision\": null\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n        \"tipoEquipo\": \"Camara\",\r\n        \"marca\": \"ACME\",\r\n        \"modelo\": \"Colon\",\r\n        \"cantDisponible\": 2,\r\n        \"apertura\": null,\r\n        \"relacionFocal\": null,\r\n        \"distanciaFocal\": null,\r\n        \"peso\": null,\r\n        \"tipoMontura\": null,\r\n        \"cargaUtilSoportada\": null,\r\n        \"computarizada\": null,\r\n        \"tipoSensorCamara\": 0,\r\n        \"resolucion\": 1280,\r\n        \"tamanioPixel\": 3,\r\n        \"diametro\": null,\r\n        \"anguloVision\": null\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/11",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                "11"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetById - Not Found",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/44444444",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                "44444444"
+              ]
+            }
           },
           "response": []
         },
@@ -41,7 +199,38 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n        \"tipoEquipo\": \"Camara\",\r\n        \"marca\": \"ACME\",\r\n        \"modelo\": \"Colon\",\r\n        \"cantDisponible\": 2,\r\n        \"apertura\": null,\r\n        \"relacionFocal\": null,\r\n        \"distanciaFocal\": null,\r\n        \"peso\": null,\r\n        \"tipoMontura\": null,\r\n        \"cargaUtilSoportada\": null,\r\n        \"computarizada\": null,\r\n        \"tipoSensorCamara\": 0,\r\n        \"resolucion\": 1280,\r\n        \"tamanioPixel\": 3,\r\n        \"diametro\": null,\r\n        \"anguloVision\": null\r\n}",
+              "raw": "{\r\n        \"tipoEquipo\": \"Camara\",\r\n        \"marca\": \"ACMEx\",\r\n        \"modelo\": \"Colon\",\r\n        \"cantDisponible\": 2,\r\n        \"apertura\": null,\r\n        \"relacionFocal\": null,\r\n        \"distanciaFocal\": null,\r\n        \"peso\": null,\r\n        \"tipoMontura\": null,\r\n        \"cargaUtilSoportada\": null,\r\n        \"computarizada\": null,\r\n        \"tipoSensorCamara\": 0,\r\n        \"resolucion\": 1280,\r\n        \"tamanioPixel\": 3,\r\n        \"diametro\": null,\r\n        \"anguloVision\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AltaEquipo - Bad Request",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n        \"tipoEquipo\": \"Camara\",\r\n        \"marca\": \"\",\r\n        \"modelo\": \"Colon\",\r\n        \"cantDisponible\": 2,\r\n        \"apertura\": null,\r\n        \"relacionFocal\": null,\r\n        \"distanciaFocal\": null,\r\n        \"peso\": null,\r\n        \"tipoMontura\": null,\r\n        \"cargaUtilSoportada\": null,\r\n        \"computarizada\": null,\r\n        \"tipoSensorCamara\": 0,\r\n        \"resolucion\": 1280,\r\n        \"tamanioPixel\": 3,\r\n        \"diametro\": null,\r\n        \"anguloVision\": null\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -80,7 +269,7 @@
               }
             },
             "url": {
-              "raw": "https://localhost:7027/api/v1/equipos/6",
+              "raw": "https://localhost:7027/api/v1/equipos/5",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -90,23 +279,28 @@
                 "api",
                 "v1",
                 "equipos",
-                "6"
+                "5"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "New Request",
+          "name": "DeleteEquipo - Not Found",
           "request": {
-            "method": "PUT",
+            "method": "DELETE",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"id\": 2,\r\n  \"tipoEquipo\": \"Montura\",\r\n  \"marca\": \"string\",\r\n  \"modelo\": \"string\",\r\n  \"cantDisponible\": 0,\r\n  \"apertura\": 0,\r\n  \"relacionFocal\": \"string\",\r\n  \"distanciaFocal\": 0,\r\n  \"peso\": 0,\r\n  \"tipoMontura\": 0,\r\n  \"cargaUtilSoportada\": 0,\r\n  \"computarizada\": true,\r\n  \"tipoSensorCamara\": 0,\r\n  \"resolucion\": 0,\r\n  \"tamanioPixel\": 0,\r\n  \"diametro\": 0,\r\n  \"anguloVision\": 0\r\n}"
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
-              "raw": "https://localhost:7027/api/v1/equipos/2",
+              "raw": "https://localhost:7027/api/v1/equipos/4444444",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -116,7 +310,69 @@
                 "api",
                 "v1",
                 "equipos",
-                "2"
+                "4444444"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"tipoEquipo\": \"Camara\",\r\n    \"marca\": \"ACMEO\",\r\n    \"modelo\": \"Colon\",\r\n    \"cantDisponible\": 2,\r\n    \"apertura\": null,\r\n    \"relacionFocal\": null,\r\n    \"distanciaFocal\": null,\r\n    \"peso\": null,\r\n    \"tipoMontura\": null,\r\n    \"cargaUtilSoportada\": null,\r\n    \"computarizada\": null,\r\n    \"tipoSensorCamara\": 0,\r\n    \"resolucion\": 1280,\r\n    \"tamanioPixel\": 3,\r\n    \"diametro\": null,\r\n    \"anguloVision\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/11",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                "11"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit - Bad Request",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"tipoEquipo\": \"Camara\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"Colon\",\r\n    \"cantDisponible\": 2,\r\n    \"apertura\": null,\r\n    \"relacionFocal\": null,\r\n    \"distanciaFocal\": null,\r\n    \"peso\": null,\r\n    \"tipoMontura\": null,\r\n    \"cargaUtilSoportada\": null,\r\n    \"computarizada\": null,\r\n    \"tipoSensorCamara\": 0,\r\n    \"resolucion\": 1280,\r\n    \"tamanioPixel\": 3,\r\n    \"diametro\": null,\r\n    \"anguloVision\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/11",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                "11"
               ]
             }
           },
@@ -126,7 +382,38 @@
     },
     {
       "name": "RF4",
-      "item": []
+      "item": [
+        {
+          "name": "AltaPrestamo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fechaFin\": \"2026-06-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 31,\r\n  \"monturaId\": 19,\r\n  \"camaraId\": 9,\r\n  \"ocularId\": 29\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     },
     {
       "name": "RF5",
