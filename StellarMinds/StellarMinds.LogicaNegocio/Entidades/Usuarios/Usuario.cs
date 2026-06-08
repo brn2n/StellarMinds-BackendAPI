@@ -1,4 +1,5 @@
-﻿using StellarMinds.LogicaNegocio.VO.VOUsuario;
+﻿using StellarMinds.LogicaNegocio.Excepciones.EntidadesException.UsuarioException;
+using StellarMinds.LogicaNegocio.VO.VOUsuario;
 
 namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
 {
@@ -28,7 +29,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Usuarios
         {
             if (Username == null || Telefono == null || VOPassword == null || NombreCompleto == null)
             {
-                throw new ArgumentException("Los campos no pueden ser nulos.");
+                throw new UserInvalidException("Los campos no pueden ser nulos.");
             }
         }
     }

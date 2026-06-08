@@ -5,6 +5,7 @@ namespace StellarMinds.LogicaNegocio.Excepciones.EntidadesException.UsuarioExcep
     public class UsernameInvalidException : LogicaNegocioExcepcion
     {
         public UsernameInvalidException()
+            : base("El username no es válido.")
         {
         }
 

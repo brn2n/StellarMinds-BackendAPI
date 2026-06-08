@@ -2,16 +2,17 @@
 
 namespace StellarMinds.LogicaNegocio.Excepciones.EntidadesException.UsuarioException
 {
-    public class NameInvalidException : LogicaNegocioExcepcion
+    public class FullNameInvalidException : LogicaNegocioExcepcion
     {
-        public NameInvalidException() { }
+        public FullNameInvalidException() { }
 
 
-        public NameInvalidException(string? message) : base(message)
+        public FullNameInvalidException(string mensaje)
+            : base(mensaje)
         {
         }
 
-        public NameInvalidException(string? message, Exception? innerException) : base(message, innerException)
+        public FullNameInvalidException(string? message, Exception? innerException) : base(message, innerException)
         {
         }
     }

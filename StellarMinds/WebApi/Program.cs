@@ -74,6 +74,7 @@ builder.Services.AddScoped<IRepositorioAuditoriaPrestamo, RepositorioAuditoriaPr
 builder.Services.AddScoped<ICUGetAll<ListarUsuariosDto>, ListarUsuarios>();
 builder.Services.AddScoped<ICUGetByTelescopio<ListarUsuariosDto>, ListadoSociosPorTelescopio>();
 builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
+builder.Services.AddScoped<ICUGetById<AltaUsuarioDto>, ObtenerUsuarioPorId>();
 
 // Inyecto los casos de uso EQUIPO
 builder.Services.AddScoped<ICUAlta<AltaEquipoDto>, AltaEquipo>();

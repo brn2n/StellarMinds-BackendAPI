@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 
@@ -49,7 +50,7 @@ namespace StellarMinds.Infraestructura.EF
         public Usuario GetById(int id)
         {
             Usuario unUsuario = _context.Usuarios.Find(id);
-            if (unUsuario == null) throw new Exception("El Usuario no existe.");
+            if (unUsuario == null) throw new NotFoundException("El Usuario no existe.");
             return unUsuario;
         }
 

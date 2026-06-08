@@ -9,7 +9,7 @@ namespace WebApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class UsuariosController(ICUGetAll<ListarUsuariosDto> _listar, ICUAlta<AltaUsuarioDto> _alta, ICUGetByTelescopio<ListarUsuariosDto> _getByTelescopio) : ControllerBase
+    public class UsuariosController(ICUGetAll<ListarUsuariosDto> _listar, ICUAlta<AltaUsuarioDto> _alta, ICUGetByTelescopio<ListarUsuariosDto> _getByTelescopio, ICUGetById<AltaUsuarioDto> _get) : ControllerBase
     {
         //HASHEAR CONTRASENIA, VALIDAR DATOS DE LOGIN (servicio para generar el token)... caso de uso para CULOGIN TRANSFORMAS A JWT
         //USUARIO DTO CON LOS DATOS QUE ME FALTAN SI ESTA TODO CORRECTO, GUARDAS EN BUSCAR POR USERNAME MATODO, (CREAR REPOGETBYNAME)
@@ -55,8 +55,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                _alta.Ejecutar(obj);
-                return Ok();
+                int id = _alta.Ejecutar(obj);
+                return CreatedAtAction(nameof(GetById), new { id = id }, id);
             }
             catch (BadRequestException e)
             {
@@ -68,12 +68,24 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, new
-                {
-                    mensaje = e.Message,
-                    inner = e.InnerException?.Message,
-                    stack = e.StackTrace
-                });
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                return Ok(_get.Execute(id));
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, new { e.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
 

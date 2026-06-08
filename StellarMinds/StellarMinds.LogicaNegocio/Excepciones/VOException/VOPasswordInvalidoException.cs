@@ -1,6 +1,8 @@
-﻿namespace StellarMinds.LogicaNegocio.Excepciones
+﻿using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
+
+namespace StellarMinds.LogicaNegocio.Excepciones
 {
-    public class VOPasswordInvalidoException : Exception
+    public class VOPasswordInvalidoException : LogicaNegocioExcepcion
     {
         public VOPasswordInvalidoException()
             : base("La contraseña no es válida.")

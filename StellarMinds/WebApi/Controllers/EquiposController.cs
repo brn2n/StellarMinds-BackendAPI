@@ -75,7 +75,7 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (LogicaNegocioExcepcion e)
             {
-                return StatusCode(400, new { e.Message });
+                return StatusCode(400, e.Error());
             }
             catch (Exception e)
             {
@@ -124,6 +124,10 @@ namespace StellarMinds.WebApp.Controllers
             catch (ConflictException e)
             {
                 return StatusCode(409, e.Error());
+            }
+            catch (LogicaNegocioExcepcion e)
+            {
+                return StatusCode(400, e.Error());
             }
             catch (Exception)
             {
