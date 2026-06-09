@@ -41,8 +41,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                var usuarios = _getByTelescopio.Ejecutar(id);
-                return Ok(usuarios);
+                var telescopios = _getByTelescopio.Ejecutar(id);
+                if (!telescopios.Any())
+                {
+                    return NoContent();
+                }
+                return Ok(telescopios);
             }
             catch (BadRequestException e)
             {

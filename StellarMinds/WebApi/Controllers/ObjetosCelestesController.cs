@@ -2,7 +2,6 @@
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
-using StellarMinds.LogicaNegocio.Excepciones.Error;
 using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
 
 namespace WebApi.Controllers

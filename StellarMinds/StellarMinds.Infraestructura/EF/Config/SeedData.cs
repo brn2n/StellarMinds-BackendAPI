@@ -1,11 +1,10 @@
 ﻿using StellarMinds.LogicaNegocio.Entidades.Equipos;
+using StellarMinds.LogicaNegocio.Entidades.NochesObservaciones;
 using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using StellarMinds.LogicaNegocio.VO;
 using StellarMinds.LogicaNegocio.VO.VOUsuario;
-using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
-using StellarMinds.LogicaNegocio.VO;
 
 namespace StellarMinds.Infraestructura.EF
 {
@@ -26,14 +25,14 @@ namespace StellarMinds.Infraestructura.EF
             if (!_context.Equipos.Any())
                 CrearEquipos();
 
-            if (!_context.ObjetosCelestes.Any())
-                CrearObjetosCelestes();
-
             if (!_context.Prestamos.Any())
                 CrearPrestamos();
 
             if (!_context.ObjetosCelestes.Any())
                 CrearObjetosCelestes();
+
+            if (!_context.NochesObservaciones.Any())
+                CrearNochesObservaciones();
         }
 
         private void CrearUsuarios()
@@ -161,6 +160,30 @@ namespace StellarMinds.Infraestructura.EF
                 new ObjetoCeleste("Betelgeuse", "Estrella", new VOMagnitudAparente(0.42))
             );
 
+            _context.SaveChanges();
+        }
+
+        private void CrearNochesObservaciones()
+        {
+            var prestamos = _context.Prestamos.ToList();
+            var objetosCelestes = _context.ObjetosCelestes.ToList();
+
+            if (prestamos.Count < 10 || objetosCelestes.Count < 10)
+            {
+                throw new Exception("No hay suficientes préstamos o objetos celestes creados para generar las noches de observación.");
+            }
+            _context.NochesObservaciones.AddRange(
+                new NocheObservacion(DateTime.Now.AddDays(1), prestamos[0], objetosCelestes[0]),
+                new NocheObservacion(DateTime.Now.AddDays(2), prestamos[1], objetosCelestes[1]),
+                new NocheObservacion(DateTime.Now.AddDays(3), prestamos[2], objetosCelestes[2]),
+                new NocheObservacion(DateTime.Now.AddDays(4), prestamos[3], objetosCelestes[3]),
+                new NocheObservacion(DateTime.Now.AddDays(5), prestamos[4], objetosCelestes[4]),
+                new NocheObservacion(DateTime.Now.AddDays(6), prestamos[5], objetosCelestes[5]),
+                new NocheObservacion(DateTime.Now.AddDays(7), prestamos[6], objetosCelestes[6]),
+                new NocheObservacion(DateTime.Now.AddDays(8), prestamos[7], objetosCelestes[7]),
+                new NocheObservacion(DateTime.Now.AddDays(9), prestamos[8], objetosCelestes[8]),
+                new NocheObservacion(DateTime.Now.AddDays(10), prestamos[9], objetosCelestes[9])
+            );
             _context.SaveChanges();
         }
     }
