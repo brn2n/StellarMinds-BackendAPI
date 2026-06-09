@@ -38,7 +38,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             Usuario usuario = _repoUsuario.GetById(dto.SocioId);
 
             if (usuario == null)
-                throw new Exception("No existe el usuario seleccionado.");
+                throw new Exception("No existe el usuario seleccionado.");//Excepcion personalizada siempre (por ej badrequest)
 
             if (usuario is not Socio socio)
                 throw new Exception("El usuario seleccionado no es un socio.");

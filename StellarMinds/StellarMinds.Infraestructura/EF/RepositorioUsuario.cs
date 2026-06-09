@@ -54,6 +54,9 @@ namespace StellarMinds.Infraestructura.EF
             return unUsuario;
         }
 
-
+        public Usuario LogInAuth(string username, string password)
+        {
+            return _context.Usuarios.FirstOrDefault(e => e.Username.Value == username && e.VOPassword.Value == password);
+        }
     }
 }
