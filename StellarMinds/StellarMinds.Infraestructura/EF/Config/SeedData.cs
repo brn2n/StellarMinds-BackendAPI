@@ -2,6 +2,8 @@
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using StellarMinds.LogicaNegocio.VO.VOUsuario;
+using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
+using StellarMinds.LogicaNegocio.VO;
 
 namespace StellarMinds.Infraestructura.EF
 {
@@ -21,6 +23,9 @@ namespace StellarMinds.Infraestructura.EF
 
             if (!_context.Equipos.Any())
                 CrearEquipos();
+
+            if (!_context.ObjetosCelestes.Any())
+                CrearObjetosCelestes();
 
             if (!_context.Prestamos.Any())
                 CrearPrestamos();
@@ -129,5 +134,24 @@ namespace StellarMinds.Infraestructura.EF
 
             _context.SaveChanges();
         }
+
+        private void CrearObjetosCelestes()
+        {
+            _context.ObjetosCelestes.AddRange(
+                new ObjetoCeleste("Luna", "Satelite", new VOMagnitudAparente(-12.70)),
+                new ObjetoCeleste("Jupiter", "Planeta", new VOMagnitudAparente(-2.90)),
+                new ObjetoCeleste("Saturno", "Planeta", new VOMagnitudAparente(0.50)),
+                new ObjetoCeleste("Marte", "Planeta", new VOMagnitudAparente(-1.50)),
+                new ObjetoCeleste("Venus", "Planeta", new VOMagnitudAparente(-4.60)),
+                new ObjetoCeleste("Andromeda", "Galaxia", new VOMagnitudAparente(3.40)),
+                new ObjetoCeleste("Nebulosa de Orion", "Nebulosa", new VOMagnitudAparente(4.00)),
+                new ObjetoCeleste("Pleyades", "Cumulo", new VOMagnitudAparente(1.60)),
+                new ObjetoCeleste("Sirio", "Estrella", new VOMagnitudAparente(-1.46)),
+                new ObjetoCeleste("Betelgeuse", "Estrella", new VOMagnitudAparente(0.42))
+            );
+
+            _context.SaveChanges();
+        }
     }
 }
+

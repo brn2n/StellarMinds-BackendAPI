@@ -19,11 +19,15 @@ namespace StellarMinds.LogicaNegocio.VO
 
         private void Validar()
         {
+            string texto = Valor.ToString("F2");
+
             string patronMagnitud = @"^-?\d+([.,]\d{2})$";
 
-            if (!Regex.IsMatch(Valor.ToString(), patronMagnitud))
+            if (!Regex.IsMatch(texto, patronMagnitud))
             {
-                throw new VOMagnitudAparenteInvalidaException("La magnitud debe ser un numero con exactamente dos decimales.");
+                throw new VOMagnitudAparenteInvalidaException(
+                    "La magnitud debe ser un numero con exactamente dos decimales."
+                );
             }
         }
     }

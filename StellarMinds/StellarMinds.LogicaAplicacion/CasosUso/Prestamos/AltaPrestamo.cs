@@ -80,6 +80,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 throw new equipoNoTelescopioException();
 
             ValidarDisponible(telescopio);
+            telescopio.DescontarDisponibilidad();
 
             return telescopio;
         }
@@ -95,6 +96,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 throw new equipoNoMonturaException();
 
             ValidarDisponible(montura);
+            montura.DescontarDisponibilidad();
 
             return montura;
         }
@@ -110,6 +112,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 throw new equipoNoCamaraException();
 
             ValidarDisponible(camara);
+            camara.DescontarDisponibilidad();
 
             return camara;
         }
@@ -125,32 +128,19 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 throw new equipoNoOcularException();
 
             ValidarDisponible(ocular);
-
+            ocular.DescontarDisponibilidad();
             return ocular;
         }
 
         private void ValidarDisponible(Equipo equipo)
         {
-            bool estaEnPrestamo = _repoPrestamo
-                .GetAll()
-                .Any(p =>
-                    p.Estado == Estado.EN_PRESTAMO &&
-                    (
-                        p.Telescopio?.Id == equipo.Id ||
-                        p.Montura?.Id == equipo.Id ||
-                        p.Camara?.Id == equipo.Id ||
-                        p.Ocular?.Id == equipo.Id
-                    )
-                );
+            if (equipo == null)
+                throw new equipoNoDisponibleException();
 
-            if (estaEnPrestamo)
-            {
-                string tipoEquipo = equipo.GetType().Name;
-
+            if (equipo.CantDisponible <= 0)
                 throw new equipoNoDisponibleException(
-                    $"El equipo '{tipoEquipo} - {equipo.Marca} {equipo.Modelo}' se encuentra actualmente en préstamo."
+                    $"No hay unidades disponibles de {equipo.Marca} {equipo.Modelo}"
                 );
-            }
         }
     }
 }

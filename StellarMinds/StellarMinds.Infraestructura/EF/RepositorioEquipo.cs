@@ -22,10 +22,14 @@ namespace StellarMinds.Infraestructura.EF
             return Obj.Id;
         }
 
-        public void Delete(int Id)
+        public void Delete(int id)
         {
-            Equipo unEquipo = GetById(Id);
-            _context.Equipos.Remove(unEquipo);
+            Equipo equipo = _context.Equipos.Find(id);
+
+            if (equipo == null)
+                throw new NotFoundException("No existe el equipo.");
+
+            _context.Equipos.Remove(equipo);
             _context.SaveChanges();
         }
 

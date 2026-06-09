@@ -21,6 +21,10 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
         {
             Prestamo prestamo = _repoPrestamo.GetById(id);
 
+            prestamo.Telescopio?.AumentarDisponibilidad();
+            prestamo.Montura?.AumentarDisponibilidad();
+            prestamo.Camara?.AumentarDisponibilidad();
+            prestamo.Ocular?.AumentarDisponibilidad();
             prestamo.Devolver();
 
             _repoPrestamo.Update(id, prestamo);

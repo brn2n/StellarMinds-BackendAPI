@@ -41,13 +41,6 @@ namespace StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes
             {
                 throw new ObjetoCelesteInvalidoException("La magnitud del objeto celeste no puede ser nula.");
             }
-
-            string patronMagnitud = @"^-?\d+([.,]\d{2})$";
-
-            if (!Regex.IsMatch(Magnitud.ToString(), patronMagnitud))
-            {
-                throw new ObjetoCelesteInvalidoException("La magnitud debe ser un numero con exactamente dos decimales.");
-            }
         }
     }
 }

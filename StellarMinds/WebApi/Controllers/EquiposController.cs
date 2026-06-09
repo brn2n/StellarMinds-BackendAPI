@@ -87,12 +87,12 @@ namespace StellarMinds.WebApp.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
             try
             {
-                _delete.Execute(Id);
-                return Ok(Id);
+                int idEliminado = _delete.Execute(id);
+                return Ok(idEliminado);
             }
             catch (NotFoundException e)
             {
@@ -102,9 +102,9 @@ namespace StellarMinds.WebApp.Controllers
             {
                 return StatusCode(409, e.Error());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
+                return StatusCode(500, e.ToString());
             }
         }
 
@@ -129,9 +129,9 @@ namespace StellarMinds.WebApp.Controllers
             {
                 return StatusCode(400, e.Error());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
+                return StatusCode(500, e.ToString());
             }
             //catch (Exception e)
             //{

@@ -28,6 +28,16 @@ namespace StellarMinds.Infraestructura.EF
                                              && p.Estado == Estado.EN_PRESTAMO);
         }
 
+        public bool FueUsadoEnPrestamo(int id)
+        {
+            return _context.Prestamos.Any(p =>
+                (p.Telescopio != null && p.Telescopio.Id == id) ||
+                (p.Montura != null && p.Montura.Id == id) ||
+                (p.Camara != null && p.Camara.Id == id) ||
+                (p.Ocular != null && p.Ocular.Id == id)
+            );
+        }
+
         public IEnumerable<Prestamo> GetAll()
         {
             return _context.Prestamos.ToList();

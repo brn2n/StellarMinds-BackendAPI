@@ -9,7 +9,7 @@ namespace StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos
           IRepositorioUpdate<Prestamo>
     {
         bool EnPrestamo(int id);
-
+        bool FueUsadoEnPrestamo(int id);
         IEnumerable<Prestamo> ListarEntreFechas(int socioId, int mes, int anio);
 
         IEnumerable<Prestamo> GetPrestamosEnPrestamoPorSocio(int socioId);
