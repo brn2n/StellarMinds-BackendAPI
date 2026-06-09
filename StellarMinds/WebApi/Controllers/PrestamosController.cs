@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.LogicaAplicacion.CUExceptions.CUEquipo;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -16,7 +17,8 @@ namespace WebApi.Controllers
         ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto> _listarPrestamosSocioEntreFechas,
         ICUDevolverPrestamo _devolverPrestamo,
         ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto> _listarAuditorias,
-        ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto> _detalleAuditoria
+        ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto> _detalleAuditoria,
+        ICUGetById<InfoAuditoriaPrestamosDto> _get
     ) : ControllerBase
     {
         [HttpPost]
@@ -26,8 +28,8 @@ namespace WebApi.Controllers
             {
                 int coordinadorId = 2; // TEMPORAL: después lo sacamos del JWT
 
-                _altaPrestamo.Ejecutar(dto, coordinadorId);
-                return Ok();
+                int id = _altaPrestamo.Ejecutar(dto, coordinadorId);
+                return CreatedAtAction(nameof(GetById), new { id = id }, id);
             }
             catch (BadRequestException e)
             {
@@ -36,6 +38,10 @@ namespace WebApi.Controllers
             catch (LogicaNegocioExcepcion e)
             {
                 return StatusCode(400, e.Error());
+            }
+            catch (equipoNoDisponibleException ex)
+            {
+                return Conflict(new { error = ex.Message });
             }
             catch (Exception e)
             {
@@ -46,6 +52,23 @@ namespace WebApi.Controllers
                     inner = e.InnerException?.Message,
                     stack = e.StackTrace
                 });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                return Ok(_get.Execute(id));
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, new { e.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
 
