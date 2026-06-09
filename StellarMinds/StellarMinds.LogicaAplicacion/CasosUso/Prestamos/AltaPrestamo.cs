@@ -61,8 +61,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             _repoPrestamo.Add(prestamo);
 
             _repoAuditoria.Add(new AuditoriaPrestamo(
-                "Se reporta Alta Prestamo",
-                prestamo.Id
+                "Alta Prestamo",
+                prestamo.Id,
+                dto.CoordinadorId
             ));
         }
 
@@ -141,7 +142,9 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 );
 
             if (estaEnPrestamo)
-                throw new equipoNoDisponibleException();
+                throw new Exception(
+                    $"El equipo {equipo.Marca} {equipo.Modelo} (Id: {equipo.Id}) ya se encuentra en préstamo."
+                );
         }
     }
 }

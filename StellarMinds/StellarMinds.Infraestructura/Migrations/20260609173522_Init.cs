@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StellarMinds.Infraestructura.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,6 +80,7 @@ namespace StellarMinds.Infraestructura.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FechaFin = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SocioId = table.Column<int>(type: "int", nullable: false),
                     OcularId = table.Column<int>(type: "int", nullable: false),
                     TelescopioId = table.Column<int>(type: "int", nullable: false),
                     CamaraId = table.Column<int>(type: "int", nullable: false),
@@ -108,6 +109,11 @@ namespace StellarMinds.Infraestructura.Migrations
                         name: "FK_Prestamos_Equipos_TelescopioId",
                         column: x => x.TelescopioId,
                         principalTable: "Equipos",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Prestamos_Usuarios_SocioId",
+                        column: x => x.SocioId,
+                        principalTable: "Usuarios",
                         principalColumn: "Id");
                 });
 
@@ -188,6 +194,11 @@ namespace StellarMinds.Infraestructura.Migrations
                 column: "OcularId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Prestamos_SocioId",
+                table: "Prestamos",
+                column: "SocioId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Prestamos_TelescopioId",
                 table: "Prestamos",
                 column: "TelescopioId");
@@ -203,9 +214,6 @@ namespace StellarMinds.Infraestructura.Migrations
                 name: "NochesObservaciones");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
-
-            migrationBuilder.DropTable(
                 name: "ObjetosCelestes");
 
             migrationBuilder.DropTable(
@@ -213,6 +221,9 @@ namespace StellarMinds.Infraestructura.Migrations
 
             migrationBuilder.DropTable(
                 name: "Equipos");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
         }
     }
 }

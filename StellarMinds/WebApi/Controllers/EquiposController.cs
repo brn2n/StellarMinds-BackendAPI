@@ -109,11 +109,11 @@ namespace StellarMinds.WebApp.Controllers
         //}
 
         [HttpPut("{id}")]
-        public IActionResult Edit(int id, [FromBody] ListarEquipoDto pais)
+        public IActionResult Edit(int id, [FromBody] ListarEquipoDto equipo)
         {
             try
             {
-                _update.Execute(id, pais);
+                _update.Execute(id, equipo);
                 return Ok();
             }
             catch (NotFoundException e)
@@ -124,11 +124,10 @@ namespace StellarMinds.WebApp.Controllers
             {
                 return StatusCode(409, e.Error());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
+                return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
-
         }
     }
 }

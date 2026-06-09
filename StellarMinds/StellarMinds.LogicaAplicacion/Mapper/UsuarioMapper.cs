@@ -35,17 +35,17 @@ namespace StellarMinds.LogicaAplicacion.Mapper
 
             if (usuario is Coordinador c)
             {
-                return new ListarUsuariosDto(c.NombreCompleto.Nombre, c.NombreCompleto.Apellido, c.Telefono.Value, c.Username.Value, "Coordinador");
+                return new ListarUsuariosDto(c.Id, c.NombreCompleto.Nombre, c.NombreCompleto.Apellido, c.Telefono.Value, c.Username.Value, "Coordinador");
             }
 
             if (usuario is Administrador a)
             {
-                return new ListarUsuariosDto(a.NombreCompleto.Nombre, a.NombreCompleto.Apellido, a.Telefono.Value, a.Username.Value, "Administrador");
+                return new ListarUsuariosDto(a.Id, a.NombreCompleto.Nombre, a.NombreCompleto.Apellido, a.Telefono.Value, a.Username.Value, "Administrador");
             }
 
             if (usuario is Socio s)
             {
-                return new ListarUsuariosDto(s.NombreCompleto.Nombre, s.NombreCompleto.Apellido, s.Telefono.Value, s.Username.Value, "Socio");
+                return new ListarUsuariosDto(s.Id, s.NombreCompleto.Nombre, s.NombreCompleto.Apellido, s.Telefono.Value, s.Username.Value, "Socio");
             }
             throw new ArgumentException("Tipo de equipo desconocido", nameof(usuario));
         }

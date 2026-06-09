@@ -3,6 +3,8 @@
     public class ListadoPrestamoSocioDto
     {
         public int Id { get; set; }
+
+        public int SocioId { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public string Estado { get; set; }

@@ -6,7 +6,8 @@
         int? TelescopioId,
         int? MonturaId,
         int? CamaraId,
-        int? OcularId
+        int? OcularId,
+        int CoordinadorId
     );
 }
 

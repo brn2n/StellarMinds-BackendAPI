@@ -41,8 +41,9 @@ namespace WebApi.Controllers
         {
             try
             {
-                _getByTelescopio.Ejecutar(id);
-                return Ok();
+                var socios = _getByTelescopio.Ejecutar(id);
+
+                return Ok(socios);
             }
             catch (BadRequestException e)
             {

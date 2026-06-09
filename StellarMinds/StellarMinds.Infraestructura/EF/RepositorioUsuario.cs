@@ -44,7 +44,8 @@ namespace StellarMinds.Infraestructura.EF
 
         public IEnumerable<Usuario> GetUsuariosPorTelescopio(int id)
         {
-            throw new NotImplementedException();
+            return _context.Prestamos.Where(p => p.TelescopioId == id).Select(p => p.Socio).Distinct().OrderByDescending(u => u.NombreCompleto.Nombre).ToList();
+
         }
     }
 }

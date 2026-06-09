@@ -10,9 +10,10 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
         private readonly IRepositorioPrestamos _repoPrestamo;
         private readonly IRepositorioAuditoriaPrestamo _repoAuditoria;
 
-        public DevolverPrestamo(IRepositorioPrestamos repoPrestamo)
+        public DevolverPrestamo(IRepositorioPrestamos repoPrestamo, IRepositorioAuditoriaPrestamo repoAuditoria)
         {
             _repoPrestamo = repoPrestamo;
+            _repoAuditoria = repoAuditoria;
         }
 
         public void Execute(int id)
@@ -24,7 +25,8 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             _repoPrestamo.Update(id, prestamo);
             _repoAuditoria.Add(new AuditoriaPrestamo(
                 "Devolucion Prestamo",
-                prestamo.Id
+                prestamo.Id,
+                2
                 ));
         }
     }

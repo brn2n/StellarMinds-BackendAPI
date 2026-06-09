@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StellarMinds.Infraestructura.EF;
 
@@ -11,9 +12,11 @@ using StellarMinds.Infraestructura.EF;
 namespace StellarMinds.Infraestructura.Migrations
 {
     [DbContext(typeof(StellarMindContext))]
-    partial class StellarMindContextModelSnapshot : ModelSnapshot
+    [Migration("20260609173522_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,9 +116,6 @@ namespace StellarMinds.Infraestructura.Migrations
                     b.Property<string>("Accion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CoordinadorId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
