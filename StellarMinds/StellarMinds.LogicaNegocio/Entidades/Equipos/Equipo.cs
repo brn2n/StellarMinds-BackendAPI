@@ -47,5 +47,17 @@ namespace StellarMinds.LogicaNegocio.Entidades.Equipos
             Modelo = obj.Modelo;
             CantDisponible = obj.CantDisponible;
         }
+        public void DescontarDisponibilidad()
+        {
+            if (CantDisponible <= 0)
+                throw new EquipoInvalidException();
+
+            CantDisponible--;
+        }
+
+        public void AumentarDisponibilidad()
+        {
+            CantDisponible++;
+        }
     }
 }

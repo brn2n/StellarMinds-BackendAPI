@@ -4,6 +4,8 @@ using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 using StellarMinds.LogicaNegocio.VO;
 using StellarMinds.LogicaNegocio.VO.VOUsuario;
+using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
+using StellarMinds.LogicaNegocio.VO;
 
 namespace StellarMinds.Infraestructura.EF
 {
@@ -23,6 +25,9 @@ namespace StellarMinds.Infraestructura.EF
 
             if (!_context.Equipos.Any())
                 CrearEquipos();
+
+            if (!_context.ObjetosCelestes.Any())
+                CrearObjetosCelestes();
 
             if (!_context.Prestamos.Any())
                 CrearPrestamos();
@@ -160,3 +165,4 @@ namespace StellarMinds.Infraestructura.EF
         }
     }
 }
+
