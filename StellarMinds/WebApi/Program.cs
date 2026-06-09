@@ -8,6 +8,7 @@ using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
 using StellarMinds.LogicaAplicacion.CasosUso.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU;
+using StellarMinds.LogicaAplicacion.CasosUso.Prestamos;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
@@ -92,6 +93,7 @@ builder.Services.AddScoped<ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto
 builder.Services.AddScoped<ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto>, ListarPrestamosEnPrestamoPorSocio>();
 builder.Services.AddScoped<ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
 builder.Services.AddScoped<ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
+builder.Services.AddScoped<ICUGetById<InfoAuditoriaPrestamosDto>, ObtenerPrestamoPorId>();
 
 
 // Inyecto los casos de uso ObjetosCelestes

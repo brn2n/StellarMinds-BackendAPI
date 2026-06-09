@@ -31,6 +31,13 @@ namespace StellarMinds.Infraestructura.EF
                 .ToList();
         }
 
+        public AuditoriaPrestamo GetById(int id)
+        {
+            AuditoriaPrestamo unPrestamo = _context.AuditoriasPrestamos.Find(id);
+            if (unPrestamo == null) throw new Exception("El Prestamo no existe.");
+            return unPrestamo;
+        }
+
         public IEnumerable<AuditoriaPrestamo> GetByIdCoordinador(int id)
         {
             return _context.AuditoriasPrestamos

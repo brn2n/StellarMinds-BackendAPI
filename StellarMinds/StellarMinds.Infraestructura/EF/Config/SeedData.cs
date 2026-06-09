@@ -95,7 +95,13 @@ namespace StellarMinds.Infraestructura.EF
                 new Ocular("Meade", "Series 4000 26mm", 4, 26, 52),
                 new Ocular("Bresser", "Plossl 15mm", 4, 15, 50),
                 new Ocular("Vixen", "NPL 20mm", 3, 20, 50),
-                new Ocular("Omegon", "Cronus 5mm", 3, 5, 60)
+                new Ocular("Omegon", "Cronus 5mm", 3, 5, 60),
+
+                //Para AltaPrestamo
+                new Ocular("Omegon", "Equipo4", 3, 5, 60),
+                new Camara("Altair", "Equipo3", 2, TipoSensorCamara.CMOS, 5440, 2),
+                new Montura("Meade", "Equipo2", 2, TipoMontura.Ecuatorial, 9.0, false),
+                new Telescopio("Meade", "Equipo1", 3, 90, "f/6.7", 600, 5)
             );
 
             _context.SaveChanges();
