@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.NochesObservaciones;
+﻿using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.Infraestructura.InterfacesRepositorio.NochesObservaciones;
 using StellarMinds.LogicaNegocio.Entidades.NochesObservaciones;
 
 namespace StellarMinds.Infraestructura.EF
@@ -26,7 +27,7 @@ namespace StellarMinds.Infraestructura.EF
         public NocheObservacion GetById(int id)
         {
             NocheObservacion unaNocheObservacion = _context.NochesObservaciones.Find(id);
-            if (unaNocheObservacion == null) throw new Exception("La NocheObservacion no existe.");
+            if (unaNocheObservacion == null) throw new NotFoundException("La NocheObservacion no existe.");
             return unaNocheObservacion;
         }
     }

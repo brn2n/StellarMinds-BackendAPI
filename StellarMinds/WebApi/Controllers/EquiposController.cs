@@ -79,7 +79,13 @@ namespace StellarMinds.WebApp.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
+                Console.WriteLine(e.Message);
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message,
+                    stack = e.StackTrace
+                });
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using StellarMinds.LogicaNegocio.Entidades.Equipos;
+using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
+using StellarMinds.LogicaNegocio.VO;
 using StellarMinds.LogicaNegocio.VO.VOUsuario;
 
 namespace StellarMinds.Infraestructura.EF
@@ -24,6 +26,9 @@ namespace StellarMinds.Infraestructura.EF
 
             if (!_context.Prestamos.Any())
                 CrearPrestamos();
+
+            if (!_context.ObjetosCelestes.Any())
+                CrearObjetosCelestes();
         }
 
         private void CrearUsuarios()
@@ -131,6 +136,24 @@ namespace StellarMinds.Infraestructura.EF
                 new Prestamo(DateTime.Now.AddDays(14), socios[1], monturas[7], oculares[7], telescopios[7], camaras[7], Estado.EN_PRESTAMO),
                 new Prestamo(DateTime.Now.AddDays(15), socios[2], monturas[8], oculares[8], telescopios[8], camaras[8], Estado.EN_PRESTAMO),
                 new Prestamo(DateTime.Now.AddDays(16), socios[3], monturas[9], oculares[9], telescopios[9], camaras[9], Estado.EN_PRESTAMO)
+            );
+
+            _context.SaveChanges();
+        }
+
+        private void CrearObjetosCelestes()
+        {
+            _context.ObjetosCelestes.AddRange(
+                new ObjetoCeleste("Luna", "Planeta", new VOMagnitudAparente(-12.74)),
+                new ObjetoCeleste("Júpiter", "Planeta", new VOMagnitudAparente(-2.20)),
+                new ObjetoCeleste("Galaxia M42", "Galaxia", new VOMagnitudAparente(4.00)),
+                new ObjetoCeleste("Polaris", "Estrella", new VOMagnitudAparente(1.97)),
+                new ObjetoCeleste("Sirio", "Estrella", new VOMagnitudAparente(-1.46)),
+                new ObjetoCeleste("Andrómeda", "Galaxia", new VOMagnitudAparente(3.44)),
+                new ObjetoCeleste("Nebulosa del Cangrejo", "Nebulosa", new VOMagnitudAparente(8.40)),
+                new ObjetoCeleste("Marte", "Planeta", new VOMagnitudAparente(0.71)),
+                new ObjetoCeleste("Nebulosa del Anillo", "Nebulosa", new VOMagnitudAparente(8.80)),
+                new ObjetoCeleste("Betelgeuse", "Estrella", new VOMagnitudAparente(0.42))
             );
 
             _context.SaveChanges();

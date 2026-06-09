@@ -1,5 +1,6 @@
-﻿using StellarMinds.LogicaNegocio.Entidades.Usuarios;
-using StellarMinds.LogicaNegocio.Entidades.Equipos;
+﻿using StellarMinds.LogicaNegocio.Entidades.Equipos;
+using StellarMinds.LogicaNegocio.Entidades.Usuarios;
+using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
 
 namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 {
@@ -83,7 +84,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
         public void Devolver()
         {
             if (Estado != Estado.EN_PRESTAMO)
-                throw new Exception("El préstamo no está en estado EN PRÉSTAMO.");
+                throw new LogicaNegocioExcepcion("El préstamo no está en estado EN PRÉSTAMO.");
 
             Estado = Estado.DEVUELTO;
         }

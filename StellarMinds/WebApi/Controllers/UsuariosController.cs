@@ -36,8 +36,8 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("ListadoTelescopio")]
-        public IActionResult ListarSocioPorTelescoio(int id)
+        [HttpGet("ListadoPorTelescopio/{id}")]
+        public IActionResult ListarSocioPorTelescopio(int id)
         {
             try
             {
@@ -47,6 +47,10 @@ namespace WebApi.Controllers
             catch (BadRequestException e)
             {
                 return StatusCode(400, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new ErrorCodigo(500, e.Message));
             }
         }
 

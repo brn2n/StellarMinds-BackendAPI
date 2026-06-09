@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
+﻿using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
 namespace StellarMinds.Infraestructura.EF
@@ -36,7 +37,7 @@ namespace StellarMinds.Infraestructura.EF
         public Prestamo GetById(int id)
         {
             Prestamo unPrestamo = _context.Prestamos.Find(id);
-            if (unPrestamo == null) throw new Exception("El Prestamo no existe.");
+            if (unPrestamo == null) throw new NotFoundException("El prestamo no existe.");
             return unPrestamo;
         }
 

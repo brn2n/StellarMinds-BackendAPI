@@ -1,5 +1,4 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
-using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
@@ -20,7 +19,6 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
         public void Execute(int id, int coordinadorId)
         {
             Prestamo prestamo = _repoPrestamo.GetById(id);
-
             prestamo.Devolver();
 
             _repoPrestamo.Update(id, prestamo);
