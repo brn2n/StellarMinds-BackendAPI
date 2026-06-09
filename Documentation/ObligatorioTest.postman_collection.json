@@ -199,7 +199,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n        \"tipoEquipo\": \"Camara\",\r\n        \"marca\": \"ACMEx\",\r\n        \"modelo\": \"Colon\",\r\n        \"cantDisponible\": 2,\r\n        \"apertura\": null,\r\n        \"relacionFocal\": null,\r\n        \"distanciaFocal\": null,\r\n        \"peso\": null,\r\n        \"tipoMontura\": null,\r\n        \"cargaUtilSoportada\": null,\r\n        \"computarizada\": null,\r\n        \"tipoSensorCamara\": 0,\r\n        \"resolucion\": 1280,\r\n        \"tamanioPixel\": 3,\r\n        \"diametro\": null,\r\n        \"anguloVision\": null\r\n}",
+              "raw": "    {\r\n        \"tipoEquipo\": \"Ocular\",\r\n        \"marca\": \"Equipo4\",\r\n        \"modelo\": \"NPL 20mm\",\r\n        \"cantDisponible\": 3,\r\n        \"apertura\": null,\r\n        \"relacionFocal\": null,\r\n        \"distanciaFocal\": null,\r\n        \"peso\": null,\r\n        \"tipoMontura\": null,\r\n        \"cargaUtilSoportada\": null,\r\n        \"computarizada\": null,\r\n        \"tipoSensorCamara\": null,\r\n        \"resolucion\": null,\r\n        \"tamanioPixel\": null,\r\n        \"diametro\": 20,\r\n        \"anguloVision\": 50\r\n    }\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -390,7 +390,37 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"fechaFin\": \"2026-06-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 31,\r\n  \"monturaId\": 19,\r\n  \"camaraId\": 9,\r\n  \"ocularId\": 29\r\n}",
+              "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 44,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AltaPrestamo - Conflict Exception",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 43,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -417,11 +447,483 @@
     },
     {
       "name": "RF5",
-      "item": []
+      "item": [
+        {
+          "name": "DevolucionPrestamo - Listado",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 44,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/enprestamo",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "socio",
+                "5",
+                "enprestamo"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DevolucionPrestamo - Listado - No Content",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 44,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/socio/1/enprestamo",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "socio",
+                "1",
+                "enprestamo"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DevolucionPrestamo - Not Found",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 44,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/devolver/44444",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "devolver",
+                "44444"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DevolucionPrestamo",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/devolver/1",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "devolver",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DevolucionPrestamo - (!!) Bad Request",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/devolver/a",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "devolver",
+                "a"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     },
     {
-      "name": "RF6",
-      "item": []
+      "name": "RF7",
+      "item": [
+        {
+          "name": "AltaObservacion -EN PROCESO-",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"socioId\": 5,\r\n  \"prestamoId\": 1,\r\n  \"objetoCelesteId\": 1,\r\n  \"fechaObservacion\": \"2027-06-09T03:36:44.840Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/nochesobservaciones",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "nochesobservaciones"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RF8",
+      "item": [
+        {
+          "name": "ListadoPrestamoEntreFechas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/entreFechas?mes=6&anio=2026",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "socio",
+                "5",
+                "entreFechas"
+              ],
+              "query": [
+                {
+                  "key": "mes",
+                  "value": "6"
+                },
+                {
+                  "key": "anio",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListadoPrestamoEntreFechas - No Content",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/entreFechas?mes=6&anio=2027",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "socio",
+                "5",
+                "entreFechas"
+              ],
+              "query": [
+                {
+                  "key": "mes",
+                  "value": "6"
+                },
+                {
+                  "key": "anio",
+                  "value": "2027"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListadoPrestamoEntreFechas - (!!) Bad Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/entreFechas?mes=a&anio=2027",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "socio",
+                "5",
+                "entreFechas"
+              ],
+              "query": [
+                {
+                  "key": "mes",
+                  "value": "a"
+                },
+                {
+                  "key": "anio",
+                  "value": "2027"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RF9",
+      "item": [
+        {
+          "name": "ListarSocioPorTelescopio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/usuarios/listadoportelescopio/44",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "usuarios",
+                "listadoportelescopio",
+                "44"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListarSocioPorTelescopio - No Content",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/usuarios/listadoportelescopio/4444",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "usuarios",
+                "listadoportelescopio",
+                "4444"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListarSocioPorTelescopio - (!!) Bad Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/usuarios/listadoportelescopio/a",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "usuarios",
+                "listadoportelescopio",
+                "a"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RF10",
+      "item": [
+        {
+          "name": "RankingNocheObservacion",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/objetoscelestes/ranking",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "objetoscelestes",
+                "ranking"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RF11",
+      "item": [
+        {
+          "name": "AuditoriaPrestamos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/auditoria?coordinadorId=5",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "auditoria"
+              ],
+              "query": [
+                {
+                  "key": "coordinadorId",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AuditoriaPrestamos - No Content",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/auditoria?coordinadorId=44",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "auditoria"
+              ],
+              "query": [
+                {
+                  "key": "coordinadorId",
+                  "value": "44"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AuditoriaPrestamos - (!!)  Bad Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/auditoria?coordinadorId=a",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "auditoria"
+              ],
+              "query": [
+                {
+                  "key": "coordinadorId",
+                  "value": "a"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
