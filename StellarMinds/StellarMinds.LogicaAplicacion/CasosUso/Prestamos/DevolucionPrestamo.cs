@@ -16,18 +16,21 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             _repoAuditoria = repoAuditoria;
         }
 
-        public void Execute(int id)
+        public int Execute(int id)
         {
             Prestamo prestamo = _repoPrestamo.GetById(id);
 
             prestamo.Devolver();
 
             _repoPrestamo.Update(id, prestamo);
+
             _repoAuditoria.Add(new AuditoriaPrestamo(
                 "Devolucion Prestamo",
                 prestamo.Id,
                 2
-                ));
+            ));
+
+            return prestamo.Id;
         }
     }
 }

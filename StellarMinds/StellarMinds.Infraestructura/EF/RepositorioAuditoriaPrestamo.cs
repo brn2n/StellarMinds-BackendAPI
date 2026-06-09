@@ -25,7 +25,7 @@ namespace StellarMinds.Infraestructura.EF
         public IEnumerable<AuditoriaPrestamo> GetAll()
         {
             return _context.AuditoriasPrestamos
-                .Include(a => a.Coordinador)
+                .Include(a => a.CoordinadorId)
                 .Include(a => a.Prestamo)
                 .OrderByDescending(a => a.Fecha)
                 .ToList();
@@ -41,7 +41,7 @@ namespace StellarMinds.Infraestructura.EF
         public IEnumerable<AuditoriaPrestamo> GetByIdCoordinador(int id)
         {
             return _context.AuditoriasPrestamos
-                .Include(a => a.Coordinador)
+                .Include(a => a.CoordinadorId)
                 .Include(a => a.Prestamo)
                 .Where(a => a.CoordinadorId == id)
                 .OrderByDescending(a => a.Fecha)
@@ -51,7 +51,7 @@ namespace StellarMinds.Infraestructura.EF
         public IEnumerable<AuditoriaPrestamo> GetByIdPrestamo(int prestamoId)
         {
             return _context.AuditoriasPrestamos
-                .Include(a => a.Coordinador)
+                .Include(a => a.CoordinadorId)
                 .Include(a => a.Prestamo)
                 .Where(a => a.PrestamoId == prestamoId)
                 .OrderByDescending(a => a.Fecha)

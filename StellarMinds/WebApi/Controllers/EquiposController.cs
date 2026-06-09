@@ -1,5 +1,5 @@
-﻿using Libreria.Infraestuctura.AccesoDatos.Excepciones;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
@@ -11,40 +11,40 @@ namespace StellarMinds.WebApp.Controllers
     [ApiController]
     public class EquiposController : ControllerBase
     {
-        private ICUGetAll<ListarEquipoDto> _listar;
-        private ICUAlta<AltaEquipoDto> _alta;
-        private ICUDelete<AltaEquipoDto> _delete;
-        private ICUGetById<ListarEquipoDto> _get;
-        private ICUEdit<ListarEquipoDto> _update;
+        private readonly ICUGetAll<ListarEquipoDto> _listar;
+        private readonly ICUAlta<AltaEquipoDto> _alta;
+        private readonly ICUDelete<AltaEquipoDto> _delete;
+        private readonly ICUEdit<AltaEquipoDto> _update;
 
-        public EquiposController(ICUAlta<AltaEquipoDto> altaEquipo, ICUGetAll<ListarEquipoDto> listarEquipo, ICUDelete<AltaEquipoDto> deleteEquipo, ICUGetById<ListarEquipoDto> getEquipoId, ICUEdit<ListarEquipoDto> updateEquipo)
+        public EquiposController(
+            ICUAlta<AltaEquipoDto> altaEquipo,
+            ICUGetAll<ListarEquipoDto> listarEquipo,
+            ICUDelete<AltaEquipoDto> deleteEquipo,
+            ICUEdit<AltaEquipoDto> updateEquipo)
         {
             _alta = altaEquipo;
             _listar = listarEquipo;
             _delete = deleteEquipo;
-            _get = getEquipoId;
             _update = updateEquipo;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
             try
             {
-                var paises = _listar.Ejecutar();
-                if (!paises.Any())
-                {
+                var equipos = _listar.Ejecutar();
+
+                if (!equipos.Any())
                     return NoContent();
-                }
-                return Ok(paises);
+
+                return Ok(equipos);
             }
             catch (Exception)
             {
                 return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
             }
         }
-
-
-        // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL CREATE !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
 
         [HttpPost]
         public IActionResult AltaEquipo([FromBody] AltaEquipoDto equipo)
@@ -62,19 +62,18 @@ namespace StellarMinds.WebApp.Controllers
             {
                 return StatusCode(400, e.Error());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
             }
         }
 
-
         [HttpDelete("{id}")]
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
             try
             {
-                _delete.Execute(Id);
+                _delete.Execute(id);
                 return Ok();
             }
             catch (NotFoundException e)
@@ -91,25 +90,8 @@ namespace StellarMinds.WebApp.Controllers
             }
         }
 
-        // PONERLE QUE EL REPOSITORIO DEVUEVLA ID EN EL EDIT !!!!!!!!!!!!!!!!!!!!! TODO NECESITA IID AHORA
-        //[HttpPut("{id}")]
-        //public IActionResult Edit(int Id, [FromBody] ListarEquipoDto equipo)
-        //{
-        //    try
-        //    {
-        //        _update.Execute(Id, equipo);
-        //        return RedirectToAction("index");
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        return RedirectToAction("index");
-        //    }
-
-        //}
-
         [HttpPut("{id}")]
-        public IActionResult Edit(int id, [FromBody] ListarEquipoDto equipo)
+        public IActionResult Edit(int id, [FromBody] AltaEquipoDto equipo)
         {
             try
             {
@@ -124,9 +106,9 @@ namespace StellarMinds.WebApp.Controllers
             {
                 return StatusCode(409, e.Error());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, new ErrorCodigo(500, ex.Message));
+                return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
             }
         }
     }

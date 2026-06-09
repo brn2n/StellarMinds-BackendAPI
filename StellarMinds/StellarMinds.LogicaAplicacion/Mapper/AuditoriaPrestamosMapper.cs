@@ -7,20 +7,14 @@ namespace StellarMinds.LogicaAplicacion.Mapper
     {
         public static InfoAuditoriaPrestamosDto ToDto(AuditoriaPrestamo auditoria)
         {
-            if (auditoria == null) throw new ArgumentNullException(nameof(auditoria));
-
-            string coordinadorNombre = "Sin coordinador";
-
-            if (auditoria.Coordinador != null && auditoria.Coordinador.NombreCompleto != null)
-            {
-                coordinadorNombre = $"{auditoria.Coordinador.NombreCompleto.Nombre} {auditoria.Coordinador.NombreCompleto.Apellido}";
-            }
+            if (auditoria == null)
+                throw new ArgumentNullException(nameof(auditoria));
 
             return new InfoAuditoriaPrestamosDto(
                 auditoria.Id,
                 auditoria.PrestamoId,
                 auditoria.CoordinadorId,
-                coordinadorNombre,
+                auditoria.CoordinadorId.ToString(),
                 auditoria.Accion,
                 auditoria.Fecha
             );

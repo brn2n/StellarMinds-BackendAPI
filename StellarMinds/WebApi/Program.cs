@@ -67,8 +67,7 @@ var key = Encoding.ASCII.GetBytes(jwtSettings.Key);
 
 
 // Contenedor de inyeccion de dependencias
-// inyecto los repositorios
-
+// Inyecto los repositorios
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddScoped<IRepositorioPrestamos, RepositorioPrestamo>();
 builder.Services.AddScoped<IRepositorioObjetosCelestes, RepositorioObjetoCeleste>();
@@ -87,28 +86,27 @@ builder.Services.AddScoped<ICUAlta<AltaEquipoDto>, AltaEquipo>();
 builder.Services.AddScoped<ICUGetAll<ListarEquipoDto>, ListarEquipos>();
 builder.Services.AddScoped<ICUGetById<ListarEquipoDto>, ObtenerEquipoPorId>();
 builder.Services.AddScoped<ICUDelete<AltaEquipoDto>, BajaEquipo>();
+
+
+
 builder.Services.AddScoped<ICUEdit<AltaEquipoDto>, EditarEquipo>();
 
-// Inyecto los casos de uso Prestamo
-builder.Services.AddScoped<ICUAltaPrestamo, AltaPrestamo>();
-
-builder.Services.AddScoped<ICUDevolverPrestamo, DevolverPrestamo>();
+// Inyecto los casos de uso PRESTAMO
+builder.Services.AddScoped<ICUGetAll<ListadoPrestamoSocioDto>, ListarPrestamos>();
+builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
+builder.Services.AddScoped<ICUDelete<AltaPrestamoDto>, DevolverPrestamo>();
 builder.Services.AddScoped<ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto>, ListarPrestamosSocioEntreFechas>();
-builder.Services.AddScoped<ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto>, ListarPrestamosEnPrestamoPorSocio>();
+
+
+// Auditoría de préstamos
 builder.Services.AddScoped<ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
 builder.Services.AddScoped<ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
 builder.Services.AddScoped<ICUGetById<InfoAuditoriaPrestamosDto>, ObtenerPrestamoPorId>();
 
-
-
-// Inyecto los casos de uso ObjetosCelestes
-builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
+// Inyecto los casos de uso OBJETOS CELESTES
 builder.Services.AddScoped<ICUGetAll<RankingObjetosPorSocioDto>, RankingObjetosPorSocio>();
 
-
-
-
-//Inyecto los casos de uso de NocheObservacion
+// Inyecto los casos de uso NOCHES / OBSERVACIONES
 builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
 builder.Services.AddScoped<ICUGetById<AltaObservacionDto>, GetObservacionById>();
 
