@@ -16,10 +16,10 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Usuarios
 
         public IEnumerable<ListarUsuariosDto> Ejecutar(int telescopioId)
         {
-            if (telescopioId <= 0)
+            if (telescopioId == 0)
             {
                 throw new ArgumentException("El Id del telescopio no es válido.");
-            }
+            }  
 
             return UsuarioMapper.ToListDto(
                 _repo.GetUsuariosPorTelescoio(telescopioId)

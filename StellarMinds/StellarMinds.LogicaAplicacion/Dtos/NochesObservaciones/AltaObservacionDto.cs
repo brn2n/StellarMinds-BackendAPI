@@ -1,6 +1,10 @@
-﻿namespace StellarMinds.LogicaAplicacion.Dtos.ObservacionDtos
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones
 {
-    public class AltaObservacionDto
+    public record AltaObservacionDto
     {
         public int SocioId { get; set; }
         public int PrestamoId { get; set; }

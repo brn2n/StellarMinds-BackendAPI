@@ -2,15 +2,18 @@ using Libreria.WepApi.Services;
 using Microsoft.OpenApi;
 using StellarMinds.Infraestructura.EF;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.Infraestructura.InterfacesRepositorio.NochesObservaciones;
 using StellarMinds.Infraestructura.InterfacesRepositorio.ObjetosCelestes;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
+using StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.CasosUso.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU;
 using StellarMinds.LogicaAplicacion.CasosUso.Prestamos;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+using StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
@@ -71,6 +74,7 @@ builder.Services.AddScoped<IRepositorioPrestamos, RepositorioPrestamo>();
 builder.Services.AddScoped<IRepositorioObjetosCelestes, RepositorioObjetoCeleste>();
 builder.Services.AddScoped<IRepositorioEquipo, RepositorioEquipo>();
 builder.Services.AddScoped<IRepositorioAuditoriaPrestamo, RepositorioAuditoriaPrestamo>();
+builder.Services.AddScoped<IRepositorioNochesObservaciones, RepositorioNocheObservaciones>();
 
 // Inyecto los casos de uso USUARIO
 builder.Services.AddScoped<ICUGetAll<ListarUsuariosDto>, ListarUsuarios>();
@@ -96,8 +100,13 @@ builder.Services.AddScoped<ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto
 builder.Services.AddScoped<ICUGetById<InfoAuditoriaPrestamosDto>, ObtenerPrestamoPorId>();
 
 
+
 // Inyecto los casos de uso ObjetosCelestes
+builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>(); 
 builder.Services.AddScoped<ICUGetAll<RankingObjetosPorSocioDto>, RankingObjetosPorSocio>();
+
+
+
 
 //Inyecto los casos de uso de NocheObservacion
 //builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
