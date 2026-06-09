@@ -11,12 +11,31 @@
       "name": "RF1",
       "item": [
         {
-          "name": "New Request",
+          "name": "GenerarToken",
           "request": {
-            "method": "GET",
+            "method": "POST",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"Usuario\": \"carlitosalto@gmail.com\",\r\n    \"Password\": \"223e12\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": ""
+              "raw": "https://localhost:7027/api/v1/login",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "login"
+              ]
             }
           },
           "response": []

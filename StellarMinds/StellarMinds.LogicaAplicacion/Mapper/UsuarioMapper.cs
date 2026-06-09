@@ -50,6 +50,27 @@ namespace StellarMinds.LogicaAplicacion.Mapper
             throw new ArgumentException("Tipo de equipo desconocido", nameof(usuario));
         }
 
+        public static JWTUsuarioDto toDtoJwt(Usuario usuario)
+        {
+            if (usuario == null) throw new ArgumentNullException(nameof(usuario));
+
+            if (usuario is Coordinador c)
+            {
+                return new JWTUsuarioDto(usuario.Id, usuario.Username.Value, "Coordinador");
+            }
+
+            if (usuario is Administrador a)
+            {
+                return new JWTUsuarioDto(usuario.Id, usuario.Username.Value, "Administrador");
+            }
+
+            if (usuario is Socio s)
+            {
+                return new JWTUsuarioDto(usuario.Id, usuario.Username.Value, "Socio");
+            }
+            throw new ArgumentException("Tipo de equipo desconocido", nameof(usuario));
+        }
+
         public static AltaUsuarioDto toDtoGet(Usuario usuario)
         {
             if (usuario == null) throw new ArgumentNullException(nameof(usuario));

@@ -1,4 +1,6 @@
 using Libreria.WepApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using StellarMinds.Infraestructura.EF;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
@@ -65,6 +67,23 @@ builder.Services.AddSingleton(jwtSettings);
 builder.Services.AddScoped<IJwtGenerator<JWTUsuarioDto>, JwtGenerator>();
 var key = Encoding.ASCII.GetBytes(jwtSettings.Key);
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false; // ?? poner en true para producción
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,  // podés poner en true si usás Issuer
+            ValidateAudience = false, // podés poner en true si usás Audience
+        };
+    });
 
 // Contenedor de inyeccion de dependencias
 // Inyecto los repositorios

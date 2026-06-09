@@ -1,8 +1,6 @@
 ﻿namespace StellarMinds.LogicaAplicacion.Dtos.Usuarios
 {
-    public record LoginUsuariosDto
+    public record LoginUsuariosDto(string Usuario, string Password)
     {
-        public string Usuario { get; set; }
-        public string Password { get; set; }
     }
 }
