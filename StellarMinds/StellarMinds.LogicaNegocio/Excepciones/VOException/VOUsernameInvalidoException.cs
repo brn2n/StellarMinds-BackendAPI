@@ -1,6 +1,8 @@
-﻿namespace StellarMinds.LogicaNegocio.Excepciones
+﻿using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
+
+namespace StellarMinds.LogicaNegocio.Excepciones
 {
-    public class VOUsernameInvalidoException : Exception
+    public class VOUsernameInvalidoException : LogicaNegocioExcepcion
     {
         public VOUsernameInvalidoException()
             : base("El username no es válido.")

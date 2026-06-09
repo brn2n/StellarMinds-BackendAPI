@@ -9,8 +9,8 @@
 
         private Telescopio() { }
 
-        public Telescopio(int id, string marca, string modelo, int cantDisponible, double apertura, string relacionFocal, double distanciaFocal, double peso)
-            : base(id, marca, modelo, cantDisponible)
+        public Telescopio(string marca, string modelo, int cantDisponible, double apertura, string relacionFocal, double distanciaFocal, double peso)
+            : base(marca, modelo, cantDisponible)
         {
             Apertura = apertura;
             RelacionFocal = relacionFocal;

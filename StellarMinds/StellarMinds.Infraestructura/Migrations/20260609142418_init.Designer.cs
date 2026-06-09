@@ -12,8 +12,13 @@ using StellarMinds.Infraestructura.EF;
 namespace StellarMinds.Infraestructura.Migrations
 {
     [DbContext(typeof(StellarMindContext))]
+<<<<<<<< HEAD:StellarMinds/StellarMinds.Infraestructura/Migrations/20260609173522_Init.Designer.cs
     [Migration("20260609173522_Init")]
     partial class Init
+========
+    [Migration("20260609142418_init")]
+    partial class init
+>>>>>>>> da228bf33b9421111e583b58206a646ecc0a6518:StellarMinds/StellarMinds.Infraestructura/Migrations/20260609142418_init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,6 +122,9 @@ namespace StellarMinds.Infraestructura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CoordinadorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -124,6 +132,8 @@ namespace StellarMinds.Infraestructura.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CoordinadorId");
 
                     b.HasIndex("PrestamoId");
 
@@ -332,11 +342,19 @@ namespace StellarMinds.Infraestructura.Migrations
 
             modelBuilder.Entity("StellarMinds.LogicaNegocio.Entidades.Prestamos.AuditoriaPrestamo", b =>
                 {
+                    b.HasOne("StellarMinds.LogicaNegocio.Entidades.Usuarios.Usuario", "Coordinador")
+                        .WithMany()
+                        .HasForeignKey("CoordinadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StellarMinds.LogicaNegocio.Entidades.Prestamos.Prestamo", "Prestamo")
                         .WithMany()
                         .HasForeignKey("PrestamoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Coordinador");
 
                     b.Navigation("Prestamo");
                 });

@@ -19,11 +19,16 @@ namespace StellarMinds.LogicaNegocio.VO
 
         private void Validar()
         {
-            string patronMagnitud = @"^-?\d+([.,]\d{2})$";
+            // Forzamos que se convierta a string usando punto decimal y siempre con dos decimales ("F2")
+            // Ejemplo: -1.4 -> "-1.40"
+            string valorTexto = Valor.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
 
-            if (!Regex.IsMatch(Valor.ToString(), patronMagnitud))
+            // La regex ahora solo se preocupa por validar sobre un formato controlado y seguro
+            string patronMagnitud = @"^-?\d+(\.\d{2})$";
+
+            if (!Regex.IsMatch(valorTexto, patronMagnitud))
             {
-                throw new VOMagnitudAparenteInvalidaException("La magnitud debe ser un numero con exactamente dos decimales.");
+                throw new VOMagnitudAparenteInvalidaException("La magnitud debe tener un formato numérico válido.");
             }
         }
     }

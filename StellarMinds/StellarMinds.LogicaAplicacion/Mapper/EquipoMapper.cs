@@ -1,5 +1,4 @@
-﻿using System;
-using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+﻿using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaNegocio.Entidades.Equipos;
 
 namespace StellarMinds.LogicaAplicacion.Mapper
@@ -15,22 +14,22 @@ namespace StellarMinds.LogicaAplicacion.Mapper
 
             if (equipoDto.TipoEquipo == "Telescopio")
             {
-                return new Telescopio(equipoDto.Id, equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.Apertura.Value, equipoDto.RelacionFocal, equipoDto.DistanciaFocal.Value, equipoDto.Peso.Value);
+                return new Telescopio(equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.Apertura.Value, equipoDto.RelacionFocal, equipoDto.DistanciaFocal.Value, equipoDto.Peso.Value);
             }
 
             if (equipoDto.TipoEquipo == "Ocular")
             {
-                return new Ocular(equipoDto.Id, equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.Diametro.Value, equipoDto.AnguloVision.Value);
+                return new Ocular(equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.Diametro.Value, equipoDto.AnguloVision.Value);
             }
 
             if (equipoDto.TipoEquipo == "Camara")
             {
-                return new Camara(equipoDto.Id, equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.TipoSensorCamara.Value, equipoDto.TamanioPixel.Value, equipoDto.Resolucion.Value);
+                return new Camara(equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.TipoSensorCamara.Value, equipoDto.TamanioPixel.Value, equipoDto.Resolucion.Value);
             }
 
             if (equipoDto.TipoEquipo == "Montura")
             {
-                return new Montura(equipoDto.Id, equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.TipoMontura.Value, equipoDto.CargaUtilSoportada.Value, equipoDto.Computarizada.Value);
+                return new Montura(equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.TipoMontura.Value, equipoDto.CargaUtilSoportada.Value, equipoDto.Computarizada.Value);
             }
             return null;
         }
@@ -44,25 +43,26 @@ namespace StellarMinds.LogicaAplicacion.Mapper
 
             if (equipoDto.TipoEquipo == "Telescopio")
             {
-                return new Telescopio(equipoDto.Id, equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.Apertura.Value, equipoDto.RelacionFocal, equipoDto.DistanciaFocal.Value, equipoDto.Peso.Value);
+                return new Telescopio(equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.Apertura.Value, equipoDto.RelacionFocal, equipoDto.DistanciaFocal.Value, equipoDto.Peso.Value);
             }
 
             if (equipoDto.TipoEquipo == "Ocular")
             {
-                return new Ocular(equipoDto.Id, equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.Diametro.Value, equipoDto.AnguloVision.Value);
+                return new Ocular(equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.Diametro.Value, equipoDto.AnguloVision.Value);
             }
 
             if (equipoDto.TipoEquipo == "Camara")
             {
-                return new Camara(equipoDto.Id, equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.TipoSensorCamara.Value, equipoDto.TamanioPixel.Value, equipoDto.Resolucion.Value);
+                return new Camara(equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.TipoSensorCamara.Value, equipoDto.TamanioPixel.Value, equipoDto.Resolucion.Value);
             }
 
             if (equipoDto.TipoEquipo == "Montura")
             {
-                return new Montura(equipoDto.Id, equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.TipoMontura.Value, equipoDto.CargaUtilSoportada.Value, equipoDto.Computarizada.Value);
+                return new Montura(equipoDto.Marca, equipoDto.Modelo, equipoDto.CantDisponible, equipoDto.TipoMontura.Value, equipoDto.CargaUtilSoportada.Value, equipoDto.Computarizada.Value);
             }
             return null;
         }
+
 
         public static ListarEquipoDto toDto(Equipo equipo)
         {
@@ -71,25 +71,25 @@ namespace StellarMinds.LogicaAplicacion.Mapper
             // Telescopio
             if (equipo is Telescopio t)
             {
-                    return new ListarEquipoDto(
-                    t.Id,
-                    "Telescopio",
-                    t.Marca,
-                    t.Modelo,
-                    t.CantDisponible,
-                    t.Apertura,
-                    t.RelacionFocal,
-                    t.DistanciaFocal,
-                    t.Peso,
-                    null, // TipoMontura
-                    null, // CargaUtilSoportada
-                    null, // Computarizada
-                    null, // TipoSensorCamara
-                    null, // Resolucion
-                    null, // TamanioPixel
-                    null, // Diametro
-                    null  // AnguloVision
-                );
+                return new ListarEquipoDto(
+                t.Id,
+                "Telescopio",
+                t.Marca,
+                t.Modelo,
+                t.CantDisponible,
+                t.Apertura,
+                t.RelacionFocal,
+                t.DistanciaFocal,
+                t.Peso,
+                null, // TipoMontura
+                null, // CargaUtilSoportada
+                null, // Computarizada
+                null, // TipoSensorCamara
+                null, // Resolucion
+                null, // TamanioPixel
+                null, // Diametro
+                null  // AnguloVision
+            );
             }
 
             // Ocular

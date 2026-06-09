@@ -1,10 +1,7 @@
-﻿namespace StellarMinds.LogicaAplicacion.Dtos.ObservacionDtos
+﻿namespace StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones
 {
-    public class AltaObservacionDto
+    public record AltaObservacionDto(int SocioId, int PrestamoId, int ObjetoCelesteId, DateTime FechaObservacion)
     {
-        public int SocioId { get; set; }
-        public int PrestamoId { get; set; }
-        public int ObjetoCelesteId { get; set; }
-        public DateTime FechaObservacion { get; set; }
+
     }
 }

@@ -125,6 +125,8 @@ namespace StellarMinds.Infraestructura.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CoordinadorId");
+
                     b.HasIndex("PrestamoId");
 
                     b.ToTable("AuditoriasPrestamos");
@@ -332,11 +334,19 @@ namespace StellarMinds.Infraestructura.Migrations
 
             modelBuilder.Entity("StellarMinds.LogicaNegocio.Entidades.Prestamos.AuditoriaPrestamo", b =>
                 {
+                    b.HasOne("StellarMinds.LogicaNegocio.Entidades.Usuarios.Usuario", "Coordinador")
+                        .WithMany()
+                        .HasForeignKey("CoordinadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StellarMinds.LogicaNegocio.Entidades.Prestamos.Prestamo", "Prestamo")
                         .WithMany()
                         .HasForeignKey("PrestamoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Coordinador");
 
                     b.Navigation("Prestamo");
                 });

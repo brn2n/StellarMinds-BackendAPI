@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
+﻿using Microsoft.EntityFrameworkCore;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
 namespace StellarMinds.Infraestructura.EF
@@ -21,9 +22,40 @@ namespace StellarMinds.Infraestructura.EF
 
         }
 
+        public IEnumerable<AuditoriaPrestamo> GetAll()
+        {
+            return _context.AuditoriasPrestamos
+                .Include(a => a.Coordinador)
+                .Include(a => a.Prestamo)
+                .OrderByDescending(a => a.Fecha)
+                .ToList();
+        }
+
+        public AuditoriaPrestamo GetById(int id)
+        {
+            AuditoriaPrestamo unPrestamo = _context.AuditoriasPrestamos.Find(id);
+            if (unPrestamo == null) throw new Exception("El Prestamo no existe.");
+            return unPrestamo;
+        }
+
         public IEnumerable<AuditoriaPrestamo> GetByIdCoordinador(int id)
         {
-            return _context.AuditoriasPrestamos.Where(a => a.Prestamo.SocioId == id).ToList();
+            return _context.AuditoriasPrestamos
+                .Include(a => a.Coordinador)
+                .Include(a => a.Prestamo)
+                .Where(a => a.CoordinadorId == id)
+                .OrderByDescending(a => a.Fecha)
+                .ToList();
+        }
+
+        public IEnumerable<AuditoriaPrestamo> GetByIdPrestamo(int prestamoId)
+        {
+            return _context.AuditoriasPrestamos
+                .Include(a => a.Coordinador)
+                .Include(a => a.Prestamo)
+                .Where(a => a.PrestamoId == prestamoId)
+                .OrderByDescending(a => a.Fecha)
+                .ToList();
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace StellarMinds.LogicaNegocio.Excepciones
+﻿using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
+
+namespace StellarMinds.LogicaNegocio.Excepciones
 {
-    public class VONombreCompletoInvalidoException : Exception
+    public class VONombreCompletoInvalidoException : LogicaNegocioExcepcion
     {
         public VONombreCompletoInvalidoException()
             : base("El nombre completo ingresado no es válido.")

@@ -50,6 +50,27 @@ namespace StellarMinds.LogicaAplicacion.Mapper
             throw new ArgumentException("Tipo de equipo desconocido", nameof(usuario));
         }
 
+        public static AltaUsuarioDto toDtoGet(Usuario usuario)
+        {
+            if (usuario == null) throw new ArgumentNullException(nameof(usuario));
+
+            if (usuario is Coordinador c)
+            {
+                return new AltaUsuarioDto(c.Id, c.NombreCompleto.Nombre, c.NombreCompleto.Apellido, c.Telefono.Value, c.Username.Value, c.VOPassword.Value, "Coordinador");
+            }
+
+            if (usuario is Administrador a)
+            {
+                return new AltaUsuarioDto(a.Id, a.NombreCompleto.Nombre, a.NombreCompleto.Apellido, a.Telefono.Value, a.Username.Value, a.VOPassword.Value, "Administrador");
+            }
+
+            if (usuario is Socio s)
+            {
+                return new AltaUsuarioDto(s.Id, s.NombreCompleto.Nombre, s.NombreCompleto.Apellido, s.Telefono.Value, s.Username.Value, s.VOPassword.Value, "Socio");
+            }
+            throw new ArgumentException("Tipo de equipo desconocido", nameof(usuario));
+        }
+
         public static IEnumerable<ListarUsuariosDto> ToListDto(IEnumerable<Usuario> usuarios)
         {
             List<ListarUsuariosDto> aux = new List<ListarUsuariosDto>();

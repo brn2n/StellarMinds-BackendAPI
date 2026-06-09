@@ -1,6 +1,6 @@
 ﻿namespace StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos
 {
-    public class ListadoPrestamoSocioDto
+    public record ListadoPrestamoSocioDto
     {
         public int Id { get; set; }
 

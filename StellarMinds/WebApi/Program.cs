@@ -2,16 +2,21 @@ using Libreria.WepApi.Services;
 using Microsoft.OpenApi;
 using StellarMinds.Infraestructura.EF;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+using StellarMinds.Infraestructura.InterfacesRepositorio.NochesObservaciones;
 using StellarMinds.Infraestructura.InterfacesRepositorio.ObjetosCelestes;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
+using StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.CasosUso.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU;
+using StellarMinds.LogicaAplicacion.CasosUso.Prestamos;
 using StellarMinds.LogicaAplicacion.CasosUso.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
+using StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
+using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using System.Reflection;
@@ -69,31 +74,43 @@ builder.Services.AddScoped<IRepositorioPrestamos, RepositorioPrestamo>();
 builder.Services.AddScoped<IRepositorioObjetosCelestes, RepositorioObjetoCeleste>();
 builder.Services.AddScoped<IRepositorioEquipo, RepositorioEquipo>();
 builder.Services.AddScoped<IRepositorioAuditoriaPrestamo, RepositorioAuditoriaPrestamo>();
+builder.Services.AddScoped<IRepositorioNochesObservaciones, RepositorioNocheObservaciones>();
 
 // Inyecto los casos de uso USUARIO
 builder.Services.AddScoped<ICUGetAll<ListarUsuariosDto>, ListarUsuarios>();
 builder.Services.AddScoped<ICUGetByTelescopio<ListarUsuariosDto>, ListadoSociosPorTelescopio>();
 builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
+builder.Services.AddScoped<ICUGetById<AltaUsuarioDto>, ObtenerUsuarioPorId>();
 
 // Inyecto los casos de uso EQUIPO
 builder.Services.AddScoped<ICUAlta<AltaEquipoDto>, AltaEquipo>();
 builder.Services.AddScoped<ICUGetAll<ListarEquipoDto>, ListarEquipos>();
 builder.Services.AddScoped<ICUGetById<ListarEquipoDto>, ObtenerEquipoPorId>();
 builder.Services.AddScoped<ICUDelete<AltaEquipoDto>, BajaEquipo>();
-builder.Services.AddScoped<ICUEdit<ListarEquipoDto>, EditarEquipo>();
+builder.Services.AddScoped<ICUEdit<AltaEquipoDto>, EditarEquipo>();
 
-// Inyecto los casos de uso builder.Services.AddScoped<
-builder.Services.AddScoped<ICUGetAll<ListadoPrestamoSocioDto>, ListarPrestamos>();
-builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
-builder.Services.AddScoped<ICUDelete<AltaPrestamoDto>, DevolverPrestamo>();
+// Inyecto los casos de uso Prestamo
+builder.Services.AddScoped<ICUAltaPrestamo, AltaPrestamo>();
 
+builder.Services.AddScoped<ICUDevolverPrestamo, DevolverPrestamo>();
 builder.Services.AddScoped<ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto>, ListarPrestamosSocioEntreFechas>();
+builder.Services.AddScoped<ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto>, ListarPrestamosEnPrestamoPorSocio>();
+builder.Services.AddScoped<ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
+builder.Services.AddScoped<ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
+builder.Services.AddScoped<ICUGetById<InfoAuditoriaPrestamosDto>, ObtenerPrestamoPorId>();
+
+
 
 // Inyecto los casos de uso ObjetosCelestes
+builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
 builder.Services.AddScoped<ICUGetAll<RankingObjetosPorSocioDto>, RankingObjetosPorSocio>();
 
+
+
+
 //Inyecto los casos de uso de NocheObservacion
-//builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
+builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
+builder.Services.AddScoped<ICUGetById<AltaObservacionDto>, GetObservacionById>();
 
 builder.Services.AddScoped<SeedData>();
 

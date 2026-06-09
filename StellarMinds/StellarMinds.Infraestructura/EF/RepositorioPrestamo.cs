@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
+﻿using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
 namespace StellarMinds.Infraestructura.EF
@@ -28,6 +29,16 @@ namespace StellarMinds.Infraestructura.EF
                                              && p.Estado == Estado.EN_PRESTAMO);
         }
 
+        public bool FueUsadoEnPrestamo(int id)
+        {
+            return _context.Prestamos.Any(p =>
+                (p.Telescopio != null && p.Telescopio.Id == id) ||
+                (p.Montura != null && p.Montura.Id == id) ||
+                (p.Camara != null && p.Camara.Id == id) ||
+                (p.Ocular != null && p.Ocular.Id == id)
+            );
+        }
+
         public IEnumerable<Prestamo> GetAll()
         {
             return _context.Prestamos.ToList();
@@ -36,8 +47,15 @@ namespace StellarMinds.Infraestructura.EF
         public Prestamo GetById(int id)
         {
             Prestamo unPrestamo = _context.Prestamos.Find(id);
-            if (unPrestamo == null) throw new Exception("El Prestamo no existe.");
+            if (unPrestamo == null) throw new NotFoundException("El prestamo no existe.");
             return unPrestamo;
+        }
+
+        public IEnumerable<Prestamo> GetPrestamosEnPrestamoPorSocio(int socioId)
+        {
+            return _context.Prestamos
+                .Where(p => p.SocioId == socioId && p.Estado == Estado.EN_PRESTAMO)
+                .ToList();
         }
 
         public IEnumerable<Prestamo> ListarEntreFechas(int socioId, int mes, int anio)

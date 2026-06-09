@@ -1,7 +1,7 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.NochesObservaciones;
 using StellarMinds.Infraestructura.InterfacesRepositorio.ObjetosCelestes;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
-using StellarMinds.LogicaAplicacion.Dtos.ObservacionDtos;
+using StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Entidades.NochesObservaciones;
 using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
@@ -25,14 +25,14 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones
             _repoObjetos = repoObjetos;
         }
 
-        public void Ejecutar(AltaObservacionDto dto)
+        public int Ejecutar(AltaObservacionDto dto)
         {
             Prestamo prestamo = _repoPrestamos.GetById(dto.PrestamoId);
 
             if (prestamo == null)
                 throw new Exception("No existe el préstamo seleccionado.");
 
-            if (prestamo.Socio.Id != dto.SocioId)
+            if (prestamo.SocioId != dto.SocioId)
                 throw new Exception("El préstamo no pertenece al socio logueado.");
 
             if (prestamo.Estado != Estado.EN_PRESTAMO)
@@ -52,7 +52,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones
                 objeto
             );
 
-            _repoObservaciones.Add(observacion);
+            return _repoObservaciones.Add(observacion);
         }
     }
 }

@@ -13,14 +13,14 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Equipos
         {
             _repo = repo;
         }
-        public void Ejecutar(AltaEquipoDto obj)
+        public int Ejecutar(AltaEquipoDto obj)
         {
             if (obj == null)
             {
                 throw new Exception("El Equipo no puede ser nulo");
             }
 
-            _repo.Add(EquipoMapper.FromDto(obj));
+            return _repo.Add(EquipoMapper.FromDto(obj));
         }
     }
 }

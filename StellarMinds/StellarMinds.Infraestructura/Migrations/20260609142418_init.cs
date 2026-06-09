@@ -125,7 +125,8 @@ namespace StellarMinds.Infraestructura.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Accion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PrestamoId = table.Column<int>(type: "int", nullable: false)
+                    PrestamoId = table.Column<int>(type: "int", nullable: false),
+                    CoordinadorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,6 +135,12 @@ namespace StellarMinds.Infraestructura.Migrations
                         name: "FK_AuditoriasPrestamos_Prestamos_PrestamoId",
                         column: x => x.PrestamoId,
                         principalTable: "Prestamos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AuditoriasPrestamos_Usuarios_CoordinadorId",
+                        column: x => x.CoordinadorId,
+                        principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -162,6 +169,11 @@ namespace StellarMinds.Infraestructura.Migrations
                         principalTable: "Prestamos",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AuditoriasPrestamos_CoordinadorId",
+                table: "AuditoriasPrestamos",
+                column: "CoordinadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AuditoriasPrestamos_PrestamoId",
