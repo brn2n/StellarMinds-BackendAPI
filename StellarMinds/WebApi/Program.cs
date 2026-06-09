@@ -8,6 +8,7 @@ using StellarMinds.Infraestructura.InterfacesRepositorio.NochesObservaciones;
 using StellarMinds.Infraestructura.InterfacesRepositorio.ObjetosCelestes;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+using StellarMinds.LogicaAplicacion.CasosUso.Auth;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
 using StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.CasosUso.ObjetosCelestes;
@@ -99,6 +100,9 @@ builder.Services.AddScoped<ICUGetAll<ListarUsuariosDto>, ListarUsuarios>();
 builder.Services.AddScoped<ICUGetByTelescopio<ListarUsuariosDto>, ListadoSociosPorTelescopio>();
 builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
 builder.Services.AddScoped<ICUGetById<AltaUsuarioDto>, ObtenerUsuarioPorId>();
+
+//LOG IN
+builder.Services.AddScoped<ICULogIn<LoginUsuariosDto>, LogIn>();
 
 // Inyecto los casos de uso EQUIPO
 builder.Services.AddScoped<ICUAlta<AltaEquipoDto>, AltaEquipo>();

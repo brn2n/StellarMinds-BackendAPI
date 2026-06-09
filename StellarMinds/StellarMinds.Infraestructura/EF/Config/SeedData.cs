@@ -1,6 +1,9 @@
 ﻿using StellarMinds.LogicaNegocio.Entidades.Equipos;
+using StellarMinds.LogicaNegocio.Entidades.NochesObservaciones;
+using StellarMinds.LogicaNegocio.Entidades.ObjetosCelestes;
 using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
+using StellarMinds.LogicaNegocio.VO;
 using StellarMinds.LogicaNegocio.VO.VOUsuario;
 
 namespace StellarMinds.Infraestructura.EF
@@ -24,6 +27,12 @@ namespace StellarMinds.Infraestructura.EF
 
             if (!_context.Prestamos.Any())
                 CrearPrestamos();
+
+            if (!_context.ObjetosCelestes.Any())
+                CrearObjetosCelestes();
+
+            if (!_context.NochesObservaciones.Any())
+                CrearNochesObservaciones();
         }
 
         private void CrearUsuarios()
@@ -85,112 +94,81 @@ namespace StellarMinds.Infraestructura.EF
 
         private void CrearEquipos()
         {
-            var equipos = new List<Equipo>
-            {
-                new Telescopio(
-                    "SkyWatcher",
-                    "Explorer 130P",
-                    5,
-                    130,
-                    "f/5",
-                    650,
-                    8
-                ),
+            _context.Equipos.AddRange(
+                // 10 telescopios
+                new Telescopio("SkyWatcher", "Explorer 130EQ", 5, 130, "f/5", 650, 12),
+                new Telescopio("Celestron", "AstroMaster 114EQ", 4, 114, "f/8.8", 1000, 9),
+                new Telescopio("Orion", "SpaceProbe 130ST", 4, 130, "f/5", 650, 11),
+                new Telescopio("Meade", "Polaris 127", 3, 127, "f/7.9", 1000, 10),
+                new Telescopio("Bresser", "Messier AR-102", 3, 102, "f/5.9", 600, 6),
+                new Telescopio("Explore Scientific", "FirstLight 80", 3, 80, "f/8", 640, 5),
+                new Telescopio("SkyWatcher", "Heritage 150P", 3, 150, "f/5", 750, 7),
+                new Telescopio("Celestron", "NexStar 6SE", 2, 150, "f/10", 1500, 14),
+                new Telescopio("Orion", "StarBlast 102", 3, 102, "f/6.5", 660, 6),
+                new Telescopio("Meade", "Infinity 90", 3, 90, "f/6.7", 600, 5),
 
-                new Telescopio(
-                    "Celestron",
-                    "AstroMaster 130EQ",
-                    4,
-                    130,
-                    "f/5",
-                    650,
-                    9
-                ),
+                // 10 monturas. Todas son Ecuatorial o Hibrida para que puedan usarse con Camara.
+                new Montura("SkyWatcher", "EQ3", 5, TipoMontura.Ecuatorial, 9.5, true),
+                new Montura("Celestron", "CG-4", 4, TipoMontura.Ecuatorial, 8.0, false),
+                new Montura("Orion", "Sirius EQ-G", 3, TipoMontura.Ecuatorial, 13.5, true),
+                new Montura("Meade", "LX85 Hybrid", 3, TipoMontura.Hibrida, 12.0, true),
+                new Montura("Bresser", "EXOS-2", 3, TipoMontura.Ecuatorial, 13.0, true),
+                new Montura("iOptron", "CEM26", 2, TipoMontura.Ecuatorial, 12.0, true),
+                new Montura("SkyWatcher", "AZ-EQ5", 2, TipoMontura.Hibrida, 15.0, true),
+                new Montura("Celestron", "Advanced VX", 2, TipoMontura.Ecuatorial, 14.0, true),
+                new Montura("Orion", "SkyView Pro", 3, TipoMontura.Ecuatorial, 9.0, false),
+                new Montura("Meade", "LX70", 2, TipoMontura.Ecuatorial, 9.0, false),
 
-                new Telescopio(
-                    "Meade",
-                    "Polaris 114",
-                    3,
-                    114,
-                    "f/8",
-                    900,
-                    7
-                ),
+                // 10 camaras
+                new Camara("ZWO", "ASI120MC", 5, TipoSensorCamara.CMOS, 1280, 3),
+                new Camara("Canon", "EOS Rebel T7", 4, TipoSensorCamara.CMOS, 2400, 4),
+                new Camara("Nikon", "D3500", 4, TipoSensorCamara.CMOS, 2400, 4),
+                new Camara("QHY", "QHY5III462C", 3, TipoSensorCamara.CMOS, 1920, 2),
+                new Camara("ZWO", "ASI224MC", 3, TipoSensorCamara.CMOS, 1304, 3),
+                new Camara("QHY", "QHY183C", 2, TipoSensorCamara.CMOS, 5544, 2),
+                new Camara("Atik", "414EX", 2, TipoSensorCamara.CCD, 1392, 6),
+                new Camara("SBIG", "STF-8300", 1, TipoSensorCamara.CCD, 3326, 5),
+                new Camara("Player One", "Neptune-C II", 2, TipoSensorCamara.CMOS, 2712, 2),
+                new Camara("Altair", "Hypercam 183C", 2, TipoSensorCamara.CMOS, 5440, 2),
 
-                new Montura(
-                    "SkyWatcher",
-                    "EQ3",
-                    4,
-                    TipoMontura.Ecuatorial,
-                    10,
-                    true
-                ),
+                // 10 oculares
+                new Ocular("Baader", "Hyperion 13mm", 5, 13, 68),
+                new Ocular("Celestron", "X-Cel LX 25mm", 5, 25, 60),
+                new Ocular("SkyWatcher", "Super 10mm", 5, 10, 52),
+                new Ocular("Orion", "Sirius Plossl 32mm", 4, 32, 52),
+                new Ocular("Explore Scientific", "82 11mm", 3, 11, 82),
+                new Ocular("Tele Vue", "Nagler 7mm", 2, 7, 82),
+                new Ocular("Meade", "Series 4000 26mm", 4, 26, 52),
+                new Ocular("Bresser", "Plossl 15mm", 4, 15, 50),
+                new Ocular("Vixen", "NPL 20mm", 3, 20, 50),
+                new Ocular("Omegon", "Cronus 5mm", 3, 5, 60),
 
-                new Montura(
-                    "Celestron",
-                    "CG-4",
-                    3,
-                    TipoMontura.Ecuatorial,
-                    12,
-                    false
-                ),
-
-                new Montura(
-                    "Orion",
-                    "Hybrid X",
-                    2,
-                    TipoMontura.Hibrida,
-                    15,
-                    true
-                ),
-
-                new Camara(
-                    "ZWO",
-                    "ASI120MC",
-                    4,
-                    TipoSensorCamara.CMOS,
-                    1280,
-                    4
-                ),
-
-                new Camara(
-                    "QHY",
-                    "QHY5III",
-                    3,
-                    TipoSensorCamara.CMOS,
-                    1920,
-                    3
-                ),
-
-                new Ocular(
-                    "Baader",
-                    "Hyperion 13mm",
-                    8,
-                    13,
-                    68
-                ),
-
-                new Ocular(
-                    "Celestron",
-                    "X-Cel LX 9mm",
-                    6,
-                    9,
-                    60
-                ),
-
-                new Ocular(
-                    "Explore Scientific",
-                    "14mm",
-                    5,
-                    14,
-                    82
-                )
-            };
-
-            _context.Equipos.AddRange(equipos);
+                //Para AltaPrestamo
+                new Ocular("Omegon", "Equipo4", 3, 5, 60),
+                new Camara("Altair", "Equipo3", 2, TipoSensorCamara.CMOS, 5440, 2),
+                new Montura("Meade", "Equipo2", 2, TipoMontura.Ecuatorial, 9.0, false),
+                new Telescopio("Meade", "Equipo1", 3, 90, "f/6.7", 600, 5)
+            );
             _context.SaveChanges();
         }
 
+        private void CrearObjetosCelestes()
+        {
+            _context.ObjetosCelestes.AddRange(
+                new ObjetoCeleste("Luna", "Planeta", new VOMagnitudAparente(-12.74)),
+                new ObjetoCeleste("Júpiter", "Planeta", new VOMagnitudAparente(-2.20)),
+                new ObjetoCeleste("Galaxia M42", "Galaxia", new VOMagnitudAparente(4.00)),
+                new ObjetoCeleste("Polaris", "Estrella", new VOMagnitudAparente(1.97)),
+                new ObjetoCeleste("Sirio", "Estrella", new VOMagnitudAparente(-1.46)),
+                new ObjetoCeleste("Andrómeda", "Galaxia", new VOMagnitudAparente(3.44)),
+                new ObjetoCeleste("Nebulosa del Cangrejo", "Nebulosa", new VOMagnitudAparente(8.40)),
+                new ObjetoCeleste("Marte", "Planeta", new VOMagnitudAparente(0.71)),
+                new ObjetoCeleste("Nebulosa del Anillo", "Nebulosa", new VOMagnitudAparente(8.80)),
+                new ObjetoCeleste("Betelgeuse", "Estrella", new VOMagnitudAparente(0.42))
+            );
+
+            _context.SaveChanges();
+        }
         private void CrearPrestamos()
         {
             var socios = _context.Usuarios.OfType<Socio>().ToList();
@@ -244,6 +222,30 @@ namespace StellarMinds.Infraestructura.EF
             };
 
             _context.Prestamos.AddRange(prestamos);
+            _context.SaveChanges();
+        }
+
+        private void CrearNochesObservaciones()
+        {
+            var prestamos = _context.Prestamos.ToList();
+            var objetosCelestes = _context.ObjetosCelestes.ToList();
+
+            if (prestamos.Count < 10 || objetosCelestes.Count < 10)
+            {
+                throw new Exception("No hay suficientes préstamos o objetos celestes creados para generar las noches de observación.");
+            }
+            _context.NochesObservaciones.AddRange(
+                new NocheObservacion(DateTime.Now.AddDays(1), prestamos[0], objetosCelestes[0]),
+                new NocheObservacion(DateTime.Now.AddDays(2), prestamos[1], objetosCelestes[1]),
+                new NocheObservacion(DateTime.Now.AddDays(3), prestamos[2], objetosCelestes[2]),
+                new NocheObservacion(DateTime.Now.AddDays(4), prestamos[3], objetosCelestes[3]),
+                new NocheObservacion(DateTime.Now.AddDays(5), prestamos[4], objetosCelestes[4]),
+                new NocheObservacion(DateTime.Now.AddDays(6), prestamos[5], objetosCelestes[5]),
+                new NocheObservacion(DateTime.Now.AddDays(7), prestamos[6], objetosCelestes[6]),
+                new NocheObservacion(DateTime.Now.AddDays(8), prestamos[7], objetosCelestes[7]),
+                new NocheObservacion(DateTime.Now.AddDays(9), prestamos[8], objetosCelestes[8]),
+                new NocheObservacion(DateTime.Now.AddDays(10), prestamos[9], objetosCelestes[9])
+            );
             _context.SaveChanges();
         }
     }
