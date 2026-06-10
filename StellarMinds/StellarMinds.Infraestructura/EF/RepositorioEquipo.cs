@@ -15,7 +15,7 @@ namespace StellarMinds.Infraestructura.EF
 
         public int Add(Equipo Obj)
         {
-            if (Obj == null) throw new Exception("El equipo no puede ser nulo.");
+            if (Obj == null) throw new NullReferenceException("El equipo no puede ser nulo.");
             Obj.Validar();
             _context.Equipos.Add(Obj);
             _context.SaveChanges();

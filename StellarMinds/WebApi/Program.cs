@@ -119,6 +119,7 @@ builder.Services.AddScoped<ICUGetAll<ListadoPrestamoSocioDto>, ListarPrestamos>(
 builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
 builder.Services.AddScoped<ICUDelete<AltaPrestamoDto>, DevolverPrestamo>();
 builder.Services.AddScoped<ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto>, ListarPrestamosSocioEntreFechas>();
+builder.Services.AddScoped<ICUGetById<InfoAuditoriaPrestamosDto>, ObtenerPrestamoPorId>();
 
 
 // Auditoría de préstamos

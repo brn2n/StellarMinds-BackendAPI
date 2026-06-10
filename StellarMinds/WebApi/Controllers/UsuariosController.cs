@@ -37,7 +37,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("ListadoTelescopio{id}")]
+        [HttpGet("ListadoTelescopio/{id}")]
         public IActionResult ListarSocioPorTelescopio(int id)
         {
             try

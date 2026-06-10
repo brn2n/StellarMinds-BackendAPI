@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
+﻿using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Equipos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CUExceptions.CUEquipo;
@@ -38,10 +39,10 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
             Usuario usuario = _repoUsuario.GetById(dto.SocioId);
 
             if (usuario == null)
-                throw new Exception("No existe el usuario seleccionado.");//Excepcion personalizada siempre (por ej badrequest)
+                throw new NotFoundException("No existe el usuario seleccionado.");//Excepcion personalizada siempre (por ej badrequest)
 
             if (usuario is not Socio socio)
-                throw new Exception("El usuario seleccionado no es un socio.");
+                throw new BadRequestException("El usuario seleccionado no es un socio.");
 
             Telescopio? telescopio = ObtenerTelescopioDisponible(dto.TelescopioId);
             Montura? montura = ObtenerMonturaDisponible(dto.MonturaId);
@@ -144,7 +145,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
                 );
 
             if (estaEnPrestamo)
-                throw new Exception(
+                throw new ConflictException(
                     $"El equipo {equipo.Marca} {equipo.Modelo} (Id: {equipo.Id}) ya se encuentra en préstamo."
                 );
         }

@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+﻿using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 
 namespace StellarMinds.Infraestructura.EF
@@ -12,7 +13,7 @@ namespace StellarMinds.Infraestructura.EF
         }
         public int Add(Usuario Obj)
         {
-            if (Obj == null) throw new Exception("El usuario no puede ser nulo.");
+            if (Obj == null) throw new NullReferenceException("El usuario no puede ser nulo.");
             _context.Usuarios.Add(Obj);
             _context.SaveChanges();
             return Obj.Id;
@@ -31,14 +32,14 @@ namespace StellarMinds.Infraestructura.EF
         public Usuario GetCoordinadorById()
         {
             Usuario unUsuario = _context.Usuarios.OfType<Coordinador>().FirstOrDefault();
-            if (unUsuario == null) throw new Exception("No existe un coordinador registrado.");
+            if (unUsuario == null) throw new NotFoundException("No existe un coordinador registrado.");
             return unUsuario;
         }
 
         public Usuario GetById(int id)
         {
             Usuario unUsuario = _context.Usuarios.Find(id);
-            if (unUsuario == null) throw new Exception("El Usuario no existe.");
+            if (unUsuario == null) throw new NotFoundException("El Usuario no existe.");
             return unUsuario;
         }
 

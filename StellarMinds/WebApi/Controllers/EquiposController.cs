@@ -128,6 +128,10 @@ namespace StellarMinds.WebApp.Controllers
             {
                 return StatusCode(409, e.Error());
             }
+            catch (LogicaNegocioExcepcion e)
+            {
+                return StatusCode(409, e.Error());
+            }
             catch (Exception)
             {
                 return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));

@@ -14,7 +14,7 @@ namespace StellarMinds.Infraestructura.EF
 
         public int Add(Prestamo Obj)
         {
-            if (Obj == null) throw new Exception("El préstamo no puede ser nulo.");//NUCNA NEW EXPECTION GENERICA
+            if (Obj == null) throw new NotFoundException("El préstamo no puede ser nulo.");//NUCNA NEW EXPECTION GENERICA
             _context.Prestamos.Add(Obj);
             _context.SaveChanges();
             return Obj.Id;
