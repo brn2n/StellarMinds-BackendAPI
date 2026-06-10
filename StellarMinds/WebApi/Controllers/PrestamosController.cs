@@ -37,7 +37,6 @@ namespace WebApi.Controllers
             }
         }
 
-
         [HttpPost]
         public IActionResult Alta([FromBody] AltaPrestamoDto dto)
         {
@@ -126,23 +125,6 @@ namespace WebApi.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
-            }
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            try
-            {
-                return Ok(_get.Execute(id));
-            }
-            catch (NotFoundException e)
-            {
-                return StatusCode(404, new { e.Message });
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
     }
