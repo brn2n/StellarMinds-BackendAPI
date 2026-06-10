@@ -37,8 +37,7 @@ namespace StellarMinds.Infraestructura.EF
 
         private void CrearUsuarios()
         {
-            var usuarios = new List<Usuario>
-            {
+            _context.Usuarios.AddRange(
                 new Administrador(
                     0,
                     new VONombreCompleto("Admin", "Sistema"),
@@ -61,7 +60,7 @@ namespace StellarMinds.Infraestructura.EF
                 new Socio(0, new VONombreCompleto("Diego", "Suarez"), new VOTelefono(99333448), new VOUsername("diego"), new VOPassword("Socio123!")),
                 new Socio(0, new VONombreCompleto("Valentina", "Rodriguez"), new VOTelefono(99333449), new VOUsername("vale"), new VOPassword("Socio123!")),
                 new Socio(0, new VONombreCompleto("Brendon", "Buriol"), new VOTelefono(99333449), new VOUsername("colo"), new VOPassword("Socio123!"))
-            };
+                );
 
             _context.SaveChanges();
         }
