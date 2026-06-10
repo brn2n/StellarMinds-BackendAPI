@@ -10,7 +10,10 @@ namespace WebApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class UsuariosController(ICUGetAll<ListarUsuariosDto> _listar, ICUAlta<AltaUsuarioDto> _alta, ICUGetByTelescopio<ListarUsuariosDto> _getByTelescopio) : ControllerBase
+    public class UsuariosController(ICUGetAll<ListarUsuariosDto> _listar,
+                                    ICUAlta<AltaUsuarioDto> _alta,
+                                    ICUGetByTelescopio<ListarUsuariosDto> _getByTelescopio,
+                                    ICUGetById<AltaUsuarioDto> _get) : ControllerBase
     {
         //HASHEAR CONTRASENIA, VALIDAR DATOS DE LOGIN (servicio para generar el token)... caso de uso para CULOGIN TRANSFORMAS A JWT
         //USUARIO DTO CON LOS DATOS QUE ME FALTAN SI ESTA TODO CORRECTO, GUARDAS EN BUSCAR POR USERNAME MATODO, (CREAR REPOGETBYNAME)
@@ -74,12 +77,6 @@ namespace WebApi.Controllers
             }
         }
 
-        //Sería un POST? Qué carajos se hace con las sessions? Ahora son solo tokens?
-        [HttpPost("Logout")]
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("login");
-        }
+
     }
 }
