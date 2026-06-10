@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using StellarMinds.Infraestructura.EF.Exceptions;
-using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaNegocio.Entidades.Usuarios;
 
 namespace StellarMinds.Infraestructura.EF
@@ -27,17 +25,7 @@ namespace StellarMinds.Infraestructura.EF
 
         public IEnumerable<Usuario> GetUsuariosPorTelescoio(int id)
         {
-            var socios = _context.Prestamos
-                .Include(p => p.Socio)
-                .Where(p => p.TelescopioId == id)
-                .Select(p => p.Socio)
-                .ToList();
-
-            return socios
-                .GroupBy(s => s.Id)
-                .Select(g => g.First())
-                .OrderByDescending(s => s.NombreCompleto.Nombre)
-                .ToList();
+            return _context.Prestamos.Where(p => p.TelescopioId == id).Select(p => p.Socio).Distinct().OrderByDescending(u => u.NombreCompleto.Nombre).ToList();
         }
 
         public Usuario GetCoordinadorById()
@@ -50,7 +38,7 @@ namespace StellarMinds.Infraestructura.EF
         public Usuario GetById(int id)
         {
             Usuario unUsuario = _context.Usuarios.Find(id);
-            if (unUsuario == null) throw new NotFoundException("El Usuario no existe.");
+            if (unUsuario == null) throw new Exception("El Usuario no existe.");
             return unUsuario;
         }
 

@@ -15,17 +15,20 @@ namespace StellarMinds.WebApp.Controllers
         private readonly ICUAlta<AltaEquipoDto> _alta;
         private readonly ICUDelete<AltaEquipoDto> _delete;
         private readonly ICUEdit<AltaEquipoDto> _update;
+        private ICUGetById<ListarEquipoDto> _get;
 
         public EquiposController(
             ICUAlta<AltaEquipoDto> altaEquipo,
             ICUGetAll<ListarEquipoDto> listarEquipo,
             ICUDelete<AltaEquipoDto> deleteEquipo,
-            ICUEdit<AltaEquipoDto> updateEquipo)
+            ICUEdit<AltaEquipoDto> updateEquipo,
+            ICUGetById<ListarEquipoDto> get)
         {
             _alta = altaEquipo;
             _listar = listarEquipo;
             _delete = deleteEquipo;
             _update = updateEquipo;
+            _get = get;
         }
 
         [HttpGet]
@@ -46,13 +49,30 @@ namespace StellarMinds.WebApp.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                return Ok(_get.Execute(id));
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, new { e.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
+            }
+        }
+
         [HttpPost]
         public IActionResult AltaEquipo([FromBody] AltaEquipoDto equipo)
         {
             try
             {
-                _alta.Ejecutar(equipo);
-                return Ok();
+                int id = _alta.Ejecutar(equipo);
+                return CreatedAtAction(nameof(GetById), new { id = id }, id);
             }
             catch (BadRequestException e)
             {
@@ -73,8 +93,10 @@ namespace StellarMinds.WebApp.Controllers
         {
             try
             {
-                _delete.Execute(id);
-                return Ok();
+                //_delete.Execute(Id);
+                //return Ok(Id);
+                int idEliminado = _delete.Execute(id);
+                return Ok(idEliminado);
             }
             catch (NotFoundException e)
             {
@@ -96,7 +118,7 @@ namespace StellarMinds.WebApp.Controllers
             try
             {
                 _update.Execute(id, equipo);
-                return Ok();
+                return Ok(id);
             }
             catch (NotFoundException e)
             {
