@@ -137,12 +137,6 @@ namespace StellarMinds.Infraestructura.Migrations
                         principalTable: "Prestamos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AuditoriasPrestamos_Usuarios_CoordinadorId",
-                        column: x => x.CoordinadorId,
-                        principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,11 +163,6 @@ namespace StellarMinds.Infraestructura.Migrations
                         principalTable: "Prestamos",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AuditoriasPrestamos_CoordinadorId",
-                table: "AuditoriasPrestamos",
-                column: "CoordinadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AuditoriasPrestamos_PrestamoId",

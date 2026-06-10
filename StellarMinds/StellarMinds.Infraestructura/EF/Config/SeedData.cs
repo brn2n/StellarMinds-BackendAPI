@@ -54,41 +54,15 @@ namespace StellarMinds.Infraestructura.EF
                     new VOUsername("coord"),
                     new VOPassword("Coord123!")
                 ),
-
-                new Socio(
-                    0,
-                    new VONombreCompleto("Fernando", "Arriondo"),
-                    new VOTelefono(99333444),
-                    new VOUsername("fer"),
-                    new VOPassword("Fer12345!")
-                ),
-
-                new Socio(
-                    0,
-                    new VONombreCompleto("Mateo", "Perez"),
-                    new VOTelefono(99444555),
-                    new VOUsername("mateo"),
-                    new VOPassword("Mateo123!")
-                ),
-
-                new Socio(
-                    0,
-                    new VONombreCompleto("Valentina", "Suarez"),
-                    new VOTelefono(99555666),
-                    new VOUsername("vale"),
-                    new VOPassword("Vale12345!")
-                ),
-
-                new Socio(
-                    0,
-                    new VONombreCompleto("Sofia", "Rodriguez"),
-                    new VOTelefono(99666777),
-                    new VOUsername("sofia"),
-                    new VOPassword("Sofia123!")
-                )
+                new Socio(0, new VONombreCompleto("Fernando", "Arriondo"), new VOTelefono(99333444), new VOUsername("fer"), new VOPassword("Fer12345!")),
+                new Socio(0, new VONombreCompleto("Juan", "Perez"), new VOTelefono(99333445), new VOUsername("juan"), new VOPassword("Socio123!")),
+                new Socio(0, new VONombreCompleto("Ana", "Lopez"), new VOTelefono(99333446), new VOUsername("ana"), new VOPassword("Socio123!")),
+                new Socio(0, new VONombreCompleto("Sofia", "Gomez"), new VOTelefono(99333447), new VOUsername("sofia"), new VOPassword("Socio123!")),
+                new Socio(0, new VONombreCompleto("Diego", "Suarez"), new VOTelefono(99333448), new VOUsername("diego"), new VOPassword("Socio123!")),
+                new Socio(0, new VONombreCompleto("Valentina", "Rodriguez"), new VOTelefono(99333449), new VOUsername("vale"), new VOPassword("Socio123!")),
+                new Socio(0, new VONombreCompleto("Brendon", "Buriol"), new VOTelefono(99333449), new VOUsername("colo"), new VOPassword("Socio123!"))
             };
 
-            _context.Usuarios.AddRange(usuarios);
             _context.SaveChanges();
         }
 
@@ -172,58 +146,32 @@ namespace StellarMinds.Infraestructura.EF
         private void CrearPrestamos()
         {
             var socios = _context.Usuarios.OfType<Socio>().ToList();
-
             var telescopios = _context.Equipos.OfType<Telescopio>().ToList();
             var monturas = _context.Equipos.OfType<Montura>().ToList();
             var camaras = _context.Equipos.OfType<Camara>().ToList();
             var oculares = _context.Equipos.OfType<Ocular>().ToList();
 
-            var prestamos = new List<Prestamo>
-            {
-                new Prestamo(
-                    DateTime.Now.AddDays(10),
-                    socios[0],
-                    monturas[0],
-                    oculares[0],
-                    telescopios[0],
-                    camaras[0],
-                    Estado.EN_PRESTAMO
-                ),
+            if (socios.Count < 6 || telescopios.Count < 10 || monturas.Count < 10 || camaras.Count < 10 || oculares.Count < 10)
+                throw new Exception("No hay suficientes datos para crear los préstamos del seed.");
 
-                new Prestamo(
-                    DateTime.Now.AddDays(15),
-                    socios[1],
-                    monturas[1],
-                    oculares[1],
-                    telescopios[1],
-                    camaras[1],
-                    Estado.EN_PRESTAMO
-                ),
+            _context.Prestamos.AddRange(
+                // Todos tienen FechaFin futura y usan equipos distintos.
+                // Así no chocan con la lógica de equipos EN_PRESTAMO.
+                new Prestamo(DateTime.Now.AddDays(7), socios[0], monturas[0], oculares[0], telescopios[0], camaras[0], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(8), socios[1], monturas[1], oculares[1], telescopios[1], camaras[1], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(9), socios[2], monturas[2], oculares[2], telescopios[2], camaras[2], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(10), socios[3], monturas[3], oculares[3], telescopios[3], camaras[3], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(11), socios[4], monturas[4], oculares[4], telescopios[4], camaras[4], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(12), socios[5], monturas[5], oculares[5], telescopios[5], camaras[5], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(13), socios[0], monturas[6], oculares[6], telescopios[6], camaras[6], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(14), socios[1], monturas[7], oculares[7], telescopios[7], camaras[7], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(15), socios[2], monturas[8], oculares[8], telescopios[8], camaras[8], Estado.EN_PRESTAMO),
+                new Prestamo(DateTime.Now.AddDays(16), socios[3], monturas[9], oculares[9], telescopios[9], camaras[9], Estado.EN_PRESTAMO)
+            );
 
-                new Prestamo(
-                    DateTime.Now.AddDays(-5),
-                    socios[2],
-                    monturas[2],
-                    oculares[2],
-                    telescopios[2],
-                    camaras[0],
-                    Estado.EN_PRESTAMO
-                ),
-
-                new Prestamo(
-                    DateTime.Now.AddDays(-20),
-                    socios[3],
-                    monturas[0],
-                    oculares[0],
-                    telescopios[0],
-                    camaras[1],
-                    Estado.DEVUELTO
-                )
-            };
-
-            _context.Prestamos.AddRange(prestamos);
             _context.SaveChanges();
         }
+
 
         private void CrearNochesObservaciones()
         {
