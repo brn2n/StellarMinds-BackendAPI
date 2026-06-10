@@ -15,7 +15,7 @@ namespace StellarMinds.WebApp.Controllers
         private readonly ICUAlta<AltaEquipoDto> _alta;
         private readonly ICUDelete<AltaEquipoDto> _delete;
         private readonly ICUEdit<AltaEquipoDto> _update;
-        private ICUGetById<ListarEquipoDto> _get;
+        private readonly ICUGetById<ListarEquipoDto> _get;
 
         public EquiposController(
             ICUAlta<AltaEquipoDto> altaEquipo,
