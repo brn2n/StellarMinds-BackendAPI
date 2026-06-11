@@ -10,7 +10,22 @@ namespace StellarMinds.LogicaAplicacion.Mapper
             if (prestamo == null)
                 throw new ArgumentNullException(nameof(prestamo));
 
-            return new ListadoPrestamoSocioDto(prestamo.Id, prestamo.SocioId, prestamo.FechaInicio, prestamo.FechaFin, prestamo.Estado.ToString(), prestamo.EstaVigente());
+            return new ListadoPrestamoSocioDto
+            {
+                Id = prestamo.Id,
+                SocioId = prestamo.SocioId,
+
+                TelescopioId = prestamo.TelescopioId,
+                CamaraId = prestamo.CamaraId,
+                MonturaId = prestamo.MonturaId,
+                OcularId = prestamo.OcularId,
+
+                FechaInicio = prestamo.FechaInicio,
+                FechaFin = prestamo.FechaFin,
+
+                Estado = prestamo.Estado.ToString(),
+                EstaAtrasado = prestamo.EstaVigente()
+            };
         }
 
         public static IEnumerable<ListadoPrestamoSocioDto> ToListDto(IEnumerable<Prestamo> prestamo)

@@ -10,6 +10,7 @@ using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.CasosUso.Auth;
 using StellarMinds.LogicaAplicacion.CasosUso.Equipos;
+using StellarMinds.LogicaAplicacion.CasosUso.IA;
 using StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.CasosUso.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU;
@@ -102,6 +103,10 @@ builder.Services.AddScoped<ICUGetById<AltaUsuarioDto>, ObtenerUsuarioPorId>();
 builder.Services.AddScoped<ICUGetAllSocios<ListarUsuariosDto>, ListarSocios>();
 builder.Services.AddScoped<ICUGetAllCoordinadores<ListarUsuariosDto>, ListarCoordinadores>();
 
+//Inyecto caso de uso para IA
+builder.Services.AddScoped<ICUGetById<ListarObjetoCelesteDto>, GetObjetoCelesteById>();
+builder.Services.AddScoped<ICUGetById<ListadoPrestamoSocioDto>, GetPrestamoByIdSocioDto>();
+builder.Services.AddScoped<ICUGetById<ListarEquipoDto>, GetEquipoByIdDto>();
 //LOG IN
 builder.Services.AddScoped<ICULogIn<LoginUsuariosDto>, LogIn>();
 
@@ -136,7 +141,10 @@ builder.Services.AddScoped<ICUGetById<AltaObservacionDto>, GetObservacionById>()
 
 builder.Services.AddScoped<SeedData>();
 
+
 //Inyecto el Context de la BD
+
+
 builder.Services.AddDbContext<StellarMindContext>(
     //option => option.UseSqlServer(builder.Configuration.GetConnectionString("Libreria"))
     );

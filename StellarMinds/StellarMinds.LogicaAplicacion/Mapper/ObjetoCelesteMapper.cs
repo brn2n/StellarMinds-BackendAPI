@@ -21,5 +21,17 @@ namespace StellarMinds.LogicaAplicacion.Mapper
             }
             return aux;
         }
+
+        internal static ListarObjetoCelesteDto ToDto(ObjetoCeleste objeto)
+        {
+            if (objeto == null)
+                throw new ArgumentNullException(nameof(objeto));
+
+            return new ListarObjetoCelesteDto(
+                objeto.Id,
+                objeto.Nombre,
+                objeto.Tipo.ToString()
+            );
+        }
     }
 }

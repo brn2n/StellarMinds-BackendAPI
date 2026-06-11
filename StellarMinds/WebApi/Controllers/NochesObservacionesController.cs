@@ -46,9 +46,7 @@ namespace WebApi.Controllers
                 Console.WriteLine(e.Message);
                 return StatusCode(500, new
                 {
-                    mensaje = e.Message,
-                    inner = e.InnerException?.Message,
-                    stack = e.StackTrace
+                    mensaje = e.Message
                 });
             }
         }
