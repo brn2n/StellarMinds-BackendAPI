@@ -22,6 +22,26 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 
             prestamo.Devolver();
 
+            if (prestamo.Telescopio != null)
+            {
+                prestamo.Telescopio.AumentarDisponibilidad();
+            }
+
+            if (prestamo.Montura != null)
+            {
+                prestamo.Montura.AumentarDisponibilidad();
+            }
+
+            if (prestamo.Camara != null)
+            {
+                prestamo.Camara.AumentarDisponibilidad();
+            }
+
+            if (prestamo.Ocular != null)
+            {
+                prestamo.Ocular.AumentarDisponibilidad();
+            }
+
             _repoPrestamo.Update(id, prestamo);
 
             _repoAuditoria.Add(new AuditoriaPrestamo(

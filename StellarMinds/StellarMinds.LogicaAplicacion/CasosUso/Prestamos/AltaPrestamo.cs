@@ -61,6 +61,29 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 
             _repoPrestamo.Add(prestamo);
 
+            if (telescopio != null)
+            {
+                telescopio.DescontarDisponibilidad();
+                _repoEquipo.Update(telescopio.Id, telescopio);
+            }
+
+            if (montura != null)
+            {
+                montura.DescontarDisponibilidad();
+                _repoEquipo.Update(montura.Id, montura);
+            }
+
+            if (camara != null)
+            {
+                camara.DescontarDisponibilidad();
+                _repoEquipo.Update(camara.Id, camara);
+            }
+
+            if (ocular != null)
+            {
+                ocular.DescontarDisponibilidad();
+                _repoEquipo.Update(ocular.Id, ocular);
+            }
             _repoAuditoria.Add(new AuditoriaPrestamo(
                 "Alta Prestamo",
                 prestamo.Id,
@@ -132,22 +155,12 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 
         private void ValidarDisponible(Equipo equipo)
         {
-            bool estaEnPrestamo = _repoPrestamo
-                .GetAll()
-                .Any(p =>
-                    p.Estado == Estado.EN_PRESTAMO &&
-                    (
-                        p.Telescopio?.Id == equipo.Id ||
-                        p.Montura?.Id == equipo.Id ||
-                        p.Camara?.Id == equipo.Id ||
-                        p.Ocular?.Id == equipo.Id
-                    )
-                );
-
-            if (estaEnPrestamo)
+            if (equipo.CantDisponible <= 0)
+            {
                 throw new ConflictException(
-                    $"El equipo {equipo.Marca} {equipo.Modelo} (Id: {equipo.Id}) ya se encuentra en préstamo."
+                    $"El equipo {equipo.Marca} {equipo.Modelo} no tiene unidades disponibles."
                 );
+            }
         }
     }
 }

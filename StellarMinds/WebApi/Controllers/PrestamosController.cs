@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
@@ -6,6 +7,7 @@ using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
 using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
+using System.Security.Claims;
 
 namespace WebApi.Controllers
 {
@@ -96,7 +98,39 @@ namespace WebApi.Controllers
                 });
             }
         }
+        [Authorize(Roles = "Socio")]
+        [HttpGet("MisPrestamosActivos")]
+        public IActionResult MisPrestamosActivos()
+        {
+            try
+            {
+                var claim = User.FindFirst(ClaimTypes.Sid);
 
+                if (claim == null)
+                    return Unauthorized();
+
+                int socioId = int.Parse(claim.Value);
+
+                var prestamos = _listarPrestamosActivosSocio.Execute(socioId);
+
+                if (!prestamos.Any())
+                    return NoContent();
+
+                return Ok(prestamos);
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message
+                });
+            }
+        }
         //[Authorize(Roles = "Coordinador")]
         [HttpGet("EnPrestamo/{socioId}")]
         public IActionResult ListarPrestamosActivosSocio(int socioId)
@@ -163,8 +197,8 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
         }
-        [Authorize]
-        [Authorize(Roles = "Socio")]
+        //[Authorize]
+        //[Authorize(Roles = "Socio")]
         [HttpGet("socio/{socioId}/mes/{mes}/anio/{anio}")]
         public IActionResult ListarEntreFechas(int socioId, int mes, int anio)
         {

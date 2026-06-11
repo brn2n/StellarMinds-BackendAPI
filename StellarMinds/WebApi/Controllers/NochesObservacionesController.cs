@@ -4,12 +4,13 @@ using StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
 using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
+using System.Security.Claims;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NochesObservacionesController(ICUAlta<AltaObservacionDto> _altaObservacion, ICUGetById<AltaObservacionDto> _get) : ControllerBase
+    public class NochesObservacionesController(ICUAltaObservacion<AltaObservacionDto> _altaObservacion, ICUGetById<AltaObservacionDto> _get) : ControllerBase
     {
         //[Authorize(Roles = "Socio")]
         [HttpPost]
@@ -17,9 +18,16 @@ namespace WebApi.Controllers
         {
             try
             {
-                int id = _altaObservacion.Ejecutar(dto);
-                return CreatedAtAction(nameof(GetById), new { id = id }, id);
+                var claim = User.FindFirst(ClaimTypes.Sid);
 
+                if (claim == null)
+                    return Unauthorized();
+
+                int socioId = int.Parse(claim.Value);
+
+                int id = _altaObservacion.Ejecutar(dto, socioId);
+
+                return CreatedAtAction(nameof(GetById), new { id = id }, id);
             }
             catch (BadRequestException e)
             {

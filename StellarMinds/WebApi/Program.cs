@@ -131,9 +131,10 @@ builder.Services.AddScoped<ICUGetById<InfoAuditoriaPrestamosDto>, ObtenerPrestam
 
 // Inyecto los casos de uso OBJETOS CELESTES
 builder.Services.AddScoped<ICUGetAll<RankingObjetosPorSocioDto>, RankingObjetosPorSocio>();
+builder.Services.AddScoped<ICUGetAll<ListarObjetoCelesteDto>, ListarObjetosCelestes>();
 
 // Inyecto los casos de uso NOCHES / OBSERVACIONES
-builder.Services.AddScoped<ICUAlta<AltaObservacionDto>, AltaObservacion>();
+builder.Services.AddScoped<ICUAltaObservacion<AltaObservacionDto>, AltaObservacion>();
 builder.Services.AddScoped<ICUGetById<AltaObservacionDto>, GetObservacionById>();
 
 builder.Services.AddScoped<SeedData>();

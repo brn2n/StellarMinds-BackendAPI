@@ -9,7 +9,7 @@ using StellarMinds.LogicaNegocio.Entidades.Prestamos;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones
 {
-    public class AltaObservacion : ICUAlta<AltaObservacionDto>
+    public class AltaObservacion : ICUAltaObservacion<AltaObservacionDto>
     {
         private readonly IRepositorioNochesObservaciones _repoObservaciones;
         private readonly IRepositorioPrestamos _repoPrestamos;
@@ -25,14 +25,14 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.NochesObservaciones
             _repoObjetos = repoObjetos;
         }
 
-        public int Ejecutar(AltaObservacionDto dto)
+        public int Ejecutar(AltaObservacionDto dto, int socioId)
         {
             Prestamo prestamo = _repoPrestamos.GetById(dto.PrestamoId);
 
             if (prestamo == null)
                 throw new Exception("No existe el préstamo seleccionado.");
 
-            if (prestamo.SocioId != dto.SocioId)
+            if (prestamo.SocioId != socioId)
                 throw new Exception("El préstamo no pertenece al socio logueado.");
 
             if (prestamo.Estado != Estado.EN_PRESTAMO)

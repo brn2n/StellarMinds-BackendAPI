@@ -9,10 +9,33 @@ namespace WebApi.Controllers
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ObjetosCelestesController(
-        ICUGetAll<RankingObjetosPorSocioDto> _rankingObjetos
+        ICUGetAll<RankingObjetosPorSocioDto> _rankingObjetos,
+        ICUGetAll<ListarObjetoCelesteDto> _listarObjetos
     ) : ControllerBase
     {
-        //[Authorize(Roles = "Administrador,Coordinador,Socio")]
+        [HttpGet]
+        public IActionResult Index()
+        {
+            try
+            {
+                var objetos = _listarObjetos.Ejecutar();
+
+                if (!objetos.Any())
+                    return NoContent();
+
+                return Ok(objetos);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message,
+                    stack = e.StackTrace
+                });
+            }
+        }
+
         [HttpGet("ranking")]
         public IActionResult Ranking()
         {
@@ -35,7 +58,6 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
                 return StatusCode(500, new
                 {
                     mensaje = e.Message,
