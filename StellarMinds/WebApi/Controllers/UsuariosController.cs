@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
@@ -36,7 +37,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
             }
         }
-
+        [Authorize(Roles = "Administrador,Coordinador")]
         [HttpGet("ListadoTelescopio/{id}")]
         public IActionResult ListarSocioPorTelescopio(int id)
         {
@@ -49,6 +50,10 @@ namespace WebApi.Controllers
                 }
                 return Ok(telescopios);
             }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, e.Error());
+            }
             catch (BadRequestException e)
             {
                 return StatusCode(400, e.Error());
@@ -58,7 +63,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, e.Message));
             }
         }
-
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Create([FromBody] AltaUsuarioDto obj)
         {
