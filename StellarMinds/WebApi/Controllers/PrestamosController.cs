@@ -38,6 +38,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
         }
+
         [Authorize(Roles = "Coordinador")]
         [HttpPost]
         public IActionResult Alta([FromBody] AltaPrestamoDto dto)
@@ -69,12 +70,18 @@ namespace WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "Coordinador")]
         [HttpGet("EnPrestamo/{socioId}")]
         public IActionResult ListarPrestamosActivosSocio(int socioId)
         {
             try
             {
-                return Ok(_listarPrestamosActivosSocio.Execute(socioId));
+                var prestamos = _listarPrestamosActivosSocio.Execute(socioId);
+
+                if (!prestamos.Any())
+                    return NoContent();
+
+                return Ok(prestamos);
             }
             catch (NotFoundException e)
             {
