@@ -1,10 +1,10 @@
 {
   "info": {
-    "_postman_id": "e8757a9f-661e-4507-800c-54ec76ccc602",
+    "_postman_id": "f9136b08-761f-4735-abe0-8033194e5c83",
     "name": "ObligatorioTest",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "29148441",
-    "_collection_link": "https://go.postman.co/collection/29148441-e8757a9f-661e-4507-800c-54ec76ccc602?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/29148441-f9136b08-761f-4735-abe0-8033194e5c83?source=collection_link"
   },
   "item": [
     {
@@ -17,7 +17,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"Usuario\": \"carlitosalto@gmail.com\",\r\n    \"Password\": \"223e12\"\r\n}",
+              "raw": "{\r\n    \"Usuario\": \"cod\",\r\n    \"Password\": \"Coord123!\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -52,7 +52,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"nombre\": \"Brendon\",\r\n    \"apellido\": \"Sistema\",\r\n    \"telefono\": 99111222,\r\n    \"username\": \"admin\",\r\n    \"password\": \"Admin123!\",\r\n    \"rol\": \"Administrador\"\r\n}",
+              "raw": "{\r\n    \"nombre\": \"Brendon\",\r\n    \"apellido\": \"Sistema\",\r\n    \"telefono\": 99111222,\r\n    \"username\": \"admin\",\r\n    \"password\": \"Admin123!\",\r\n    \"rol\": \"Coordinador\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -288,6 +288,37 @@
               }
             },
             "url": {
+              "raw": "https://localhost:7027/api/v1/equipos/45",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "equipos",
+                "45"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteEquipo - Conflict",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
               "raw": "https://localhost:7027/api/v1/equipos/5",
               "protocol": "https",
               "host": [
@@ -439,7 +470,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 43,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}",
+              "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 65,\r\n  \"telescopioId\": 43,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -468,19 +499,29 @@
       "name": "RF5",
       "item": [
         {
-          "name": "DevolucionPrestamo - Listado",
+          "name": "ListadoPrestamoPorSocio",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 44,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}"
+              "raw": ""
             },
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/enprestamo",
+              "raw": "https://localhost:7027/api/v1/prestamos/EnPrestamo/3",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -490,16 +531,15 @@
                 "api",
                 "v1",
                 "prestamos",
-                "socio",
-                "5",
-                "enprestamo"
+                "EnPrestamo",
+                "3"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "DevolucionPrestamo - Listado - No Content",
+          "name": "ListadoPrestamoPorSocio - No Content",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -511,7 +551,7 @@
               "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 44,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}"
             },
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/socio/1/enprestamo",
+              "raw": "https://localhost:7027/api/v1/prestamos/EnPrestamo/800",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -521,9 +561,8 @@
                 "api",
                 "v1",
                 "prestamos",
-                "socio",
-                "1",
-                "enprestamo"
+                "EnPrestamo",
+                "800"
               ]
             }
           },
@@ -539,7 +578,7 @@
               "raw": "{\r\n  \"fechaFin\": \"2026-10-08T04:46:20.153Z\",\r\n  \"socioId\": 5,\r\n  \"telescopioId\": 44,\r\n  \"monturaId\": 22,\r\n  \"camaraId\": 11,\r\n  \"ocularId\": 33\r\n}"
             },
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/devolver/44444",
+              "raw": "https://localhost:7027/api/v1/prestamos/44444/devolver",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -549,8 +588,8 @@
                 "api",
                 "v1",
                 "prestamos",
-                "devolver",
-                "44444"
+                "44444",
+                "devolver"
               ]
             }
           },
@@ -566,7 +605,7 @@
               "raw": ""
             },
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/devolver/1",
+              "raw": "https://localhost:7027/api/v1/prestamos/1/devolver",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -576,8 +615,8 @@
                 "api",
                 "v1",
                 "prestamos",
-                "devolver",
-                "1"
+                "1",
+                "devolver"
               ]
             }
           },
@@ -605,6 +644,45 @@
                 "prestamos",
                 "devolver",
                 "a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListadoSocios",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://localhost:7027/api/v1/prestamos/socios",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "socios"
               ]
             }
           },
@@ -656,7 +734,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/entreFechas?mes=6&anio=2026",
+              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/mes/6/anio/2026",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -668,17 +746,10 @@
                 "prestamos",
                 "socio",
                 "5",
-                "entreFechas"
-              ],
-              "query": [
-                {
-                  "key": "mes",
-                  "value": "6"
-                },
-                {
-                  "key": "anio",
-                  "value": "2026"
-                }
+                "mes",
+                "6",
+                "anio",
+                "2026"
               ]
             }
           },
@@ -690,7 +761,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/entreFechas?mes=6&anio=2027",
+              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/mes/6/anio/2027",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -702,17 +773,10 @@
                 "prestamos",
                 "socio",
                 "5",
-                "entreFechas"
-              ],
-              "query": [
-                {
-                  "key": "mes",
-                  "value": "6"
-                },
-                {
-                  "key": "anio",
-                  "value": "2027"
-                }
+                "mes",
+                "6",
+                "anio",
+                "2027"
               ]
             }
           },
@@ -724,7 +788,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/entreFechas?mes=a&anio=2027",
+              "raw": "https://localhost:7027/api/v1/prestamos/socio/5/mes/a/anio/2027",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -736,17 +800,10 @@
                 "prestamos",
                 "socio",
                 "5",
-                "entreFechas"
-              ],
-              "query": [
-                {
-                  "key": "mes",
-                  "value": "a"
-                },
-                {
-                  "key": "anio",
-                  "value": "2027"
-                }
+                "mes",
+                "a",
+                "anio",
+                "2027"
               ]
             }
           },
@@ -763,7 +820,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/usuarios/listadoportelescopio/44",
+              "raw": "https://localhost:7027/api/v1/usuarios/listadotelescopio/44",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -773,7 +830,7 @@
                 "api",
                 "v1",
                 "usuarios",
-                "listadoportelescopio",
+                "listadotelescopio",
                 "44"
               ]
             }
@@ -786,7 +843,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/usuarios/listadoportelescopio/4444",
+              "raw": "https://localhost:7027/api/v1/usuarios/listadotelescopio/4444",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -796,7 +853,7 @@
                 "api",
                 "v1",
                 "usuarios",
-                "listadoportelescopio",
+                "listadotelescopio",
                 "4444"
               ]
             }
@@ -809,7 +866,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/usuarios/listadoportelescopio/a",
+              "raw": "https://localhost:7027/api/v1/usuarios/listadotelescopio/a",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -819,7 +876,7 @@
                 "api",
                 "v1",
                 "usuarios",
-                "listadoportelescopio",
+                "listadotelescopio",
                 "a"
               ]
             }
@@ -832,7 +889,7 @@
       "name": "RF10",
       "item": [
         {
-          "name": "RankingNocheObservacion",
+          "name": "RankingObjetosCelestes",
           "request": {
             "method": "GET",
             "header": [],
@@ -859,12 +916,12 @@
       "name": "RF11",
       "item": [
         {
-          "name": "AuditoriaPrestamos",
+          "name": "ListadoAuditoriaPorCoordinador",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/auditoria?coordinadorId=5",
+              "raw": "https://localhost:7027/api/v1/auditoria/2",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -873,26 +930,20 @@
               "path": [
                 "api",
                 "v1",
-                "prestamos",
-                "auditoria"
-              ],
-              "query": [
-                {
-                  "key": "coordinadorId",
-                  "value": "5"
-                }
+                "auditoria",
+                "2"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "AuditoriaPrestamos - No Content",
+          "name": "ListadoAuditoriaPorCoordinador - Not Found",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/auditoria?coordinadorId=44",
+              "raw": "https://localhost:7027/api/v1/auditoria/888",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -901,26 +952,20 @@
               "path": [
                 "api",
                 "v1",
-                "prestamos",
-                "auditoria"
-              ],
-              "query": [
-                {
-                  "key": "coordinadorId",
-                  "value": "44"
-                }
+                "auditoria",
+                "888"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "AuditoriaPrestamos - (!!)  Bad Request",
+          "name": "AuditoriaPrestamosListadoAuditoriaPorCoordinador- (!!)  Bad Request",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:7027/api/v1/prestamos/auditoria?coordinadorId=a",
+              "raw": "https://localhost:7027/api/v1/auditoria/a",
               "protocol": "https",
               "host": [
                 "localhost"
@@ -929,14 +974,99 @@
               "path": [
                 "api",
                 "v1",
-                "prestamos",
-                "auditoria"
+                "auditoria",
+                "a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DetallePrestamo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/auditoria/prestamo/1",
+              "protocol": "https",
+              "host": [
+                "localhost"
               ],
-              "query": [
-                {
-                  "key": "coordinadorId",
-                  "value": "a"
-                }
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "auditoria",
+                "prestamo",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DetallePrestamo - Not Found",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/auditoria/prestamo/10000",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "auditoria",
+                "prestamo",
+                "10000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DetallePrestamo - Bad Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/auditoria/prestamo/a",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "auditoria",
+                "prestamo",
+                "a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListadoCoordinadores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7027/api/v1/auditoria/coordinadores",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7027",
+              "path": [
+                "api",
+                "v1",
+                "auditoria",
+                "coordinadores"
               ]
             }
           },
