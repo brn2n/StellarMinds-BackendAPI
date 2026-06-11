@@ -1,6 +1,7 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
-using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaAplicacion.Mapper;
 
 public class ListarPrestamosEnPrestamoPorSocio
     : ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto>
@@ -16,13 +17,6 @@ public class ListarPrestamosEnPrestamoPorSocio
     {
         var prestamos = _repoPrestamos.GetPrestamosEnPrestamoPorSocio(socioId);
 
-        return prestamos.Select(p => new ListadoPrestamoSocioDto
-        {
-            Id = p.Id,
-            FechaInicio = p.FechaInicio,
-            FechaFin = p.FechaFin,
-            Estado = p.Estado.ToString(),
-            EstaAtrasado = !p.EstaVigente()
-        });
+        return PrestamoMapper.ToListDto(_repoPrestamos.GetPrestamosEnPrestamoPorSocio(socioId));
     }
 }
