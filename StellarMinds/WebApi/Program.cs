@@ -24,7 +24,6 @@ using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using System.Reflection;
 using System.Text;
-using RepositorioEquipo = StellarMinds.Infraestructura.EF.RepositorioEquipo;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -110,9 +109,6 @@ builder.Services.AddScoped<ICUAlta<AltaEquipoDto>, AltaEquipo>();
 builder.Services.AddScoped<ICUGetAll<ListarEquipoDto>, ListarEquipos>();
 builder.Services.AddScoped<ICUGetById<ListarEquipoDto>, ObtenerEquipoPorId>();
 builder.Services.AddScoped<ICUDelete<AltaEquipoDto>, BajaEquipo>();
-
-
-
 builder.Services.AddScoped<ICUEdit<AltaEquipoDto>, EditarEquipo>();
 
 // Inyecto los casos de uso PRESTAMO
@@ -120,14 +116,13 @@ builder.Services.AddScoped<ICUGetAll<ListadoPrestamoSocioDto>, ListarPrestamos>(
 builder.Services.AddScoped<ICUAlta<AltaPrestamoDto>, AltaPrestamo>();
 builder.Services.AddScoped<ICUDelete<AltaPrestamoDto>, DevolverPrestamo>();
 builder.Services.AddScoped<ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto>, ListarPrestamosSocioEntreFechas>();
-builder.Services.AddScoped<ICUGetById<InfoAuditoriaPrestamosDto>, ObtenerPrestamoPorId>();
+builder.Services.AddScoped<ICUGetById<ListadoPrestamoSocioDto>, ObtenerPrestamoPorId>();
 builder.Services.AddScoped<ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto>, ListarPrestamosEnPrestamoPorSocio>();
 
 
 // Auditoría de préstamos
-builder.Services.AddScoped<ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
-builder.Services.AddScoped<ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto>, AuditoriaPrestamos>();
-builder.Services.AddScoped<ICUGetById<InfoAuditoriaPrestamosDto>, ObtenerPrestamoPorId>();
+builder.Services.AddScoped<ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto>, ListarAuditoriaPrestamos>();
+builder.Services.AddScoped<ICUGetById<ListadoPrestamoSocioDto>, ObtenerPrestamoPorId>();
 
 // Inyecto los casos de uso OBJETOS CELESTES
 builder.Services.AddScoped<ICUGetAll<RankingObjetosPorSocioDto>, RankingObjetosPorSocio>();

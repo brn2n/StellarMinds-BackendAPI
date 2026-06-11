@@ -13,7 +13,7 @@ namespace StellarMinds.Infraestructura.EF
         }
         public int Add(Usuario Obj)
         {
-            if (Obj == null) throw new NullReferenceException("El usuario no puede ser nulo.");
+            if (Obj == null) throw new BadRequestException("El usuario no puede ser nulo.");
             _context.Usuarios.Add(Obj);
             _context.SaveChanges();
             return Obj.Id;
@@ -33,11 +33,15 @@ namespace StellarMinds.Infraestructura.EF
         {
             return _context.Usuarios.OfType<Socio>().ToList();
         }
-        public Usuario GetCoordinadorById()
+        public Usuario GetCoordinadorById(int id)
         {
-            Usuario unUsuario = _context.Usuarios.OfType<Coordinador>().FirstOrDefault();
+            Usuario unUsuario = _context.Usuarios.OfType<Coordinador>().FirstOrDefault(u => u.Id == id);
             if (unUsuario == null) throw new NotFoundException("No existe un coordinador registrado.");
             return unUsuario;
+        }
+        public bool ExisteCoordinador(int id)
+        {
+            return _context.Usuarios.OfType<Coordinador>().Any(u => u.Id == id);
         }
 
         public Usuario GetById(int id)

@@ -41,7 +41,6 @@ namespace StellarMinds.Infraestructura.EF
         public IEnumerable<AuditoriaPrestamo> GetByIdCoordinador(int id)
         {
             return _context.AuditoriasPrestamos
-                .Include(a => a.CoordinadorId)
                 .Include(a => a.Prestamo)
                 .Where(a => a.CoordinadorId == id)
                 .OrderByDescending(a => a.Fecha)

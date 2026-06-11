@@ -1,22 +1,22 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
-using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
+using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaAplicacion.Mapper;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.Prestamos
 {
-    public class ObtenerPrestamoPorId : ICUGetById<InfoAuditoriaPrestamosDto>
+    public class ObtenerPrestamoPorId : ICUGetById<ListadoPrestamoSocioDto>
     {
-        private IRepositorioAuditoriaPrestamo _repo;
+        private IRepositorioPrestamos _repo;
 
-        public ObtenerPrestamoPorId(IRepositorioAuditoriaPrestamo repo)
+        public ObtenerPrestamoPorId(IRepositorioPrestamos repo)
         {
             _repo = repo;
         }
 
-        public InfoAuditoriaPrestamosDto Execute(int id)
+        public ListadoPrestamoSocioDto Execute(int id)
         {
-            return AuditoriaPrestamosMapper.ToDto(_repo.GetById(id));
+            return PrestamoMapper.ToDto(_repo.GetById(id));
         }
     }
 }

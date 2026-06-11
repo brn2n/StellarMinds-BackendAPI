@@ -1,6 +1,7 @@
 ﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Prestamos;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaAplicacion.Mapper;
 
 namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 {
@@ -15,18 +16,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.PrestamoCU
 
         public IEnumerable<ListadoPrestamoSocioDto> Ejecutar()
         {
-            return _repoPrestamo.GetAll()
-                .Select(p => new ListadoPrestamoSocioDto
-                {
-                    Id = p.Id,
-                    SocioId = p.SocioId,
-                    FechaInicio = p.FechaInicio,
-                    FechaFin = p.FechaFin,
-                    Estado = p.Estado.ToString(),
-                    EstaAtrasado = p.Estado.ToString() == "EN_PRESTAMO"
-                                   && DateTime.Today > p.FechaFin.Date
-                })
-                .ToList();
+            return PrestamoMapper.ToListDto(_repoPrestamo.GetAll());
         }
     }
 }
