@@ -78,7 +78,7 @@ namespace StellarMinds.LogicaNegocio.Entidades.Prestamos
 
         public bool EstaVigente()
         {
-            return Estado == Estado.EN_PRESTAMO && FechaFin >= DateTime.Today;
+            return Estado == Estado.EN_PRESTAMO && FechaFin <= DateTime.Today;
         }
 
         public void Devolver()

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -11,13 +12,7 @@ namespace WebApi.Controllers
     [ApiController]
     public class UsuariosController(ICUGetAll<ListarUsuariosDto> _listar, ICUAlta<AltaUsuarioDto> _alta, ICUGetByTelescopio<ListarUsuariosDto> _getByTelescopio, ICUGetById<AltaUsuarioDto> _get) : ControllerBase
     {
-        //HASHEAR CONTRASENIA, VALIDAR DATOS DE LOGIN (servicio para generar el token)... caso de uso para CULOGIN TRANSFORMAS A JWT
-        //USUARIO DTO CON LOS DATOS QUE ME FALTAN SI ESTA TODO CORRECTO, GUARDAS EN BUSCAR POR USERNAME MATODO, (CREAR REPOGETBYNAME)
-        //THROW NEW EXCEPTION SI NO EXISTE USUARIO NI NADA, LUEGO DE VALIDADO, SEGUIS A VALIDAR LA CONTRASE;A CON LA CONTRASE;A YA HASHEADA,
-        //SI EL IF DE ESE RESULTADO DA OK SEGUIS CON LO SIGUIENTE, DTOJTWUSERDTO EL USER QUE RECOLECTASTE Y AHI DEVOLVES EL TOKEN, INTERFAZ
-        //DEVUELVE UN STRING Y ACEPTA UN T DEL LOGIN.
-        //CONTROLLER ENVIA LOGINDTO, CU LO RECIBE, USA GETUSUARIOBYUSERNAME, CON ESTO OBTENGO EL OBJETO PARA VALIDAR LA CONTRASENIA INGRESADA
-        //CON LA HASHEADA. RECIEN AHI GENERO EL TOKEN CON EL DTOJTWUSERDTO Y LO RETORNO COMO STRING
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -35,7 +30,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
             }
         }
-        //[Authorize(Roles = "Administrador,Coordinador")]
+        [Authorize(Roles = "Administrador,Coordinador")]
         [HttpGet("ListadoTelescopio/{id}")]
         public IActionResult ListarSocioPorTelescopio(int id)
         {
@@ -61,7 +56,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, e.Message));
             }
         }
-        //[Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Create([FromBody] AltaUsuarioDto obj)
         {

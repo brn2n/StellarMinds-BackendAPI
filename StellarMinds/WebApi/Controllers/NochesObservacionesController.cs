@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.NochesObservaciones;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -12,7 +13,7 @@ namespace WebApi.Controllers
     [ApiController]
     public class NochesObservacionesController(ICUAltaObservacion<AltaObservacionDto> _altaObservacion, ICUGetById<AltaObservacionDto> _get) : ControllerBase
     {
-        //[Authorize(Roles = "Socio")]
+        [Authorize(Roles = "Socio")]
         [HttpPost]
         public IActionResult Alta([FromBody] AltaObservacionDto dto)
         {

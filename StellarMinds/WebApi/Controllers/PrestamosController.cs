@@ -22,6 +22,7 @@ namespace WebApi.Controllers
         ICUGetById<ListadoPrestamoSocioDto> _get
     ) : ControllerBase
     {
+        [Authorize(Roles = "Coordinador")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -40,7 +41,7 @@ namespace WebApi.Controllers
             }
         }
 
-        //[Authorize(Roles = "Coordinador")]
+        [Authorize(Roles = "Coordinador")]
         [HttpPost]
         public IActionResult Alta([FromBody] AltaPrestamoDto dto)
         {
@@ -97,6 +98,7 @@ namespace WebApi.Controllers
                 });
             }
         }
+
         [Authorize(Roles = "Socio")]
         [HttpGet("MisPrestamosActivos")]
         public IActionResult MisPrestamosActivos()
@@ -130,7 +132,7 @@ namespace WebApi.Controllers
                 });
             }
         }
-        //[Authorize(Roles = "Coordinador")]
+        [Authorize(Roles = "Coordinador")]
         [HttpGet("EnPrestamo/{socioId}")]
         public IActionResult ListarPrestamosActivosSocio(int socioId)
         {
@@ -178,7 +180,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
-        //[Authorize(Roles = "Coordinador")]
+        [Authorize(Roles = "Coordinador")]
         [HttpPut("{id}/devolver")]
         public IActionResult Devolver(int id)
         {
@@ -204,8 +206,8 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
         }
-        //[Authorize]
-        //[Authorize(Roles = "Socio")]
+
+        [Authorize(Roles = "Socio")]
         [HttpGet("socio/{socioId}/mes/{mes}/anio/{anio}")]
         public IActionResult ListarEntreFechas(int socioId, int mes, int anio)
         {

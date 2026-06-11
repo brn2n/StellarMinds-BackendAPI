@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.CasosUso.IA;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
@@ -21,6 +22,7 @@ namespace WebApi.Controllers
         ICUGetById<ListarEquipoDto> _getEquipo
     ) : ControllerBase
     {
+        [Authorize(Roles = "Socio")]
         [HttpPost("evaluarObservacion")]
         public async Task<IActionResult> EvaluarObservacion([FromBody] EvaluarObservacionDto dto)
         {
@@ -160,6 +162,7 @@ No agregues texto fuera del JSON.
             }
         }
 
+        [Authorize(Roles = "Socio")]
         [HttpGet("objetosCelestes")]
         public IActionResult ListadoObjetos()
         {
@@ -184,6 +187,7 @@ No agregues texto fuera del JSON.
         }
 
         [HttpGet("prestamosvigentes")]
+        [Authorize(Roles = "Socio")]
         public IActionResult PrestamosVigentes()
         {
             try
