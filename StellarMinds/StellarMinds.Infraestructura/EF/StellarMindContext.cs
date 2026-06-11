@@ -24,7 +24,7 @@ namespace StellarMinds.Infraestructura.EF
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Initial Catalog=StellarMindDB;Integrated Security=True;");
+            optionsBuilder.UseSqlServer(@"Server=DBStellarMinds1.mssql.somee.com;Database=DBStellarMinds1;User Id=coloburiol23_SQLLogin_3;Password=h6cg5ayt8y;TrustServerCertificate=True;;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

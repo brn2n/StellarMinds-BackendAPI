@@ -12,7 +12,7 @@ using StellarMinds.Infraestructura.EF;
 namespace StellarMinds.Infraestructura.Migrations
 {
     [DbContext(typeof(StellarMindContext))]
-    [Migration("20260610224135_init")]
+    [Migration("20260611222636_init")]
     partial class init
     {
         /// <inheritdoc />
