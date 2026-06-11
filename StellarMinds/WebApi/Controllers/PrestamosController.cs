@@ -16,7 +16,8 @@ namespace WebApi.Controllers
         ICUDelete<AltaPrestamoDto> _devolverPrestamo,
         ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto> _listarEntreFechas,
         ICUGetAll<ListadoPrestamoSocioDto> _listarPrestamos,
-        ICUGetById<InfoAuditoriaPrestamosDto> _get
+        ICUGetById<InfoAuditoriaPrestamosDto> _get,
+        ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto> _getListadoPrestamoPorSocio
     ) : ControllerBase
     {
         [HttpGet]
@@ -36,6 +37,25 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
         }
+
+        [HttpGet("socio/{id}")]
+        public IActionResult PrestamoPorSocioId(int id)
+        {
+            try
+            {
+                var prestamos = _getListadoPrestamoPorSocio.Execute(id);
+
+                if (!prestamos.Any())
+                    return NoContent();
+
+                return Ok(prestamos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ErrorCodigo(500, ex.Message));
+            }
+        }
+
 
         [HttpPost]
         public IActionResult Alta([FromBody] AltaPrestamoDto dto)
