@@ -29,6 +29,10 @@ namespace StellarMinds.Infraestructura.EF
             return _context.Prestamos.Where(p => p.TelescopioId == id).Select(p => p.Socio).Distinct().OrderByDescending(u => u.NombreCompleto.Nombre).ToList();
         }
 
+        public IEnumerable<Socio> ObtenerTodosLosSocios()
+        {
+            return _context.Usuarios.OfType<Socio>().ToList();
+        }
         public Usuario GetCoordinadorById()
         {
             Usuario unUsuario = _context.Usuarios.OfType<Coordinador>().FirstOrDefault();

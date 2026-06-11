@@ -1,9 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
+using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
 using StellarMinds.LogicaNegocio.Excepciones.VOExceptions;
@@ -18,6 +17,7 @@ namespace WebApi.Controllers
         ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto> _listarEntreFechas,
         ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto> _listarPrestamosActivosSocio,
         ICUGetAll<ListadoPrestamoSocioDto> _listarPrestamos,
+        ICUGetAllSocios<ListarUsuariosDto> _listarSocios,
         ICUGetById<InfoAuditoriaPrestamosDto> _get
     ) : ControllerBase
     {
@@ -39,7 +39,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [Authorize(Roles = "Coordinador")]
+        //[Authorize(Roles = "Coordinador")]
         [HttpPost]
         public IActionResult Alta([FromBody] AltaPrestamoDto dto)
         {
@@ -70,7 +70,34 @@ namespace WebApi.Controllers
             }
         }
 
-        [Authorize(Roles = "Coordinador")]
+        [HttpGet("socios")]
+        public IActionResult ListarSocios()
+        {
+            try
+            {
+                var socios = _listarSocios.Ejecutar();
+
+                if (!socios.Any())
+                    return NoContent();
+
+                return Ok(socios);
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message,
+                    stack = e.StackTrace
+                });
+            }
+        }
+
+        //[Authorize(Roles = "Coordinador")]
         [HttpGet("EnPrestamo/{socioId}")]
         public IActionResult ListarPrestamosActivosSocio(int socioId)
         {
@@ -114,7 +141,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
-        [Authorize(Roles = "Coordinador")]
+        //[Authorize(Roles = "Coordinador")]
         [HttpPut("{id}/devolver")]
         public IActionResult Devolver(int id)
         {
@@ -136,8 +163,8 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
         }
-        [Authorize]
-        [Authorize(Roles = "Socio")]
+        //[Authorize]
+        //[Authorize(Roles = "Socio")]
         [HttpGet("socio/{socioId}/mes/{mes}/anio/{anio}")]
         public IActionResult ListarEntreFechas(int socioId, int mes, int anio)
         {

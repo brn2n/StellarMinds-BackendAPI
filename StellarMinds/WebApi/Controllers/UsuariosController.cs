@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -37,7 +35,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Hupp ahora estoy en otra cosa"));
             }
         }
-        [Authorize(Roles = "Administrador,Coordinador")]
+        //[Authorize(Roles = "Administrador,Coordinador")]
         [HttpGet("ListadoTelescopio/{id}")]
         public IActionResult ListarSocioPorTelescopio(int id)
         {
@@ -63,7 +61,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, e.Message));
             }
         }
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Create([FromBody] AltaUsuarioDto obj)
         {

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.Equipos;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -66,7 +65,7 @@ namespace StellarMinds.WebApp.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult AltaEquipo([FromBody] AltaEquipoDto equipo)
         {
@@ -89,7 +88,7 @@ namespace StellarMinds.WebApp.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -114,7 +113,7 @@ namespace StellarMinds.WebApp.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         [HttpPut("{id}")]
         public IActionResult Edit(int id, [FromBody] AltaEquipoDto equipo)
         {

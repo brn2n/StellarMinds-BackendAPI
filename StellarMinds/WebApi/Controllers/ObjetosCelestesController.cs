@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
@@ -13,7 +12,7 @@ namespace WebApi.Controllers
         ICUGetAll<RankingObjetosPorSocioDto> _rankingObjetos
     ) : ControllerBase
     {
-        [Authorize(Roles = "Administrador,Coordinador,Socio")]
+        //[Authorize(Roles = "Administrador,Coordinador,Socio")]
         [HttpGet("ranking")]
         public IActionResult Ranking()
         {
