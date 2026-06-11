@@ -163,8 +163,8 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
         }
-        //[Authorize]
-        //[Authorize(Roles = "Socio")]
+        [Authorize]
+        [Authorize(Roles = "Socio")]
         [HttpGet("socio/{socioId}/mes/{mes}/anio/{anio}")]
         public IActionResult ListarEntreFechas(int socioId, int mes, int anio)
         {
