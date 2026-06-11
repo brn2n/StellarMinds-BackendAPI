@@ -1,4 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.LogicaAplicacion.Dtos.ObjetosCelestes;
+using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using WebApi.Models.IA;
@@ -9,7 +14,7 @@ namespace WebApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class IAController : ControllerBase
+    public class IAController(ICUGetAll<ListarObjetoCelesteDto> _listarObjetos, ICUPrestamosVigentes<ListadoPrestamoSocioDto> _listarPrestamos) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -48,5 +53,62 @@ namespace WebApi.Controllers
 
             return Ok(departamentos);
         }
+
+        [HttpGet("objetosCelestes")]
+        public IActionResult ListadoObjetos()
+        {
+            try
+            {
+                var objetos = _listarObjetos.Ejecutar();
+
+                if (!objetos.Any())
+                    return NoContent();
+
+                return Ok(objetos);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message,
+                    stack = e.StackTrace
+                });
+            }
+        }
+
+        [HttpGet("prestamosvigentes")]
+        public IActionResult PrestamosVigentes()
+        {
+            try
+            {
+                var claim = User.FindFirst(ClaimTypes.Sid);
+
+                if (claim == null)
+                    return Unauthorized();
+
+                int socioId = int.Parse(claim.Value);
+
+                var prestamos = _listarPrestamos.Execute(socioId);
+
+                if (!prestamos.Any())
+                    return NoContent();
+
+                return Ok(prestamos);
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message
+                });
+            }
+        }
+
     }
 }
