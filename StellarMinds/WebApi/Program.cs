@@ -100,6 +100,7 @@ builder.Services.AddScoped<ICUGetByTelescopio<ListarUsuariosDto>, ListadoSociosP
 builder.Services.AddScoped<ICUAlta<AltaUsuarioDto>, AltaUsuario>();
 builder.Services.AddScoped<ICUGetById<AltaUsuarioDto>, ObtenerUsuarioPorId>();
 builder.Services.AddScoped<ICUGetAllSocios<ListarUsuariosDto>, ListarSocios>();
+builder.Services.AddScoped<ICUGetAllCoordinadores<ListarUsuariosDto>, ListarCoordinadores>();
 
 //LOG IN
 builder.Services.AddScoped<ICULogIn<LoginUsuariosDto>, LogIn>();

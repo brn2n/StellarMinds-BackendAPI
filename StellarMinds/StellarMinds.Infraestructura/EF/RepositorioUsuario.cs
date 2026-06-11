@@ -33,6 +33,11 @@ namespace StellarMinds.Infraestructura.EF
         {
             return _context.Usuarios.OfType<Socio>().ToList();
         }
+
+        public IEnumerable<Coordinador> ObtenerTodosLosCoordinadores()
+        {
+            return _context.Usuarios.OfType<Coordinador>().ToList();
+        }
         public Usuario GetCoordinadorById(int id)
         {
             Usuario unUsuario = _context.Usuarios.OfType<Coordinador>().FirstOrDefault(u => u.Id == id);

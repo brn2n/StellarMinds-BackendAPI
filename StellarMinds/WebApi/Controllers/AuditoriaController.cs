@@ -2,6 +2,7 @@
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
 using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
+using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
 
@@ -9,7 +10,9 @@ namespace WebApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class AuditoriaController(ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto> _listarAuditorias, ICUGetById<ListadoPrestamoSocioDto> _get) : ControllerBase
+    public class AuditoriaController(ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto> _listarAuditorias,
+        ICUGetById<ListadoPrestamoSocioDto> _get,
+        ICUGetAllCoordinadores<ListarUsuariosDto> _listarCoordinadores) : ControllerBase
     {
         [HttpGet("{coordinadorId}")]
         public IActionResult ListarAuditoriaPrestamos(int coordinadorId)
@@ -37,6 +40,34 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpGet("coordinadores")]
+        public IActionResult ListarCoordinadores()
+        {
+            try
+            {
+                var auditorias = _listarCoordinadores.Ejecutar();
+
+                if (!auditorias.Any())
+                    return NoContent();
+
+                return Ok(auditorias);
+            }
+            catch (BadRequestException e)
+            {
+                return StatusCode(400, e.Error());
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new ErrorCodigo(500, e.Message));
+            }
+        }
+
+
+
         [HttpGet("prestamo/{id}")]
         public IActionResult GetById(int id)
         {
@@ -53,28 +84,6 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
-
-        //[HttpGet("{prestamoId}/Detalles")]
-        //public IActionResult VerAuditoriaPrestamo(int prestamoId)
-        //{
-        //    try
-        //    {
-        //        var auditorias = _detalleAuditoria.Ejecutar(prestamoId);
-
-        //        if (!auditorias.Any())
-        //            return NoContent();
-
-        //        return Ok(auditorias);
-        //    }
-        //    catch (BadRequestException e)
-        //    {
-        //        return StatusCode(400, e.Error());
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(500, new ErrorCodigo(500, e.Message));
-        //    }
-        //}
     }
 }
 
