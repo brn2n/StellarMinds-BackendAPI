@@ -32,7 +32,7 @@ namespace StellarMinds.WebApp.Controllers
             _get = get;
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador, Coordinador")]
         [HttpGet]
         public IActionResult Index()
         {
