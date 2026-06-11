@@ -18,8 +18,7 @@ namespace WebApi.Controllers
         ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto> _listarEntreFechas,
         ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto> _listarPrestamosActivosSocio,
         ICUGetAll<ListadoPrestamoSocioDto> _listarPrestamos,
-        ICUGetById<InfoAuditoriaPrestamosDto> _get,
-        ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto> _getListadoPrestamoPorSocio
+        ICUGetById<InfoAuditoriaPrestamosDto> _get
     ) : ControllerBase
     {
         [HttpGet]
@@ -40,23 +39,6 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("socio/{id}")]
-        public IActionResult PrestamoPorSocioId(int id)
-        {
-            try
-            {
-                var prestamos = _getListadoPrestamoPorSocio.Execute(id);
-
-                if (!prestamos.Any())
-                    return NoContent();
-
-                return Ok(prestamos);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new ErrorCodigo(500, ex.Message));
-            }
-        }
         [Authorize(Roles = "Coordinador")]
         [HttpPost]
         public IActionResult Alta([FromBody] AltaPrestamoDto dto)
@@ -88,12 +70,18 @@ namespace WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "Coordinador")]
         [HttpGet("EnPrestamo/{socioId}")]
         public IActionResult ListarPrestamosActivosSocio(int socioId)
         {
             try
             {
-                return Ok(_listarPrestamosActivosSocio.Execute(socioId));
+                var prestamos = _listarPrestamosActivosSocio.Execute(socioId);
+
+                if (!prestamos.Any())
+                    return NoContent();
+
+                return Ok(prestamos);
             }
             catch (NotFoundException e)
             {
