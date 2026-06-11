@@ -1,43 +1,59 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
+using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
+using StellarMinds.LogicaNegocio.Excepciones.Error;
 
 namespace WebApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class AuditoriaController : ControllerBase
+    public class AuditoriaController(ICUListarAuditoriaPrestamos<InfoAuditoriaPrestamosDto> _listarAuditorias,
+        ICUDetalleAuditoriaPrestamo<InfoAuditoriaPrestamosDto> _detalleAuditoria) : ControllerBase
     {
-        // GET: api/<AuditoriaController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("Auditoria/{coordinadorId}")]
+        public IActionResult ListarAuditoriaPrestamos(int coordinadorId)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var auditorias = _listarAuditorias.Ejecutar(coordinadorId);
+
+                if (!auditorias.Any())
+                    return NoContent();
+
+                return Ok(auditorias);
+            }
+            catch (BadRequestException e)
+            {
+                return StatusCode(400, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new ErrorCodigo(500, e.Message));
+            }
         }
 
-        // GET api/<AuditoriaController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{prestamoId}/Auditoria")]
+        public IActionResult VerAuditoriaPrestamo(int prestamoId)
         {
-            return "value";
-        }
+            try
+            {
+                var auditorias = _detalleAuditoria.Ejecutar(prestamoId);
 
-        // POST api/<AuditoriaController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+                if (!auditorias.Any())
+                    return NoContent();
 
-        // PUT api/<AuditoriaController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AuditoriaController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+                return Ok(auditorias);
+            }
+            catch (BadRequestException e)
+            {
+                return StatusCode(400, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new ErrorCodigo(500, e.Message));
+            }
         }
     }
 }
+
