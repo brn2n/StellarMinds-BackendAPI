@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
@@ -15,6 +16,7 @@ namespace WebApi.Controllers
         ICUAlta<AltaPrestamoDto> _altaPrestamo,
         ICUDelete<AltaPrestamoDto> _devolverPrestamo,
         ICUPrestamosSociosEntreFechas<ListadoPrestamoSocioDto> _listarEntreFechas,
+        ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto> _listarPrestamosActivosSocio,
         ICUGetAll<ListadoPrestamoSocioDto> _listarPrestamos,
         ICUGetById<InfoAuditoriaPrestamosDto> _get
     ) : ControllerBase
@@ -36,7 +38,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
         }
-
+        [Authorize(Roles = "Coordinador")]
         [HttpPost]
         public IActionResult Alta([FromBody] AltaPrestamoDto dto)
         {
@@ -67,6 +69,28 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpGet("EnPrestamo/{socioId}")]
+        public IActionResult ListarPrestamosActivosSocio(int socioId)
+        {
+            try
+            {
+                return Ok(_listarPrestamosActivosSocio.Execute(socioId));
+            }
+            catch (NotFoundException e)
+            {
+                return StatusCode(404, e.Error());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new
+                {
+                    mensaje = e.Message,
+                    inner = e.InnerException?.Message,
+                    stack = e.StackTrace
+                });
+            }
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -83,7 +107,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, "Error interno del servidor."));
             }
         }
-
+        [Authorize(Roles = "Coordinador")]
         [HttpPut("{id}/devolver")]
         public IActionResult Devolver(int id)
         {
@@ -105,7 +129,8 @@ namespace WebApi.Controllers
                 return StatusCode(500, new ErrorCodigo(500, ex.Message));
             }
         }
-
+        [Authorize]
+        [Authorize(Roles = "Socio")]
         [HttpGet("socio/{socioId}/mes/{mes}/anio/{anio}")]
         public IActionResult ListarEntreFechas(int socioId, int mes, int anio)
         {
