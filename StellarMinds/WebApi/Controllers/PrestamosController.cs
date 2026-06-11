@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using StellarMinds.Infraestructura.EF.Exceptions;
 using StellarMinds.LogicaAplicacion.Dtos.PrestamoDtos;
-using StellarMinds.LogicaAplicacion.Dtos.Prestamos;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaNegocio.Excepciones.Error;
@@ -20,7 +19,7 @@ namespace WebApi.Controllers
         ICUListarPrestamosEnPrestamoPorSocio<ListadoPrestamoSocioDto> _listarPrestamosActivosSocio,
         ICUGetAll<ListadoPrestamoSocioDto> _listarPrestamos,
         ICUGetAllSocios<ListarUsuariosDto> _listarSocios,
-        ICUGetById<InfoAuditoriaPrestamosDto> _get
+        ICUGetById<ListadoPrestamoSocioDto> _get
     ) : ControllerBase
     {
         [HttpGet]
@@ -148,6 +147,10 @@ namespace WebApi.Controllers
             {
                 return StatusCode(404, e.Error());
             }
+            catch (LogicaNegocioExcepcion e)
+            {
+                return StatusCode(400, e.Error());
+            }
             catch (Exception e)
             {
                 return StatusCode(500, new
@@ -187,6 +190,10 @@ namespace WebApi.Controllers
             catch (NotFoundException e)
             {
                 return StatusCode(404, e.Error());
+            }
+            catch (LogicaNegocioExcepcion e)
+            {
+                return StatusCode(400, e.Error());
             }
             catch (ConflictException e)
             {
