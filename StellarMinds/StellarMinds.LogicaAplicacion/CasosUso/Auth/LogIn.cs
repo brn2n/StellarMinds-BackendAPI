@@ -14,7 +14,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Auth
             Usuario usuario = _repo.LogInAuth(t.Usuario, t.Password);
             if (usuario == null)
             {
-                throw new BadRequestException("Usuario o contraseña incorrectos");
+                throw new BadRequestException("Usuario o contraseña incorrectos.");
             }
 
             return _jwtGenerator.GenerateToken(UsuarioMapper.toDtoJwt(usuario));
