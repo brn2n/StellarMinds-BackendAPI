@@ -1,4 +1,5 @@
-﻿using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
+﻿using StellarMinds.Infraestructura.EF.Exceptions;
+using StellarMinds.Infraestructura.InterfacesRepositorio.Usuarios;
 using StellarMinds.LogicaAplicacion.Dtos.Usuarios;
 using StellarMinds.LogicaAplicacion.InterfacesLogicaAplicacion;
 using StellarMinds.LogicaAplicacion.Mapper;
@@ -13,7 +14,7 @@ namespace StellarMinds.LogicaAplicacion.CasosUso.Auth
             Usuario usuario = _repo.LogInAuth(t.Usuario, t.Password);
             if (usuario == null)
             {
-                throw new UnauthorizedAccessException("Usuario o contraseña incorrectos");
+                throw new BadRequestException("Usuario o contraseña incorrectos");
             }
 
             return _jwtGenerator.GenerateToken(UsuarioMapper.toDtoJwt(usuario));
